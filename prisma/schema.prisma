@@ -11,6 +11,8 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
+// add an alternative contact
+// add an isBanned field
 model User {
   id       String   @id @default(uuid())
   name         String   @unique

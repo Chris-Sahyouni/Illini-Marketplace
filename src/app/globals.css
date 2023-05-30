@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
+/* :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -24,4 +24,14 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+} */
+
+.background-image {
+  background-size: cover;
+  /*
+  This repeat property could be useful for scrolling vertically
+  */
+  background-repeat: no-repeat;
+  background-image: url("/bg.png");
 }
+
