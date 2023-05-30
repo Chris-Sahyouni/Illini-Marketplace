@@ -12,7 +12,22 @@ datasource db {
 }
 
 model User {
-  id   String @id @default(uuid())
-  name String
-   
+  id       String   @id @default(uuid())
+  name         String   @unique
+  password     String
+  email        String   @unique
+  joinedDate   DateTime @default(now())
+  isAdmin      Boolean  @default(false)
+  itemsSelling Item[]
+}
+
+model Item {
+  id       String  @id @default(uuid())
+  price        Float
+  name         String
+  description  String?
+  type         String 
+  image        Bytes?
+  seller       User    @relation(fields: [sellerId], references: [id])
+  sellerId String
 }
