@@ -14,7 +14,7 @@ datasource db {
 // add an alternative contact
 // add an isBanned field
 model User {
-  id       String   @id @default(uuid())
+  id           String   @id @default(uuid())
   name         String   @unique
   password     String
   email        String   @unique
@@ -24,12 +24,12 @@ model User {
 }
 
 model Item {
-  id       String  @id @default(uuid())
-  price        Float
-  name         String
-  description  String?
-  type         String 
-  image        Bytes?
-  seller       User    @relation(fields: [sellerId], references: [id])
-  sellerId String
+  id          String  @id @default(uuid())
+  price       Float
+  name        String
+  description String?
+  type        String
+  image       Bytes?
+  seller      User    @relation(fields: [sellerId], references: [id])
+  sellerId    String
 }
