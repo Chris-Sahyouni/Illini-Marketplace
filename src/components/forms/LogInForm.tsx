@@ -2,12 +2,13 @@
 
 import { test } from "node:test";
 import { useState, useEffect } from "react";
+import { useSession } from 'next-auth/react';
 
 export default function LogInForm() {
 
-    const [username, setUsername] = useState("");
-    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
+    const [email, setEmail] = useState("");
+    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(event.target.value);
       }
 
     const [password, setPassword] = useState("");
@@ -15,11 +16,11 @@ export default function LogInForm() {
         setPassword(event.target.value);
     }
 
-    const [testLogIn, setTestLogIn] = useState(false);
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setTestLogIn(true);
     };  
+
 
     useEffect(() => {
         const handleEnter = (event: KeyboardEvent) => {
@@ -37,18 +38,24 @@ export default function LogInForm() {
     }, []);
 
     
-    
+    const inputParentDivStyles = "p-2 flex justify-center";    
 
     return (
 
-        <div>
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username" />
-                <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
-                <button type="submit" >Log in</button>
-                <div>
-                    {testLogIn ? <h1>success</h1> : <h1>not yet logged in</h1>}
+        <div className="justify-center my-10 flex">
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full">
+                <div className={inputParentDivStyles}>
+                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline" />
                 </div>
+
+                <div className={inputParentDivStyles}>
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline" />
+                </div>
+
+                <div className={inputParentDivStyles}>
+                    <button type="submit" className="hover:outline">Log in</button>
+                </div>
+
             </form>
         </div>
     );

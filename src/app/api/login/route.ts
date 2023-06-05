@@ -1,8 +1,8 @@
 import * as bcrypt from 'bcrypt';
-import { prisma } from '../../../db'
+import { prisma } from '../../../lib/db'
 
 interface loginRequest {
-    username: string,
+    userNetId: string,
     password: string
 }
 
@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     const body: loginRequest = await request.json();
     const user = await prisma.user.findFirst({
         where: {
-            name: body.username
+            netId: body.userNetId
         }
     });
 

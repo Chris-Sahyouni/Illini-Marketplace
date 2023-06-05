@@ -1,7 +1,12 @@
 import Providers from '../components/Providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import { Italianno } from 'next/font/google'
 
+const cursiveFont = Italianno({
+  weight: "400",
+  subsets: ["latin"],
+});
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
@@ -19,6 +24,9 @@ export default function RootLayout({
       <body className={`${inter.className} background-image`}>
         <Providers>
           {children}
+          <div className='flex items-center justify-center '>
+            <p className={`text-center absolute bottom-5 text-white ${cursiveFont.className} font-semibold text-xl`}>Created by Chris Sahyouni</p>
+          </div>
         </Providers>
       </body>
     </html>

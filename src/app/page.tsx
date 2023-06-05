@@ -1,14 +1,24 @@
+"use client"
 import Header from '../components/Header';
-import CreateAccount from '../components/forms/CreateAccount';
-import LogInForm from '../components/forms/LogInForm';
+
+function testReq() {
+  fetch('/api/test', {
+    method: "POST",
+    body: JSON.stringify({data: 'nothing'}),
+    headers: {
+      "Content-Type": "application/json",
+      'Accept': "application/json"
+    }
+  });
+}
 
 export default function Home() {
 
-
+  
   return (
-    <>
-      <Header />
-      <CreateAccount />
-    </>
+    <div>
+      <Header /> 
+      <button onClick={testReq}>Send test email</button>
+    </div>
   ); 
 }

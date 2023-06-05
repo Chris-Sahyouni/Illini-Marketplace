@@ -15,7 +15,7 @@ datasource db {
 // add an isBanned field
 model User {
   id           String   @id @default(uuid())
-  name         String   @unique
+  netId         String   @unique
   password     String
   email        String   @unique
   joinedDate   DateTime @default(now())

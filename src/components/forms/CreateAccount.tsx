@@ -1,7 +1,7 @@
 "use client"
 
-import { test } from "node:test";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { newUserRequest, extractNetId, sendRegisterRequest, isValidEmail } from "@/src/lib/utilities";
 
 export default function CreateAccount() {
 
@@ -29,36 +29,40 @@ export default function CreateAccount() {
 
      const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
          event.preventDefault();
-         
+        if (!isValidEmail(email)) {
+            console.error("invalid email address");
+            return;
+        }
+         const data: newUserRequest = {
+            email: email,
+            netId: extractNetId(email),
+            password: password
+         };
+         sendRegisterRequest(data);
      };  
 
-    useEffect(() => {
-        const handleEnter = (event: KeyboardEvent) => {
-            if (event.key === "Enter") {
-                handleSubmit;
-            }
-        };
-
-        window.addEventListener('keydown', handleEnter);
-
-        return  () => {
-            window.removeEventListener("keydown", handleEnter);
-        }
-
-    }, []);
-
+    const inputParentDivStyles = "p-2 flex justify-center";
 
     return (
-    <div className="h-screen">
-        <div className="bg-gray outline mx-20 my-20 h-1/2">
-            <form onSubmit={handleSubmit}>
-                    <input type="text" value={username} onChange={handleUsernameChange} placeholder="Username" />
-                    <input type="text" value={email} onChange={handleEmailChange} placeholder="email" />
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" />
-                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" />
-                    <button type="submit" >Create Account</button>
+        <div className="justify-center my-10 flex">
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full">
+                <div className={inputParentDivStyles}>
+                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline" />
+                </div>
+
+                <div className={inputParentDivStyles}>
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline" />
+                </div>
+
+                <div className={inputParentDivStyles}>
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline" />
+                </div>
+
+                <div className={inputParentDivStyles}>
+                    <button type="submit" className="hover:outline">Create Account</button>
+                </div>
+
             </form>
-        </div>
-    </div>    
+        </div>  
     );
 }
