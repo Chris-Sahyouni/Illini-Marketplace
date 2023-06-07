@@ -11,7 +11,7 @@ export function isValidEmail(email: string): boolean {
 export interface newUserRequest {
     password: string;
     email: string;
-    netId: string;
+    username: string;
 }
 
 // I don't think this function needs to be async, but it might need to
@@ -23,6 +23,10 @@ export function sendRegisterRequest(data: newUserRequest) {
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
+        }
+    }).then((res: Response) => {
+        if (res.status === 200) {
+            return res.json();
         }
     })
 }

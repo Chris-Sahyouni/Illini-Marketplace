@@ -2,14 +2,9 @@
 
 import { useState } from "react";
 import { newUserRequest, extractNetId, sendRegisterRequest, isValidEmail } from "@/src/lib/utilities";
+import VerifyRequest from "../VerifyRequest";
 
 export default function CreateAccount() {
-
-
-    const [username, setUsername] = useState("");
-    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
-      }
 
     const [password, setPassword] = useState("");
     const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,22 +21,36 @@ export default function CreateAccount() {
         setEmail(event.target.value);
     }
 
+    const [submittedForm, setSubmittedForm] = useState(false);
 
-     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-         event.preventDefault();
-        if (!isValidEmail(email)) {
-            console.error("invalid email address");
-            return;
-        }
+     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+
+        event.preventDefault();
+
+        // if (!isValidEmail(email)) {
+        //     console.error("invalid email address");
+        //     return;
+        // }
          const data: newUserRequest = {
             email: email,
-            netId: extractNetId(email),
+            username: 'testUser',
+         //   username: extractNetId(email),
             password: password
          };
          sendRegisterRequest(data);
-     };  
+
+        console.log('form submitted');
+        setSubmittedForm(true);
+     }; 
+
 
     const inputParentDivStyles = "p-2 flex justify-center";
+
+    if (submittedForm) {
+        return (
+            <VerifyRequest />
+        );
+    }
 
     return (
         <div className="justify-center my-10 flex">
@@ -59,7 +68,7 @@ export default function CreateAccount() {
                 </div>
 
                 <div className={inputParentDivStyles}>
-                    <button type="submit" className="hover:outline">Create Account</button>
+                    <button type="submit" className="hover:outline" >Create Account</button>
                 </div>
 
             </form>

@@ -6,10 +6,10 @@ export async function POST(req: Request) {
 
 function sendEmail() {
     transporter.sendMail({
-      to: 'csahy2@illinois.edu',
+      to: 'pxs456@gmail.com',
       from: 'no-reply@illinimarketplace.com',
-      subject: 'Test',
-      text: 'email successfully sent',
+      subject: 'You\'re gay',
+      text: '',
     },
     (err) => {
       console.log(err);

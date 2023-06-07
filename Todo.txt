@@ -1,0 +1,51 @@
+Front:
+ - make the UI 
+ - Styling
+ - figure out what should be rendered on the client and what on the server
+ - make background render first while website is loading
+ - add loading animations
+ - let admin delete items
+ - let users save items
+ - forgot password recovery
+ - add session timeout
+ - report sellers option
+ - add a not-found file
+ - lock people out for trying to log in too many times
+
+ - CHANGE THE VARIABLE NAME OF NETID TO USERNAME UNDER THE HOOD SO CHROME PASSWORD MANAGER RECOGNIZES IT
+
+Back:
+ - make the API
+ - account and log in functionality
+ - sessions + user auth (next auth)
+ - pass data between front and db
+ - verify image safety with openai api (could also do this in azure)
+ - listings need to be taken down after being unsold for a long period of time
+ - email addresses need to be validated
+ - accounts need to be removed when the school email addresses are deleted
+ - might run into CORS problems
+
+Database:
+ - upgrade to standard tier and maybe add DTUS before deployment (Compute + Storage in Azure)
+ - configure Prisma
+ - allow the IP address for the server
+
+Testing:
+ - react tests
+ - other tests
+
+Security:
+ - SQL injection prevention
+ - XSS prevention
+ - SSRF prevention
+ - CSRF prevention
+ - encrypt passwords with bcrypt
+
+Payment System:
+ - implement Stripe API
+
+Development Related:
+ - Data analytics
+ - Pandas to visualize website data
+ - System of deployment and continuos integration
+ - Production branch on github when the time comes

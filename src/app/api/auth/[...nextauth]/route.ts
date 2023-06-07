@@ -1,12 +1,7 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider  from "next-auth/providers/credentials";
-import EmailProvider from "next-auth/providers/email";
-// import { prisma } from "@/src/lib/db";
-// import { PrismaAdapter } from "@auth/prisma-adapter";
-
 
 const handler = NextAuth({
- //   adapter: PrismaAdapter(prisma),
     providers: [
         CredentialsProvider({
             // The name to display on the sign in form (e.g. 'Sign in with...')
@@ -16,7 +11,7 @@ const handler = NextAuth({
             // e.g. domain, username, password, 2FA token, etc.
             // You can pass any HTML attribute to the <input> tag through the object.
             credentials: {
-              email: { label: "Email", type: "text" },
+              username: { label: "Username", type: "text" },
               password: { label: "Password", type: "password" }
             },
             async authorize(credentials, req) {
@@ -26,33 +21,51 @@ const handler = NextAuth({
               // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
               // You can also use the `req` object to obtain additional parameters
               // (i.e., the request IP address)
-              const res = await fetch("/api/login ", {
+              const res = await fetch("http://localhost:3000/api/login", {
                 method: 'POST',
-                body: JSON.stringify(credentials),
-                headers: { "Content-Type": "application/json" }
-              })
+                body: JSON.stringify({
+                  username: credentials?.username,
+                  password: credentials?.password,
+              }),
+                headers: { 
+                  "Content-Type": "application/json"
+                }
+              });
               const user = await res.json()
-        
+
               // If no error and we have user data, return it
               if (res.ok && user) {
+                console.log("returning user to client");
                 return user
               }
               // Return null if user data could not be retrieved
               return null
             }
           }),
-          EmailProvider({
-            server: {
-              host: 'smtp.office365.com',
-              port: 587,
-              auth: {
-                user: 'no-reply@illinimarketplace.com',
-                pass: process.env.EMAIL_PASS
-              }
-            },
-            from: 'no-reply@illinimarketplace.com'
-          })
-    ]
+    ],
+
+    // add an error and a not found page
+    pages: {
+      signIn: '/account/login',
+      newUser: '/account/register'
+    },
+
+    session: {
+      strategy: "jwt",
+    },
+
+    callbacks: {
+      async jwt({ token, user }) {
+        return {... token, ...user };
+      },
+
+      async session({ session, token }) {
+        session.user = token as any;
+        return session;
+      }
+    }
+    
+
 });
 
 

@@ -1,14 +1,15 @@
 "use client"
 
-import { test } from "node:test";
-import { useState, useEffect } from "react";
-import { useSession } from 'next-auth/react';
+import React from "react";
+import { useState, useEffect, useCallback } from "react";
+import { signIn, useSession } from 'next-auth/react';
 
 export default function LogInForm() {
 
-    const [email, setEmail] = useState("");
-    const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setEmail(event.target.value);
+
+    const [username, setUserName] = useState("");
+    const handleUserNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setUserName(event.target.value);
       }
 
     const [password, setPassword] = useState("");
@@ -17,9 +18,19 @@ export default function LogInForm() {
     }
 
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const { data:session, status } = useSession();
+    console.log(status);
+    console.log(session);
+
+    const handleSubmit = useCallback( async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-    };  
+        const result = await signIn("credentials", {
+            username: username,
+            password: password,
+            redirect: true,
+            callbackUrl: "/"
+        });
+    }, [username, password] );
 
 
     useEffect(() => {
@@ -35,17 +46,23 @@ export default function LogInForm() {
             window.removeEventListener("keydown", handleEnter);
         }
 
-    }, []);
+    }, [handleSubmit]);
 
     
     const inputParentDivStyles = "p-2 flex justify-center";    
+
+    if (status === 'authenticated') {
+        return (
+            <h1>Authenticated</h1>
+        );
+    }
 
     return (
 
         <div className="justify-center my-10 flex">
             <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full">
                 <div className={inputParentDivStyles}>
-                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline" />
+                    <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className="outline" />
                 </div>
 
                 <div className={inputParentDivStyles}>
