@@ -27,19 +27,16 @@ export default function CreateAccount() {
 
         event.preventDefault();
 
-        // if (!isValidEmail(email)) {
-        //     console.error("invalid email address");
-        //     return;
-        // }
+        if (!isValidEmail(email)) {
+            console.error("invalid email address");
+            return;
+        }
          const data: newUserRequest = {
             email: email,
-            username: 'testUser',
-         //   username: extractNetId(email),
+            username: extractNetId(email),
             password: password
          };
-         sendRegisterRequest(data);
-
-        console.log('form submitted');
+        sendRegisterRequest(data);
         setSubmittedForm(true);
      }; 
 
