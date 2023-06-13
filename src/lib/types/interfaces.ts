@@ -11,3 +11,7 @@ export interface newUserRequest {
     email: string;
     username: string;
 }
+
+export interface itemTypeParams {
+    type: string;
+}

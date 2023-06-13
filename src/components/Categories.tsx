@@ -12,6 +12,7 @@ export default function Categories() {
             <Link href={'/'} className={linkStyles}>Textbooks</Link>
             <Link href={'/'} className={linkStyles}>Subleases</Link>
             <Link href={'/'} className={linkStyles}>Transit</Link>
+            <Link href={'/'} className={linkStyles}>Parking</Link>
             <Link href={'/'} className={linkStyles}>Misc</Link>
         </div>
     );
