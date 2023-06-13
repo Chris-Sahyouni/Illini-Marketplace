@@ -5,7 +5,6 @@ import { useSession, signIn, signOut} from 'next-auth/react'
 import  Link  from 'next/link';
 import React from "react";
 import Dropdown from "./Dropdown";
-import SearchBar from "./SearchBar";
 
 
 export default function Header() {
@@ -15,6 +14,12 @@ export default function Header() {
    const dropdownOptions = ['My Account', 'Favorites', 'Sign Out'];
 
    const [toggleDropdown, setToggleDropdown] = useState(false);
+
+   const [searchContent, setSearchContent] = useState("");
+
+   const handleSearchContentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchContent(event.target.value);
+   }
 
     if (session && session.user) {
 
@@ -39,7 +44,7 @@ export default function Header() {
                 <div className="w-1/3">
                     Logo here
                 </div>
-                <input type="text" placeholder="Search" className="w-1/3 font-light italic" />
+                <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
                     <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>
                     <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>About</Link>
