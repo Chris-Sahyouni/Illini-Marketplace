@@ -3,6 +3,7 @@
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import { signIn, useSession } from 'next-auth/react';
+import Link from "next/link";
 
 export default function LogInForm() {
 
@@ -73,6 +74,10 @@ export default function LogInForm() {
                     <button type="submit" className="hover:outline">Log in</button>
                 </div>
 
+                <div className='p-2 flex'>
+                    <Link href={'/account/register'} className="text-blue-400 mx-auto hover:text-blue-600">Create an account</Link>
+                    <Link href={'/'} className="text-blue-400 mx-auto hover:text-blue-600">Forgot Password?</Link>
+                </div>
             </form>
         </div>
     );
