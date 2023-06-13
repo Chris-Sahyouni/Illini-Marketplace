@@ -1,7 +1,8 @@
 "use client"
 
 import { useState } from "react";
-import { newUserRequest, extractNetId, sendRegisterRequest, isValidEmail } from "@/src/lib/utilities";
+import { extractNetId, sendRegisterRequest, isValidEmail } from "@/src/lib/utilities";
+import { newUserRequest } from "@/src/lib/types/interfaces";
 import VerifyRequest from "../VerifyRequest";
 
 export default function CreateAccount() {

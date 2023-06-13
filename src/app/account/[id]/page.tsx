@@ -15,7 +15,7 @@ export default function Page({ params }: { params: { id: string}}) {
     useEffect(() => {
         try {
             const { id } = params;
-            const verify = async () => { 
+            const verify = async () => {
                 let res = await fetch('/api/verify', {
                     method: "POST",
                     body: JSON.stringify({ id }),

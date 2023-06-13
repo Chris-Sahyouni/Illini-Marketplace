@@ -52,12 +52,6 @@ export default function LogInForm() {
     
     const inputParentDivStyles = "p-2 flex justify-center";    
 
-    if (status === 'authenticated') {
-        return (
-            <h1>Authenticated</h1>
-        );
-    }
-
     return (
 
         <div className="justify-center my-10 flex">

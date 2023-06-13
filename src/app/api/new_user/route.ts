@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     });
 
     // this will need to change before deployment
-    const magicLink= `http://localhost:3000/${user.id}`;
+    const magicLink= `http://localhost:3000/account/${user.id}`;
 
     transporter.sendMail({
         to: body.email,

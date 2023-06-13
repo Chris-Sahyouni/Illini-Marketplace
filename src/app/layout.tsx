@@ -28,8 +28,8 @@ export default function RootLayout({
           <Header />
           <Categories />
           {children}
-          <div className='flex items-center justify-center '>
-            <p className={`text-center absolute bottom-5 text-white ${cursiveFont.className} font-normal text-xl`}>Created by Chris Sahyouni</p>
+          <div className=' flex justify-center text-center'>
+            <p className={` text-white ${cursiveFont.className} font-normal text-xl absolute bottom-1`}>Created by Chris Sahyouni</p>
           </div>
         </Providers>
       </body>

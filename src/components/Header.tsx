@@ -30,7 +30,7 @@ export default function Header() {
                         <div className="w-1/3">
                             Logo here
                         </div>
-                        <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
+                        <input type="text" placeholder='Search' className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                         <div className="w-1/3 flex justify-end">
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/admin'} >Admin</Link>
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>
