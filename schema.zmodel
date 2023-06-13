@@ -17,8 +17,7 @@ model User {
   isVerified    Boolean   @default(false)
   joinedDate    DateTime  @default(now())
   isAdmin       Boolean   @default(false)
-  contact       String    
-  itemsSelling  Item[]
+  contact       String? 
   SubleaseSelling Sublease[]
   SportsTicketSelling SportsTicket[]
   TransitTicketSelling TransitTicket[]
@@ -83,6 +82,6 @@ model Misc extends Item {
 }
 
 model bannedEmail {
-  email String
+  email String @unique
 }
 
