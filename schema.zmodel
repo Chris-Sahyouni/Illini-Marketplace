@@ -9,7 +9,6 @@ datasource db {
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
-// add an isBanned field
 model User {
   id            String    @id @default(cuid())
   username      String    @unique
@@ -20,15 +19,70 @@ model User {
   isAdmin       Boolean   @default(false)
   contact       String    
   itemsSelling  Item[]
+  SubleaseSelling Sublease[]
+  SportsTicketSelling SportsTicket[]
+  TransitTicketSelling TransitTicket[]
+  TextooksSelling Textbook[]
+  ParkingSelling Parking[]
+  MiscSelling Misc[]
 }
 
-model Item {
-  id          String  @id @default(uuid())
+abstract model Item {
+  id          String  @id @default(cuid())
   price       Float
   name        String
   description String?
-  type        String
+  notes String?
+  contact String
   image       Bytes?
   seller      User    @relation(fields: [sellerId], references: [id])
   sellerId    String
+  createdAt DateTime @default(now())
+  tags String?
 }
+
+model Sublease extends Item {
+  address String
+  image2 Bytes?
+  iamge3 Bytes?
+  image4 Bytes?
+  Company String
+  numBedrooms Int
+  numBathrooms Int
+  startDate DateTime
+  endDate DateTime
+}
+
+model SportsTicket extends Item {
+  game String
+  location String
+  date DateTime
+  numTix Int
+  sport String
+}
+
+model TransitTicket extends Item {
+  dateTime DateTime
+  mode String
+  from String
+  to String
+}
+
+model Textbook extends Item {
+  course String
+}
+
+model Parking extends Item {
+  location String
+  startDate DateTime
+  endDate DateTime?
+}
+
+model Misc extends Item {
+  fields String?
+}
+
+model bannedEmail {
+  email String
+}
+
