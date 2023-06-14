@@ -23,7 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} background-image`}>
+      <body className={`${inter.className} background-image ::-webkit-scrollbar`}>
         <Providers>
           <Header />
           <Categories />
@@ -36,3 +36,5 @@ export default function RootLayout({
     </html>
   )
 }
+
+
