@@ -8,6 +8,7 @@ Front:
  - add a not-found file
  - lock people out for trying to log in too many times
  - make a logo and an icon
+ - maybe change all the fonts
 
 FETCH REQUEST FUNCTIONS MIGHT NEED TO BE ASYNC TO WORK
 
@@ -19,11 +20,13 @@ Back:
  - accounts need to be removed when the school email addresses are deleted
  - might run into CORS problems
  - add html to emails to make them look good
+ - consider using gpt 4 to make an ai powered search
 
 Database:
  - upgrade to standard tier and maybe add DTUS before deployment (Compute + Storage in Azure)
- - configure Prisma
  - allow the IP address for the server
+ - check out prisma full text search for the search funtionality
+
 
 Testing:
  - react tests

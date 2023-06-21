@@ -1,8 +1,7 @@
 import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
-import { alignKeyValues } from '@/src/lib/utilities';
-import { Sublease } from '@prisma/client';
-import { VisibleData } from '@/src/lib/utilities';
+import { VisibleData, alignKeyValues } from '@/src/lib/utilities';
+import { Parking } from '@prisma/client';
 
 
 export async function POST(request: Request) {
@@ -16,12 +15,12 @@ export async function POST(request: Request) {
     //     // handle search here
     // }
 
-    const data: Sublease[] = await prisma.sublease.findMany({
+    const data: Parking[] = await prisma.parking.findMany({
         take: 20,
         skip: 20 * skipCount
     });
 
-    const desiredKeys: string[] = ["price", "address", "contact", "company", "numBedrooms", "numBathrooms", "startDate", "endDate", "notes"];
+    const desiredKeys: string[] = ['course', 'price', 'contact'];
     let parsed: VisibleData[] = [];
     data.forEach((item) => {
       parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
@@ -34,6 +33,4 @@ export async function POST(request: Request) {
         console.log(error);
         return new Response(JSON.stringify(error));
     }
-
 }
-

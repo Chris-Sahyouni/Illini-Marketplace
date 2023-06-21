@@ -2,6 +2,7 @@ import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
 import { alignKeyValues } from '@/src/lib/utilities';
 import { Textbook } from '@prisma/client';
+import { VisibleData } from '@/src/lib/utilities';
 
 
 export async function POST(request: Request) {
@@ -21,11 +22,10 @@ export async function POST(request: Request) {
     });
 
     const desiredKeys: string[] = ['course', 'price', 'contact'];
-    let parsed: [[string[], string[]]] = [[[], []]];
+    let parsed: VisibleData[] = [];
     data.forEach((item) => {
       parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
     });
-
 
     return new Response(JSON.stringify(parsed));
 
@@ -33,5 +33,4 @@ export async function POST(request: Request) {
         console.log(error);
         return new Response(JSON.stringify(error));
     }
-
 }
