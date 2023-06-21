@@ -43,13 +43,14 @@ abstract model Item {
 model Sublease extends Item {
   address String
   image2 Bytes?
-  iamge3 Bytes?
+  image3 Bytes?
   image4 Bytes?
-  Company String
+  company String
   numBedrooms Int
   numBathrooms Int
   startDate DateTime
   endDate DateTime
+  isSublease Boolean @default(true)
 }
 
 model SportsTicket extends Item {
@@ -58,6 +59,7 @@ model SportsTicket extends Item {
   date DateTime
   numTix Int
   sport String
+  isSportsTicket Boolean @default(true)
 }
 
 model TransitTicket extends Item {
@@ -65,20 +67,24 @@ model TransitTicket extends Item {
   mode String
   from String
   to String
+  isTransitTicket Boolean @default(true)
 }
 
 model Textbook extends Item {
   course String
+  isTextbook Boolean @default(true)
 }
 
 model Parking extends Item {
   location String
   startDate DateTime
   endDate DateTime?
+  isParking Boolean @default(true)
 }
 
 model Misc extends Item {
   fields String?
+  isMisc Boolean @default(true)
 }
 
 model bannedEmail {

@@ -1,25 +1,17 @@
-import { newUserRequest } from "./types/interfaces";
+import { Sublease, Textbook, SportsTicket, TransitTicket, Parking, Misc } from "@prisma/client";
+import { Item } from "./types/models";
 
-export function extractNetId(email: string): string {
-    return email.split('@')[0];
-}
+export type anyItem = Sublease | Textbook | TransitTicket | SportsTicket | Parking | Misc | Item;
 
-export function isValidEmail(email: string): boolean {
-    return email.endsWith("@illinois.edu");
-}
+export type VisibleData = [string[], string[]];
 
-export function sendRegisterRequest(data: newUserRequest) {
-
-    fetch('/api/new_user', {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
+export function alignKeyValues(desiredKeys: string[], keyVals: string[][]): [string[], string[]] {
+    let out: [string[], string[]] = [[], []];
+    for (let key of keyVals[0]) {
+        if (desiredKeys.includes(key)) {
+            out[0].push(key);
+            out[1].push(keyVals[1][keyVals[0].indexOf(key)]);
         }
-    }).then((res: Response) => {
-        if (res.status === 200) {
-            return res.json();
-        }
-    })
+    }
+    return out;
 }

@@ -33,13 +33,14 @@ model User {
 model Sublease {
     address String
     image2 Bytes?
-    iamge3 Bytes?
+    image3 Bytes?
     image4 Bytes?
-    Company String
+    company String
     numBedrooms Int
     numBathrooms Int
     startDate DateTime
     endDate DateTime
+    isSublease Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
@@ -59,6 +60,7 @@ model SportsTicket {
     date DateTime
     numTix Int
     sport String
+    isSportsTicket Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
@@ -77,6 +79,7 @@ model TransitTicket {
     mode String
     from String
     to String
+    isTransitTicket Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
@@ -92,6 +95,7 @@ model TransitTicket {
 
 model Textbook {
     course String
+    isTextbook Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
@@ -109,6 +113,7 @@ model Parking {
     location String
     startDate DateTime
     endDate DateTime?
+    isParking Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
@@ -124,6 +129,7 @@ model Parking {
 
 model Misc {
     fields String?
+    isMisc Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String
