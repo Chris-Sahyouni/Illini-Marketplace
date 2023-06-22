@@ -7,27 +7,27 @@ import { VisibleData } from '@/src/lib/utilities';
 
 export async function POST(request: Request) {
     try {
-    const  {filters, skipCount, sortBy, searchInput}: dbRequest = await request.json();
+        const  {filters, skipCount, sortBy, searchInput}: dbRequest = await request.json();
 
-    // filters and sortBy need to be converted into usable types or values for prisma here
+        // filters and sortBy need to be converted into usable types or values for prisma here
 
-    // if (body.searchInput) {
-    //     console.log("");
-    //     // handle search here
-    // }
+        // if (body.searchInput) {
+        //     console.log("");
+        //     // handle search here
+        // }
 
-    const data: Textbook[] = await prisma.textbook.findMany({
-        take: 20,
-        skip: 20 * skipCount
-    });
+        const data: Textbook[] = await prisma.textbook.findMany({
+            take: 20,
+            skip: 20 * skipCount
+        });
+        
+        const desiredKeys: string[] = ['course', 'price', 'contact'];
+        let parsed: VisibleData[] = [];
+        data.forEach((item) => {
+        parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
+        });
 
-    const desiredKeys: string[] = ['course', 'price', 'contact'];
-    let parsed: VisibleData[] = [];
-    data.forEach((item) => {
-      parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
-    });
-
-    return new Response(JSON.stringify(parsed));
+        return new Response(JSON.stringify(parsed));
 
     } catch (error) {
         console.log(error);

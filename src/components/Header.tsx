@@ -11,7 +11,7 @@ export default function Header() {
 
    const  { data:session } = useSession();
 
-   const dropdownOptions = ['My Account', 'Favorites', 'Sign Out'];
+   const dropdownOptions = ['My Account', 'Saved', 'Sign Out'];
 
    const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -53,7 +53,7 @@ export default function Header() {
                 </div>
                 <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
-                    <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>Home</Link>
+                    <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/sell'}>Sell</Link>
                     <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
                     <button className="p-2 hover:bg-orange-500 hover:outline relative rounded-sm" onClick={() => setToggleDropdown(!toggleDropdown)}>{session.user?.username}</button>
                     <>
@@ -71,9 +71,9 @@ export default function Header() {
                 </div>
                 <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
-                    <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>
-                    <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>About</Link>
-                    <button className="p-2 hover:bg-orange-500 hover:outline" onClick={() => signIn()}>Log in</button>
+                    <button className="p-2 hover:bg-orange-500 hover:outline rounded-sm" onClick={() => signIn()}>Sell</button>
+                    <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
+                    <button className="p-2 hover:bg-orange-500 hover:outline rounded-sm" onClick={() => signIn()}>Log in</button>
                 </div>
             </div>
 

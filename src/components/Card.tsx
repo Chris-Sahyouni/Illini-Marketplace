@@ -1,4 +1,3 @@
-import { Item } from "../lib/types/models";
 import Image from "next/image";
 import { Sublease } from "@prisma/client";
 import { anyItem } from "../lib/utilities";

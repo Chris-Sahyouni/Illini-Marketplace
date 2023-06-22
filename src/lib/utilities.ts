@@ -1,7 +1,6 @@
 import { Sublease, Textbook, SportsTicket, TransitTicket, Parking, Misc } from "@prisma/client";
-import { Item } from "./types/models";
 
-export type anyItem = Sublease | Textbook | TransitTicket | SportsTicket | Parking | Misc | Item;
+export type anyItem = Sublease | Textbook | TransitTicket | SportsTicket | Parking | Misc;
 
 export type VisibleData = [string[], string[]];
 
@@ -15,3 +14,4 @@ export function alignKeyValues(desiredKeys: string[], keyVals: string[][]): [str
     }
     return out;
 }
+

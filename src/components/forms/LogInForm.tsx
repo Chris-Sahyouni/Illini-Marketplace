@@ -55,7 +55,7 @@ export default function LogInForm() {
     return (
 
         <div className="justify-center my-10 flex">
-            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full">
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded">
                 <div className={inputParentDivStyles}>
                     <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className="outline" />
                 </div>

@@ -51,7 +51,7 @@ export default function CreateAccount() {
 
     return (
         <div className="justify-center my-10 flex">
-            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full">
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded">
                 <div className={inputParentDivStyles}>
                     <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline" />
                 </div>
