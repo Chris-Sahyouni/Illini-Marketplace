@@ -1,7 +1,8 @@
 import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
-import { VisibleData, alignKeyValues } from '@/src/lib/utilities';
 import { Misc } from '@prisma/client';
+import { CardData } from '@/src/lib/types/interfaces';
+import { ItemData } from '@/src/lib/types/models';
 
 
 export async function POST(request: Request) {
@@ -20,13 +21,13 @@ export async function POST(request: Request) {
             skip: 20 * skipCount
         });
 
-        const desiredKeys: string[] = ['course', 'price', 'contact'];
-        let parsed: VisibleData[] = [];
+        let res: CardData[] = [];
         data.forEach((item) => {
-        parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
-        });
+          let dat = new ItemData(undefined, undefined, undefined, undefined, undefined, item);
+          res.push(dat.getCardData());
+        })
 
-        return new Response(JSON.stringify(parsed));
+        return new Response(JSON.stringify(res));
 
     } catch (error) {
         console.log(error);

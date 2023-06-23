@@ -22,13 +22,6 @@ export async function POST(request: Request) {
             skip: 20 * skipCount
         });
 
-        // const desiredKeys: readonly string[] = typeKeyMap.get(ItemType.Textbook) || [];
-
-        // let visibleVals: VisibleData[] = [];
-        // data.forEach((item) => {
-        //     visibleVals.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
-        // });
-
         let res: CardData[] = [];
         data.forEach((item) => {
           let dat = new ItemData(undefined, item);
