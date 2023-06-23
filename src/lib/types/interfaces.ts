@@ -1,3 +1,5 @@
+import { ItemType } from "./models";
+
 export interface User {
     id?: string;
     username?: string | null | undefined;
@@ -23,3 +25,10 @@ export interface dbRequest {
     sortBy?: Object | null
 }
 
+export interface CardData {
+    keys?: string[];
+    values?: string[];
+    id?: string;
+    name?: string;
+    type?: ItemType
+}

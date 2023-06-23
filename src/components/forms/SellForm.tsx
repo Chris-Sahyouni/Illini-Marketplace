@@ -1,6 +1,8 @@
 
+interface SellProps {
+    
+}
 
-
-export default function SellForm(props: Props) {
-    return ();
+export default function SellForm(props: any) {
+    return (null);
 }

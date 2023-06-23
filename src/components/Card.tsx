@@ -1,16 +1,13 @@
 import Image from "next/image";
-import { Sublease } from "@prisma/client";
-import { anyItem } from "../lib/utilities";
-import { VisibleData } from "../lib/utilities";
+import { CardData } from "../lib/types/interfaces";
 
 interface ItemProps {
-    keyVals: VisibleData;
+    data: CardData
 }
 
-export default function Card({keyVals}: ItemProps) {
+export default function Card({data}: ItemProps) {
 
-console.log(keyVals);
-if (keyVals === undefined) return (<></>);
+if (data === undefined) return (<></>);
 
     return (
         <div className=" w-full h-36 rounded-xl flex-row bg-white p-2 flex">
@@ -23,11 +20,11 @@ if (keyVals === undefined) return (<></>);
             </div>
             <div className="columns-2 px-2 w-3/4 pl-4">
                     {
-                        keyVals[0].map((field, index) => {
+                        data.keys?.map((field, index) => {
                             return (
                                 <div className="flex flex-row py-2" key={field}> 
                                     <p className="font-bold pr-1">{field}:</p>
-                                    <p>{keyVals[1][index]}</p>
+                                    <p>{data.values?.at(index)}</p>
                                 </div>
                             );
                         })
@@ -51,13 +48,13 @@ if (keyVals === undefined) return (<></>);
     
 // }
 
-function imageGen(src: string) {
-    return (
-        <Image
-            src={src}
-            width={80}
-            height={80}
-            alt='Image of Puppy'
-        />
-    )
-}
+// function imageGen(src: string) {
+//     return (
+//         <Image
+//             src={src}
+//             width={80}
+//             height={80}
+//             alt='Image of Puppy'
+//         />
+//     )
+// }

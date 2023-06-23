@@ -1,14 +1,14 @@
 "use client"
 import Card from "@/src/components/Card";
 import { useEffect, useRef, useState } from "react";
-import { VisibleData } from "@/src/lib/utilities";
+import { CardData } from "@/src/lib/types/interfaces";
 
 
 
 export default function Page({params}: {params: {itemType: string}}) {
 
     const [skipCount, setSkipCount] = useState(0);
-    const [data, setData] = useState<VisibleData[]>([]);
+    const [data, setData] = useState<CardData[]>([]);
 
     useEffect(() => {
 
@@ -25,9 +25,14 @@ export default function Page({params}: {params: {itemType: string}}) {
         }).then((res: Response) => {
             console.log(res);
 
-            res.json().then((newItems: VisibleData[]) => {
-                setData((prevState: VisibleData[]) => [...prevState, ...newItems]);
-            });
+            // res.json().then((newItems: VisibleData[]) => {
+            //     setData((prevState: VisibleData[]) => [...prevState, ...newItems]);
+            // });
+
+            res.json().then((newItems: CardData[]) => {
+              setData((prevState: CardData[]) => [...prevState, ...newItems]);
+            })
+            
             setSkipCount((prev) => prev + 1)
         })
 
@@ -40,10 +45,10 @@ export default function Page({params}: {params: {itemType: string}}) {
         return (
             <div className="h-screen w-1/2 items-center flex flex-col m-auto p-2 overflow-scroll">
                 {
-                    data.map((itemData: VisibleData, index: number) => {
+                    data.map((itemData: CardData, index: number) => {
                         return (
                             <div key={index} className="w-full py-2">
-                                <Card keyVals={itemData} key={index} />
+                                <Card data={itemData} key={itemData.id} />
                             </div>
                         );
                     })

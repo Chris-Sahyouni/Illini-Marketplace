@@ -1,8 +1,9 @@
 import { prisma } from '../../../../lib/db'
-import { dbRequest } from '@/src/lib/types/interfaces'
-import { alignKeyValues } from '@/src/lib/utilities';
+import { CardData, dbRequest } from '@/src/lib/types/interfaces'
+import { alignKeyValues, getVisibleValues } from '@/src/lib/utilities';
 import { Textbook } from '@prisma/client';
 import { VisibleData } from '@/src/lib/utilities';
+import { ItemData, ItemType, typeKeyMap } from '@/src/lib/types/models';
 
 
 export async function POST(request: Request) {
@@ -20,14 +21,21 @@ export async function POST(request: Request) {
             take: 20,
             skip: 20 * skipCount
         });
-        
-        const desiredKeys: string[] = ['course', 'price', 'contact'];
-        let parsed: VisibleData[] = [];
-        data.forEach((item) => {
-        parsed.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
-        });
 
-        return new Response(JSON.stringify(parsed));
+        // const desiredKeys: readonly string[] = typeKeyMap.get(ItemType.Textbook) || [];
+
+        // let visibleVals: VisibleData[] = [];
+        // data.forEach((item) => {
+        //     visibleVals.push(alignKeyValues(desiredKeys, [Object.keys(item), Object.values(item).map(value => value !== null ? value.toString() : 'null')]));
+        // });
+
+        let res: CardData[] = [];
+        data.forEach((item) => {
+          let dat = new ItemData(undefined, item);
+          res.push(dat.getCardData());
+        })
+
+        return new Response(JSON.stringify(res));
 
     } catch (error) {
         console.log(error);
