@@ -23,6 +23,7 @@ Back:
  - add html to emails to make them look good
  - consider using gpt 4 to make an ai powered search
  - make it so the id gets sent over with the item data and is stored in a prop for the card so items can be saved
+ - even though the email id magic link url is working, it might be faulty
 
 Database:
  - upgrade to standard tier and maybe add DTUS before deployment (Compute + Storage in Azure)

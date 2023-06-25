@@ -8,12 +8,12 @@ import { Sublease, Textbook, TransitTicket, SportsTicket, Parking, Misc } from "
 import { CardData } from "./interfaces";
 
 export class ItemData {
-    visibleKeys:  string[] | undefined;
+    visibleKeys:  string[] | undefined = [];
     visibleValues: string[] = [];
-    sellQuestions:  [string, string][] | undefined;
-    id?: string;
-    name?: string;
-    type?: ItemType;
+    sellQuestions:  [string, string][] | undefined = [];
+    id?: string = "";
+    name?: string = "";
+    type: ItemType = ItemType.UnResolved;
     // image
 
     public constructor(sublease?: Sublease, textbook?: Textbook, transit?: TransitTicket, sport?: SportsTicket, parking?: Parking, misc?: Misc) {
@@ -88,7 +88,8 @@ export enum ItemType {
     Transit,
     Ticket,
     Parking,
-    Misc
+    Misc,
+    UnResolved
 }
 
 

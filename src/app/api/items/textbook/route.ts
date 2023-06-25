@@ -1,9 +1,7 @@
 import { prisma } from '../../../../lib/db'
 import { CardData, dbRequest } from '@/src/lib/types/interfaces'
-import { alignKeyValues, getVisibleValues } from '@/src/lib/utilities';
 import { Textbook } from '@prisma/client';
-import { VisibleData } from '@/src/lib/utilities';
-import { ItemData, ItemType, typeKeyMap } from '@/src/lib/types/models';
+import { ItemData} from '@/src/lib/types/models';
 
 
 export async function POST(request: Request) {
