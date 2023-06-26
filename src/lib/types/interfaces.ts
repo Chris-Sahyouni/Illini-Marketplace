@@ -1,4 +1,5 @@
 import { ItemType } from "./models";
+import { ItemData } from "./models";
 
 export interface User {
     id?: string;
@@ -31,4 +32,9 @@ export interface CardData {
     id?: string;
     name?: string;
     type?: ItemType
+}
+
+export interface creationRequest {
+    data: ItemData;
+    sellerId: string
 }

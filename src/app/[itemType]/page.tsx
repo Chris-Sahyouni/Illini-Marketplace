@@ -25,10 +25,6 @@ export default function Page({params}: {params: {itemType: string}}) {
         }).then((res: Response) => {
             console.log(res);
 
-            // res.json().then((newItems: VisibleData[]) => {
-            //     setData((prevState: VisibleData[]) => [...prevState, ...newItems]);
-            // });
-
             res.json().then((newItems: CardData[]) => {
               setData((prevState: CardData[]) => [...prevState, ...newItems]);
             })
