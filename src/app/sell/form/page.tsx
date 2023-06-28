@@ -1,7 +1,7 @@
 "use client"
 
 import Card from "@/src/components/Card";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { ItemData, typeKeyMap, typeQuestionMap } from "@/src/lib/types/models";
 import { ItemType } from "@/src/lib/types/models";
 import SellForm from "@/src/components/forms/SellForm";
@@ -23,40 +23,54 @@ import { useSession } from "next-auth/react";
         const params = useSearchParams();
         const  { data:session } = useSession();
         const [status, setStatus] = useState(Status.NotYetRequested);
+        const [hasEdited, setHasEdited] = useState(false);
+
+
+        const initData = (itemType: ItemType) => {
+            setData((prev) => {
+                let newData: Partial<ItemData> = {...prev};
+                newData.type = itemType;
+                newData.visibleKeys = typeKeyMap.get(itemType);
+                newData.sellQuestions = typeQuestionMap.get(itemType);
+                newData.visibleValues = new Array(newData.visibleKeys?.length);
+                newData.getCardData = prev.getCardData;
+                return newData as ItemData;
+            })
+        }
 
        const assignType = () => {
+        console.log('here')
         switch (params.get('t')) {
             case 'sublease': {
-
+                initData(ItemType.Sublease);
+                break;
             }
             case 'textbook': {
-                setData((prev) => {
-                    let newData: Partial<ItemData> = {...prev};
-                    newData.type = ItemType.Textbook;
-                    newData.visibleKeys = typeKeyMap.get(ItemType.Textbook);
-                    newData.sellQuestions = typeQuestionMap.get(ItemType.Textbook);
-                    newData.visibleValues = new Array(newData.visibleKeys?.length);
-                    newData.getCardData = prev.getCardData;
-                    return newData as ItemData;
-                })
+                initData(ItemType.Textbook)
+                break;
             }
             case 'transit': {
-
+                initData(ItemType.Transit);
+                break;
             }
             case 'parking': {
-
+                initData(ItemType.Parking);
+                break;
             }
             case 'ticket': {
-
+                initData(ItemType.Ticket);
+                break;
             }
             case 'misc': {
-
+                initData(ItemType.Misc);
+                break;
             }
         };
        }
 
         useEffect(() => {
             assignType();
+            console.log(data);
         }, [])
 
         if (data.type === ItemType.UnResolved) {
@@ -64,7 +78,7 @@ import { useSession } from "next-auth/react";
             return (<></>);
         }
 
-
+        // there should be lots of checks here before the request even gets sent
         const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 
             setStatus(Status.Loading);
@@ -99,7 +113,7 @@ import { useSession } from "next-auth/react";
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData}/>
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited}/>
                 </div>
 
                 <div className="w-full flex flex-row">
@@ -112,7 +126,7 @@ import { useSession } from "next-auth/react";
                         </div>
                     </div>
                     {/*for this button disabled, the button does not get disabled until the sell form inputs become controlled, fix this*/}
-                    <button className="ml-8 bg-blue-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={data.visibleValues.includes("")} onClick={handleSubmit}>submit</button>
+                    <button className="ml-8 bg-blue-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={data.visibleValues.includes("") || !hasEdited} onClick={handleSubmit}>submit</button>
                 </div>
 
             </div>

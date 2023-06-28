@@ -1,15 +1,22 @@
+"use client"
+
 import { ItemData, ItemType, typeQuestionMap } from "@/src/lib/types/models";
 import { useState, Dispatch, SetStateAction } from "react";
 interface SellProps {
     data: ItemData;
     setData: Dispatch<SetStateAction<ItemData>>
+    setHasEdited: Dispatch<SetStateAction<boolean>>
 }
 
-export default function SellForm({data, setData}: SellProps) {
+export default function SellForm({data, setData, setHasEdited}: SellProps) {
 
+
+    // const questions = typeQuestionMap.get(data.type);
     const questions = data.sellQuestions;
+    console.log(data);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setHasEdited(true);
         const idStr: string | null = e.target.getAttribute('id');
         const idx: number = Number(idStr);
         setData((prev) => {
@@ -28,7 +35,7 @@ export default function SellForm({data, setData}: SellProps) {
                     return (
                         <div className="p-2" key={`div${index}`}>
                             <h1 key={`h${index}`}>{question[0]}</h1>
-                            <input className="outline w-1/2 rounded-sm" placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index]} onChange={handleInputChange}/>
+                            <input className="outline w-1/2 rounded-sm" placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
                         </div>
                     );
                 })

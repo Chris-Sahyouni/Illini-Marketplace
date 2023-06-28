@@ -3,7 +3,6 @@
 
 // ItemData is meant to be an intermediary between the prisma item types and raw strings the cards render
 
-import { assert } from "console";
 import { Sublease, Textbook, TransitTicket, SportsTicket, Parking, Misc } from "@prisma/client";
 import { CardData } from "./interfaces";
 
@@ -21,7 +20,7 @@ export class ItemData {
 
         }
         if (textbook) {
-            this.constructFromTexbook(textbook);
+            this.constructFromTextbook(textbook);
             this.assignVisibleValues(Object.keys(textbook), Object.values(textbook));
         }
         if (sport) {
@@ -35,7 +34,7 @@ export class ItemData {
         }
     }
 
-    private constructFromTexbook(prismaItem: Textbook) {
+    private constructFromTextbook(prismaItem: Textbook) {
         this.id = prismaItem.id;
         this.type = ItemType.Textbook;
         this.visibleKeys = typeKeyMap.get(ItemType.Textbook);
