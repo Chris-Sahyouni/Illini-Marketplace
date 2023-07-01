@@ -3,7 +3,7 @@
 
 // ItemData is meant to be an intermediary between the prisma item types and raw strings the cards render
 
-import { Sublease, Textbook, TransitTicket, SportsTicket, Parking, Misc } from "@prisma/client";
+import { Sublease, Textbook, Ticket, Transit, Parking, Misc } from "@prisma/client";
 import { CardData } from "./interfaces";
 
 export class ItemData {
@@ -15,7 +15,7 @@ export class ItemData {
     type: ItemType = ItemType.UnResolved;
     // image
 
-    public constructor(sublease?: Sublease, textbook?: Textbook, transit?: TransitTicket, ticket?: SportsTicket, parking?: Parking, misc?: Misc) {
+    public constructor(sublease?: Sublease, textbook?: Textbook, transit?: Transit, ticket?: Ticket, parking?: Parking, misc?: Misc) {
         if (sublease) {
             this.constructFromSublease(sublease);
         }
@@ -54,7 +54,7 @@ export class ItemData {
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
-    private constructFromTransit(prismaItem: TransitTicket) {
+    private constructFromTransit(prismaItem: Transit) {
         this.id = prismaItem.id;
         this.constructGeneric(ItemType.Transit);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
@@ -62,7 +62,7 @@ export class ItemData {
 
 
     // this will have to change to just Ticket
-    private constructFromTicket(prismaItem: SportsTicket) {
+    private constructFromTicket(prismaItem: Ticket) {
         this.id = prismaItem.id;
         this.constructGeneric(ItemType.Ticket);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));

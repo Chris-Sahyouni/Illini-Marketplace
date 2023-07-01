@@ -1,6 +1,6 @@
 import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
-import { TransitTicket } from '@prisma/client';
+import { Transit } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 
@@ -15,7 +15,7 @@ export async function POST(request: Request) {
         //     // handle search here
         // }
 
-        const data: TransitTicket[] = await prisma.transitTicket.findMany({
+        const data: Transit[] = await prisma.transit.findMany({
             take: 20,
             skip: 20 * skipCount
         });

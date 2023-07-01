@@ -27,6 +27,7 @@ model User {
     TransitSelling Transit[]
     TextooksSelling Textbook[]
     ParkingSelling Parking[]
+    MiscSelling Misc[]
 }
 
 model Sublease {
@@ -100,6 +101,19 @@ model Parking {
     location String
     start DateTime
     end DateTime?
+    id String @id() @default(cuid())
+    price Float
+    name String?
+    notes String?
+    contact String
+    image Bytes?
+    seller User @relation(fields: [sellerId], references: [id])
+    sellerId String
+    createdAt DateTime @default(now())
+}
+
+model Misc {
+    foo Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String?

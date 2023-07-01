@@ -1,0 +1,33 @@
+BEGIN TRY
+
+BEGIN TRAN;
+
+-- CreateTable
+CREATE TABLE [dbo].[Misc] (
+    [foo] BIT NOT NULL CONSTRAINT [Misc_foo_df] DEFAULT 1,
+    [id] NVARCHAR(1000) NOT NULL,
+    [price] FLOAT(53) NOT NULL,
+    [name] NVARCHAR(1000),
+    [notes] NVARCHAR(1000),
+    [contact] NVARCHAR(1000) NOT NULL,
+    [image] VARBINARY(max),
+    [sellerId] NVARCHAR(1000) NOT NULL,
+    [createdAt] DATETIME2 NOT NULL CONSTRAINT [Misc_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT [Misc_pkey] PRIMARY KEY CLUSTERED ([id])
+);
+
+-- AddForeignKey
+ALTER TABLE [dbo].[Misc] ADD CONSTRAINT [Misc_sellerId_fkey] FOREIGN KEY ([sellerId]) REFERENCES [dbo].[User]([id]) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+COMMIT TRAN;
+
+END TRY
+BEGIN CATCH
+
+IF @@TRANCOUNT > 0
+BEGIN
+    ROLLBACK TRAN;
+END;
+THROW
+
+END CATCH

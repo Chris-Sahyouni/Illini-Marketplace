@@ -23,6 +23,7 @@ model User {
   TransitSelling Transit[]
   TextooksSelling Textbook[]
   ParkingSelling Parking[]
+  MiscSelling Misc[]
 }
 
 abstract model Item {
@@ -73,7 +74,10 @@ model Parking extends Item {
   location String
   start DateTime
   end DateTime?
+}
 
+model Misc extends Item {
+  foo Boolean @default(true)
 }
 
 
