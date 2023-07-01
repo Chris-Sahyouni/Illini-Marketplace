@@ -23,124 +23,92 @@ model User {
     isAdmin Boolean @default(false)
     contact String?
     SubleaseSelling Sublease[]
-    SportsTicketSelling SportsTicket[]
-    TransitTicketSelling TransitTicket[]
+    TicketSelling Ticket[]
+    TransitSelling Transit[]
     TextooksSelling Textbook[]
     ParkingSelling Parking[]
-    MiscSelling Misc[]
 }
 
 model Sublease {
-    address String
+    location String
     image2 Bytes?
     image3 Bytes?
     image4 Bytes?
     company String
-    numBedrooms Int
-    numBathrooms Int
-    startDate DateTime
-    endDate DateTime
-    isSublease Boolean @default(true)
+    bedrooms Int
+    bathrooms Int
+    start DateTime
+    end DateTime
+    term String
     id String @id() @default(cuid())
     price Float
-    name String
-    description String?
+    name String?
     notes String?
     contact String
     image Bytes?
     seller User @relation(fields: [sellerId], references: [id])
     sellerId String
     createdAt DateTime @default(now())
-    tags String?
 }
 
-model SportsTicket {
-    game String
-    location String
-    date DateTime
-    numTix Int
-    sport String
-    isSportsTicket Boolean @default(true)
-    id String @id() @default(cuid())
-    price Float
-    name String
-    description String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
-    createdAt DateTime @default(now())
-    tags String?
-}
-
-model TransitTicket {
-    dateTime DateTime
-    mode String
+model Transit {
     from String
     to String
-    isTransitTicket Boolean @default(true)
+    mode String
+    date DateTime
     id String @id() @default(cuid())
     price Float
-    name String
-    description String?
+    name String?
     notes String?
     contact String
     image Bytes?
     seller User @relation(fields: [sellerId], references: [id])
     sellerId String
     createdAt DateTime @default(now())
-    tags String?
+}
+
+model Ticket {
+    type String
+    event String
+    date DateTime
+    seat String?
+    id String @id() @default(cuid())
+    price Float
+    name String?
+    notes String?
+    contact String
+    image Bytes?
+    seller User @relation(fields: [sellerId], references: [id])
+    sellerId String
+    createdAt DateTime @default(now())
 }
 
 model Textbook {
     course String
-    isTextbook Boolean @default(true)
     id String @id() @default(cuid())
     price Float
-    name String
-    description String?
+    name String?
     notes String?
     contact String
     image Bytes?
     seller User @relation(fields: [sellerId], references: [id])
     sellerId String
     createdAt DateTime @default(now())
-    tags String?
 }
 
 model Parking {
     location String
-    startDate DateTime
-    endDate DateTime?
-    isParking Boolean @default(true)
+    start DateTime
+    end DateTime?
     id String @id() @default(cuid())
     price Float
-    name String
-    description String?
+    name String?
     notes String?
     contact String
     image Bytes?
     seller User @relation(fields: [sellerId], references: [id])
     sellerId String
     createdAt DateTime @default(now())
-    tags String?
-}
-
-model Misc {
-    fields String?
-    isMisc Boolean @default(true)
-    id String @id() @default(cuid())
-    price Float
-    name String
-    description String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
-    createdAt DateTime @default(now())
-    tags String?
 }
 
 model bannedEmail {
