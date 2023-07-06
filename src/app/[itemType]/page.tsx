@@ -71,7 +71,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                 <div className="w-1/4 py-4 px-3">
                     <div className="bg-white rounded w-full px-4 py-2 h-fit flex flex-col">
                         <CheckBoxes itemType={params.itemType} handler={handleToggleFilter} />
-                        <Ranges itemType={params.itemType} ranges={ranges} handler={setRanges} />
+                        <Ranges itemType={params.itemType} handler={setRanges} />
                         <button className='w-20 bg-blue-600 text-white hover:bg-blue-400 rounded'>Apply</button>
                     </div>
                 </div>
