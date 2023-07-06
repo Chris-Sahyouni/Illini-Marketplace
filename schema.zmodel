@@ -17,7 +17,7 @@ model User {
   isVerified    Boolean   @default(false)
   joinedDate    DateTime  @default(now())
   isAdmin       Boolean   @default(false)
-  contact       String? 
+  contact       String?
   SubleaseSelling Sublease[]
   TicketSelling Ticket[]
   TransitSelling Transit[]
@@ -63,7 +63,7 @@ model Ticket extends Item {
   event String
   date DateTime
   seat String?
-
+  amount Int @default(1)
 }
 
 model Textbook extends Item {

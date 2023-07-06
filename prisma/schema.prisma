@@ -73,6 +73,7 @@ model Ticket {
     event String
     date DateTime
     seat String?
+    amount Int @default(1)
     id String @id() @default(cuid())
     price Float
     name String?

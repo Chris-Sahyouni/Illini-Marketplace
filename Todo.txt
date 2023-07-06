@@ -4,7 +4,7 @@ Front:
  - let admin delete items
  - let users save items
  - forgot password recovery
- - report sellers option
+ - report sellers option?
  - add a not-found file
  - lock people out for trying to log in too many times
  - make a logo and an icon
@@ -12,6 +12,9 @@ Front:
  - make it so links that require sign in first add a 'sign in first' header to the log in page so users know why they were redirected there
  - all of the fields need to not have camelCase names
  - restrict inputs for fields that are numbers/dates only etc
+ - input fields in the sell form need a character limit
+ - some of the input fields in the sell form should be dropdowns instead of text input
+ - try using material ui Select component for form inputs
 
 FETCH REQUEST FUNCTIONS MIGHT NEED TO BE ASYNC TO WORK
 
@@ -53,4 +56,4 @@ Development Related:
  - Pandas to visualize website data
  - System of deployment and continuos integration
  - Production branch on github when the time comes
- - 
+
