@@ -5,6 +5,7 @@ import { CardData } from "@/src/lib/types/interfaces";
 import { typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
+import { request } from "http";
 
 
 
@@ -36,32 +37,52 @@ export default function Page({params}: {params: {itemType: string}}) {
         }
     }
 
-    console.log("checkboxes: ", filters);
-    console.log('ranges: ', ranges);
+    // console.log("checkboxes: ", filters);
+    // console.log('ranges: ', ranges);
 
     useEffect(() => {
 
-        fetch(`api/items/${params.itemType}`, {
-            method: "POST",
-            body: JSON.stringify({
-                skipCount: skipCount,
-                filters: null
-            }),
-            headers: {
-                "Content-Type": "application/json",
-                'Accept': "application/json",
-            }
-        }).then((res: Response) => {
+        // fetch(`api/items/${params.itemType}`, {
+        //     method: "POST",
+        //     body: JSON.stringify({
+        //         skipCount: skipCount,
+        //         filters: null
+        //     }),
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //         'Accept': "application/json",
+        //     }
+        // }).then((res: Response) => {
 
-            res.json().then((newItems: CardData[]) => {
-              setData((prevState: CardData[]) => [...prevState, ...newItems]);
-            })
+        //     res.json().then((newItems: CardData[]) => {
+        //       setData((prevState: CardData[]) => [...prevState, ...newItems]);
+        //     })
 
-            setSkipCount((prev) => prev + 1)
-        })
+        //     setSkipCount((prev) => prev + 1)
+        // })
+        
+        const wrapper = async () => {
+            const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
+            // if (newItems.length === 0 || newItems === undefined || newItems === null) {
+            //     console.log('invalid');
+            //     return;
+            // }
+            setData((prevState: CardData[]) => [...prevState, ...newItems]);
+           // setSkipCount((prev) => prev + 1)
+        }
+        wrapper();
+
 
     }, [params.itemType]);
 
+
+    const applyFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+        const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
+        setData((prevState: CardData[]) => [...newItems]);
+    }
+
+    // THIS SHOULD NOT RETURN NOTHING IF THERE IS NO DATA
     if (!data || data.length === 0 || data === null || data === undefined) {
         return (<></>);
     }
@@ -72,7 +93,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                     <div className="bg-white rounded w-full px-4 py-2 h-fit flex flex-col">
                         <CheckBoxes itemType={params.itemType} handler={handleToggleFilter} />
                         <Ranges itemType={params.itemType} handler={setRanges} />
-                        <button className='w-20 bg-blue-600 text-white hover:bg-blue-400 rounded'>Apply</button>
+                        <button className='w-20 bg-blue-600 text-white hover:bg-blue-400 rounded' type="button" onClick={applyFilters}>Apply</button>
                     </div>
                 </div>
                 <div className=" w-1/2 items-center flex flex-col mx-auto p-2 overflow-scroll">
@@ -95,4 +116,22 @@ export default function Page({params}: {params: {itemType: string}}) {
 
 /* -------------------------------------------------------------------------- */
 
+async function requestItems(type: string, skipCount: number, filters: [string, string][], ranges: [string, number[]][])  {
+    const data = await fetch(`api/items/${type}`, {
+        method: "POST",
+        body: JSON.stringify({
+            skipCount: skipCount,
+            filters: filters,
+            ranges: ranges
+        }),
+        headers: {
+            "Content-Type": "application/json",
+            'Accept': "application/json",
+        }
+    });
+    
+    const parsed: CardData[] = await data.json();
+    return parsed;
+
+}
 

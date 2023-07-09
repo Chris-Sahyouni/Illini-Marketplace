@@ -20,8 +20,6 @@ export default function LogInForm() {
 
 
     const { data:session, status } = useSession();
-    console.log(status);
-    console.log(session);
 
     const handleSubmit = useCallback( async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();

@@ -2,12 +2,12 @@
 
 import Card from "@/src/components/Card";
 import { useState, useEffect } from "react";
-import { ItemData, typeKeyMap, typeQuestionMap } from "@/src/lib/types/models";
-import { ItemType } from "@/src/lib/types/models";
 import SellForm from "@/src/components/forms/SellForm";
 import { useSearchParams } from 'next/navigation'
 import { creationRequest } from "@/src/lib/types/interfaces";
 import { useSession } from "next-auth/react";
+import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
+import { ItemData } from "@/src/lib/types/models";
 
 
     export default function Page() {

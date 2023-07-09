@@ -6,7 +6,7 @@ import { ItemData} from '@/src/lib/types/models';
 
 export async function POST(request: Request) {
     try {
-        const  {filters, skipCount, sortBy, searchInput}: dbRequest = await request.json();
+        const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
 
         // filters and sortBy need to be converted into usable types or values for prisma here
 

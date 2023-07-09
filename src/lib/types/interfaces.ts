@@ -1,4 +1,5 @@
-import { ItemType } from "./models";
+
+import { ItemType } from "../maps";
 import { ItemData } from "./models";
 
 export interface User {
@@ -21,9 +22,9 @@ export interface itemTypeParams {
 
 export interface dbRequest {
     skipCount: number;
-    filters: Object | null
+    filters: [string, string][] | null;
     searchInput?: string | null
-    sortBy?: Object | null
+    ranges: [string, number[]][];
 }
 
 export interface CardData {

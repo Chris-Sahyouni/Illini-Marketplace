@@ -87,7 +87,7 @@ export class ItemData {
                 let pureVal = allValues[(allKeys.indexOf(visKey))];
                 let asString;
                 try {
-                    // apply string conversion rules here
+                    // apply string conversion rules here THERE IS A TYPE ERROR WITH TO DATE STRING
                     if (typeof pureVal === "number") asString = pureVal.toString();
                     else if (typeof pureVal === "object") asString = pureVal.toDateString();
                     else asString = pureVal;
