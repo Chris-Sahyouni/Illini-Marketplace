@@ -21,23 +21,38 @@ export async function POST(request: Request) {
             where: {
                 AND: [
                     {
-                        price: {
-                            gte: ranges[0][1][0],
-                        }  
+                        AND: [
+                            {
+                                price: {
+                                    gte: ranges[0][1][0]
+                                }
+                            },
+                            {
+                                price: {
+                                    lte: ranges[0][1][1]
+                                }
+                            }
+                        ],
                     },
-                    {
-                        price: {
-                            lte: ranges[0][1][1],
-                        }
-                    }
+                    // {
+                    //     AND: [
+                    //         {
+                    //             amount: {
+                    //                 gte: ranges[1][1][0]
+                    //             }
+                    //         },
+                    //         {
+                    //             amount: {
+                    //                 lte: ranges[1][1][1]
+                    //             }
+                    //         }
+                    //     ]
+                    // }
                 ]
-                
-                // amount: {
-                //     gte: ranges[1][1][0],
-                //     lte: ranges[1][1][1]
-                // }
+
             }
         });
+
         // console.log("DATA: ", data);
         let res: CardData[] = [];
         data.forEach((item) => {

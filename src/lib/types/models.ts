@@ -61,8 +61,6 @@ export class ItemData {
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
-
-    // this will have to change to just Ticket
     private constructFromTicket(prismaItem: Ticket) {
         this.id = prismaItem.id;
         this.constructGeneric(ItemType.Ticket);

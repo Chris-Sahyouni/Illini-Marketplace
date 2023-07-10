@@ -5,7 +5,6 @@ import { CardData } from "@/src/lib/types/interfaces";
 import { typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
-import { request } from "http";
 
 
 
@@ -41,33 +40,15 @@ export default function Page({params}: {params: {itemType: string}}) {
     // console.log('ranges: ', ranges);
 
     useEffect(() => {
-
-        // fetch(`api/items/${params.itemType}`, {
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         skipCount: skipCount,
-        //         filters: null
-        //     }),
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //         'Accept': "application/json",
-        //     }
-        // }).then((res: Response) => {
-
-        //     res.json().then((newItems: CardData[]) => {
-        //       setData((prevState: CardData[]) => [...prevState, ...newItems]);
-        //     })
-
-        //     setSkipCount((prev) => prev + 1)
-        // })
         
         const wrapper = async () => {
             const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
-            // if (newItems.length === 0 || newItems === undefined || newItems === null) {
-            //     console.log('invalid');
-            //     return;
-            // }
-            setData((prevState: CardData[]) => [...prevState, ...newItems]);
+            if (newItems.length === 0 || newItems === undefined || newItems === null) {
+                console.log('invalid');
+                return;
+            }
+            console.log(newItems);
+            setData((prevState: CardData[]) => [...newItems]);
            // setSkipCount((prev) => prev + 1)
         }
         wrapper();
@@ -82,10 +63,7 @@ export default function Page({params}: {params: {itemType: string}}) {
         setData((prevState: CardData[]) => [...newItems]);
     }
 
-    // THIS SHOULD NOT RETURN NOTHING IF THERE IS NO DATA
-    if (!data || data.length === 0 || data === null || data === undefined) {
-        return (<></>);
-    }
+
 
         return (
             <div className="h-screen flex flex-row">
