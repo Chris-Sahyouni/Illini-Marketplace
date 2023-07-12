@@ -6,9 +6,9 @@ import { ItemData } from '@/src/lib/types/models';
 
 export async function POST(request: Request) {
     try {
-        const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
-
         
+        const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
+        let selectedFilters: string[] = filters.map(([key, val]) => val);
 
         // if (body.searchInput) {
         //     console.log("");
@@ -19,8 +19,8 @@ export async function POST(request: Request) {
             take: 20,
             skip: 20 * skipCount,
             where: {
-                AND: [
-                    {
+                // AND: [
+                //     {
                         AND: [
                             {
                                 price: {
@@ -31,24 +31,25 @@ export async function POST(request: Request) {
                                 price: {
                                     lte: ranges[0][1][1]
                                 }
+                            },
+                            {
+                                amount: {
+                                    gte: ranges[1][1][0]
+                                }
+                            },
+                            {
+                                amount: {
+                                    lte: ranges[1][1][1]
+                                }
                             }
                         ],
-                    },
-                    // {
-                    //     AND: [
-                    //         {
-                    //             amount: {
-                    //                 gte: ranges[1][1][0]
-                    //             }
-                    //         },
-                    //         {
-                    //             amount: {
-                    //                 lte: ranges[1][1][1]
-                    //             }
-                    //         }
-                    //     ]
-                    // }
-                ]
+                        OR: [
+                            {
+                                type: {
+                                    in: selectedFilters
+                                }
+                            }
+                        ]
 
             }
         });

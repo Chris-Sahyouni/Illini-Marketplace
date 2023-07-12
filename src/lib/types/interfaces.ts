@@ -22,7 +22,7 @@ export interface itemTypeParams {
 
 export interface dbRequest {
     skipCount: number;
-    filters: [string, string][] | null;
+    filters: [string, string][];
     searchInput?: string | null
     ranges: [string, number[]][];
 }
