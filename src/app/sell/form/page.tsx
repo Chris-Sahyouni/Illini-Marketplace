@@ -8,6 +8,7 @@ import { creationRequest } from "@/src/lib/types/interfaces";
 import { useSession } from "next-auth/react";
 import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
 import { ItemData } from "@/src/lib/types/models";
+import SubleaseCard from "@/src/components/SubleaseCard";
 
 
     export default function Page() {
@@ -121,7 +122,7 @@ import { ItemData } from "@/src/lib/types/models";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                data ? <Card data={data.getCardData()}/> : <Card data={{}} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {}} /> : <Card data={data ? data.getCardData() : {}} />
                             }
                         </div>
                     </div>

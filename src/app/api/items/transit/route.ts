@@ -14,10 +14,36 @@ export async function POST(request: Request) {
         //     console.log("");
         //     // handle search here
         // }
+        let selectedFilters: string[] = filters.map(([key, val]) => val);
+        if (selectedFilters.length === 0) {
+            selectedFilters = ['Peoria Charter', 'Amtrack', 'other'];
+        }
+
 
         const data: Transit[] = await prisma.transit.findMany({
             take: 20,
-            skip: 20 * skipCount
+            skip: 20 * skipCount,
+            where: {
+                AND: [
+                    {
+                        price: {
+                            gte: ranges[0][1][0]
+                        }
+                    },
+                    {
+                        price: {
+                            lte: ranges[0][1][1]
+                        }
+                    },
+                ],
+                OR: [
+                    {
+                        mode: {
+                            in: selectedFilters
+                        }
+                    }
+                ]
+            }
         });
 
         let res: CardData[] = [];

@@ -2,9 +2,10 @@
 import Card from "@/src/components/Card";
 import { useEffect, useState } from "react";
 import { CardData } from "@/src/lib/types/interfaces";
-import { typeRangeMap } from "@/src/lib/maps";
+import { ItemType, typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
+import SubleaseCard from "@/src/components/SubleaseCard";
 
 
 
@@ -17,7 +18,7 @@ export default function Page({params}: {params: {itemType: string}}) {
     const [ranges, setRanges] = useState<Array<[string, number[]]>>(() => {
         const initRangeState: [string, number[]][] = [];
         const rangeLabels = typeRangeMap.get(params.itemType);
-        rangeLabels?.forEach((label) => initRangeState.push([label, [0, 100]]));
+        rangeLabels?.forEach((label) => initRangeState.push([label, [0, 1000]]));
         return initRangeState;
     });
 
@@ -40,7 +41,6 @@ export default function Page({params}: {params: {itemType: string}}) {
     // console.log('ranges: ', ranges);
 
     useEffect(() => {
-        
         const wrapper = async () => {
             const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
             if (newItems.length === 0 || newItems === undefined || newItems === null) {
@@ -79,7 +79,9 @@ export default function Page({params}: {params: {itemType: string}}) {
                         data.map((itemData: CardData, index: number) => {
                             return (
                                 <div key={index} className="w-full py-2">
-                                    <Card data={itemData} key={itemData.id} />
+                                    {
+                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} />
+                                    }
                                 </div>
                             );
                         })

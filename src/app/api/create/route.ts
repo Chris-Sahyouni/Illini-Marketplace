@@ -1,7 +1,8 @@
 
-import { ItemData, ItemType } from '@/src/lib/types/models';
+import { ItemData } from '@/src/lib/types/models';
 import { prisma } from '../../../lib/db';
 import { creationRequest } from '@/src/lib/types/interfaces';
+import { ItemType } from '@/src/lib/maps';
 
 
 

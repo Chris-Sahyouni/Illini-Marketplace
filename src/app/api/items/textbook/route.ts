@@ -6,18 +6,25 @@ import { ItemData} from '@/src/lib/types/models';
 
 export async function POST(request: Request) {
     try {
-        const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
-
-        // filters and sortBy need to be converted into usable types or values for prisma here
-
-        // if (body.searchInput) {
-        //     console.log("");
-        //     // handle search here
-        // }
+        const  {skipCount, ranges, searchInput}: dbRequest = await request.json();
 
         const data: Textbook[] = await prisma.textbook.findMany({
             take: 20,
-            skip: 20 * skipCount
+            skip: 20 * skipCount,
+            where: {
+                AND: [
+                        {
+                            price: {
+                                gte: ranges[0][1][0]
+                            }
+                        },
+                        {
+                            price: {
+                                lte: ranges[0][1][1]
+                            }
+                        }
+                    ]
+            }
         });
 
         let res: CardData[] = [];

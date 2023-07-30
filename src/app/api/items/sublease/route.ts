@@ -8,17 +8,56 @@ import { ItemData } from '@/src/lib/types/models';
 export async function POST(request: Request) {
     try {
         const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
+        let selectedFilters: string[] = filters.map(([key, val]) => val);
+        if (selectedFilters.length === 0) {
+            selectedFilters = ['fall', 'spring', 'summer'];
+        }
 
-        // filters and sortBy need to be converted into usable types or values for prisma here
-
-        // if (body.searchInput) {
-        //     console.log("");
-        //     // handle search here
-        // }
 
         const data: Sublease[] = await prisma.sublease.findMany({
             take: 20,
-            skip: 20 * skipCount
+            skip: 20 * skipCount,
+            where: {
+                AND: [
+                    {
+                        price: {
+                            gte: ranges[0][1][0]
+                        }
+                    },
+                    {
+                        price: {
+                            lte: ranges[0][1][1]
+                        }
+                    },
+                    {
+                        bedrooms: {
+                            gte: ranges[1][1][0]
+                        }
+                    },
+                    {
+                        bedrooms: {
+                            lte: ranges[1][1][1]
+                        }
+                    },
+                    {
+                        bathrooms: {
+                            gte: ranges[2][1][0]
+                        }
+                    },
+                    {
+                        bathrooms: {
+                            lte: ranges[2][1][1]
+                        }
+                    },
+                ],
+                OR: [
+                    {
+                        term: {
+                            in: selectedFilters
+                        }
+                    }
+                ]
+            }
         });
 
         let res: CardData[] = [];

@@ -11,7 +11,7 @@ export enum ItemType {
 const contactPair: [string, string] = ['How would you like to be contacted?', 'eg. 123-456-7890, or snap: john_doe123, etc'];
 
 // is company really necessary?
-export const subleaseKeys:  string[] = ["address", "price", "contact", "company", "numBedrooms", "numBathrooms", "startDate", "endDate", "notes"];
+export const subleaseKeys:  string[] = ["location", "price", "contact", "company", "bedrooms", "bathrooms", "start", "end", "notes"];
 export const textbookKeys:  string[] = ['course', 'price', 'contact'];
 export const transitKeys:  string[] = ['mode', 'price', 'date'];
 export const ticketKeys:  string[] = ['event', 'price', 'date', 'seat', 'amount'];
@@ -56,7 +56,7 @@ const strToType = new Map<string, ItemType>([
 
 
 const subleaseCheckBoxFilters: [string, string[]][] = [['Term', ['fall', 'spring', 'summer']]];
-const textbookCheckBoxFilters: [string, string[]][] = [['Mode', ['Peoria Charter', 'Amtrack', 'other']]]
+const textbookCheckBoxFilters: [string, string[]][] = []
 const transitCheckBoxFilters: [string, string[]][] = [['Mode', ['Peoria Charter', 'Amtrack', 'other']]]
 const ticketCheckBoxFilters: [string, string[]][] = [['Type', ['football', 'basketball', 'concert', 'other']]]
 const parkingCheckBoxFilters: [string, string[]][] = []

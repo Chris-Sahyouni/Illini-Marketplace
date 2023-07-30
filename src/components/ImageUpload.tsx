@@ -1,0 +1,3 @@
+
+
+const uploadWidget = cloudinary.create

@@ -9,12 +9,14 @@ export async function POST(request: Request) {
         
         const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
         let selectedFilters: string[] = filters.map(([key, val]) => val);
+        if (selectedFilters.length === 0) {
+            selectedFilters = ["football", 'basketball', 'concert', 'other'];
+        }
 
         // if (body.searchInput) {
         //     console.log("");
         //     // handle search here
         // }
-        console.log(ranges);
         const data: Ticket[] = await prisma.ticket.findMany({
             take: 20,
             skip: 20 * skipCount,
