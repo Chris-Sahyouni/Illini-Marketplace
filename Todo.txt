@@ -10,11 +10,11 @@ Front:
  - make a logo and an icon
  - maybe change all the fonts
  - make it so links that require sign in first add a 'sign in first' header to the log in page so users know why they were redirected there
- - all of the fields need to not have camelCase names
  - restrict inputs for fields that are numbers/dates only etc
  - input fields in the sell form need a character limit
  - some of the input fields in the sell form should be dropdowns instead of text input
  - try using material ui Select component for form inputs
+ - within the card component, make everything but the image render first
 
 FETCH REQUEST FUNCTIONS MIGHT NEED TO BE ASYNC TO WORK
 
@@ -28,7 +28,6 @@ Back:
  - add html to emails to make them look good
  - consider using gpt 4 to make an ai powered search
  - make it so the id gets sent over with the item data and is stored in a prop for the card so items can be saved
- - even though the email id magic link url is working, it might be faulty
  - npm i sharp for image for optimization
 
 Database:
@@ -36,6 +35,7 @@ Database:
  - allow the IP address for the server
  - check out prisma full text search for the search funtionality
  - switch address to location for subleases to accomodate high rises
+ - probably switch to postgreSQL, should be cheaper
 
 
 Testing:

@@ -19,6 +19,8 @@
     "autoprefixer": "10.4.14",
     "bcrypt": "^5.1.0",
     "buffer": "^6.0.3",
+    "cloudinary": "^1.39.0",
+    "cloudinary-core": "^2.13.0",
     "eslint": "8.40.0",
     "eslint-config-next": "13.4.3",
     "jsonwebtoken": "^9.0.0",

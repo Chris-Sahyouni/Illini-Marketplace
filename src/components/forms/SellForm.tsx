@@ -2,7 +2,9 @@
 
 import { ItemData, } from "@/src/lib/types/models";
 import { useState, Dispatch, SetStateAction } from "react";
-import { CldUploadWidget } from "next-cloudinary";
+import ImageUpload from "../ImageUpload";
+
+
 interface SellProps {
     data: ItemData;
     setData: Dispatch<SetStateAction<ItemData>>
@@ -43,8 +45,8 @@ export default function SellForm({data, setData, setHasEdited}: SellProps) {
                 })
             }
             </div>
-            <div className="outline w-1/2 justify-center flex ">
-                <CldUploadWidget />
+            <div className=" w-1/2 justify-center flex ">
+                <ImageUpload />
             </div>
         </div>
     );
