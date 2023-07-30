@@ -8,11 +8,11 @@ import { ItemType } from '@/src/lib/maps';
 
 export async function POST(request: Request) {
     const body: creationRequest = await request.json();
-    const { data, sellerId } = body;
+    const { data, sellerId, id} = body;
     let success: boolean = false;
     switch (data.type) {
         case ItemType.Textbook: {
-            success = await createTextbook(data, sellerId);
+            success = await createTextbook(data, sellerId, id);
         }
     }
     if (success) {
@@ -21,13 +21,14 @@ export async function POST(request: Request) {
     return new Response('error', {status: 500});
 }
 
-async function createTextbook(data: ItemData, sellerId: string) {
+async function createTextbook(data: ItemData, sellerId: string, itemId: string) {
     const {visibleKeys:keys, visibleValues:values} = data;
     
     if (keys && values) {
         try {
             await prisma.textbook.create({
                 data: {
+                    id: itemId,
                     course: values[keys.indexOf('course')],
                     name: values[keys.indexOf('course')],
                     price: Number(values[keys.indexOf("price")]),

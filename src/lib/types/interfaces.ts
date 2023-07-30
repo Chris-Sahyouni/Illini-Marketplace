@@ -32,10 +32,11 @@ export interface CardData {
     values?: string[];
     id?: string;
     name?: string;
-    type?: ItemType
+    type?: ItemType;
 }
 
 export interface creationRequest {
+    id: string;
     data: ItemData;
-    sellerId: string
+    sellerId: string;
 }

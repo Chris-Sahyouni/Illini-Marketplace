@@ -9,6 +9,7 @@ import { useSession } from "next-auth/react";
 import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
 import { ItemData } from "@/src/lib/types/models";
 import SubleaseCard from "@/src/components/SubleaseCard";
+import {v4 as uuidv4} from "uuid";
 
 
     export default function Page() {
@@ -25,6 +26,8 @@ import SubleaseCard from "@/src/components/SubleaseCard";
         const  { data:session } = useSession();
         const [status, setStatus] = useState(Status.NotYetRequested);
         const [hasEdited, setHasEdited] = useState(false);
+        const [itemId, setItemId] = useState(uuidv4());
+        const [isUploaded, setIsUploaded] = useState(false)
 
 
         const initData = (itemType: ItemType) => {
@@ -71,7 +74,7 @@ import SubleaseCard from "@/src/components/SubleaseCard";
 
         useEffect(() => {
             assignType();
-            console.log(data);
+            console.log('items Id is: ' + itemId);
         }, [])
 
         if (data.type === ItemType.UnResolved) {
@@ -87,7 +90,8 @@ import SubleaseCard from "@/src/components/SubleaseCard";
             if (session && session.user && session.user.id) {
                 const req: creationRequest = {
                     data: data,
-                    sellerId: session.user.id
+                    sellerId: session.user.id,
+                    id: itemId
                 }
 
                 fetch('/api/create', {
@@ -114,7 +118,7 @@ import SubleaseCard from "@/src/components/SubleaseCard";
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited}/>
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setIsUploaded={setIsUploaded}/>
                 </div>
 
                 <div className="w-full flex flex-row">
@@ -122,7 +126,7 @@ import SubleaseCard from "@/src/components/SubleaseCard";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {}} /> : <Card data={data ? data.getCardData() : {}} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {} } /> : <Card data={data ? data.getCardData() : {} } isUploaded={isUploaded} itemId={itemId}/>
                             }
                         </div>
                     </div>

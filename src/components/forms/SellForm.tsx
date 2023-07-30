@@ -9,9 +9,11 @@ interface SellProps {
     data: ItemData;
     setData: Dispatch<SetStateAction<ItemData>>
     setHasEdited: Dispatch<SetStateAction<boolean>>
+    setIsUploaded: Dispatch<SetStateAction<boolean>>;
+    imgId: string
 }
 
-export default function SellForm({data, setData, setHasEdited}: SellProps) {
+export default function SellForm({data, setData, setHasEdited, imgId, setIsUploaded}: SellProps) {
 
 
     // const questions = typeQuestionMap.get(data.type);
@@ -46,7 +48,7 @@ export default function SellForm({data, setData, setHasEdited}: SellProps) {
             }
             </div>
             <div className=" w-1/2 justify-center flex ">
-                <ImageUpload />
+                <ImageUpload imageId={imgId} setIsUploaded={setIsUploaded}/>
             </div>
         </div>
     );

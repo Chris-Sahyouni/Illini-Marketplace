@@ -84,7 +84,7 @@ model Ticket {
 
 model Textbook {
     course String
-    id String @id() @default(cuid())
+    id String @id()
     price Float
     name String?
     notes String?

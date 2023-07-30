@@ -80,7 +80,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                             return (
                                 <div key={index} className="w-full py-2">
                                     {
-                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} />
+                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={true} />
                                     }
                                 </div>
                             );

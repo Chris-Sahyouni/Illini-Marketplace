@@ -1,11 +1,31 @@
 'use client'
+import { CldUploadWidget, CldUploadWidgetPropsOptions } from 'next-cloudinary';
+import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
+import { useState, Dispatch, SetStateAction } from 'react';
 
-import { CldUploadWidget } from 'next-cloudinary';
- 
-export default function ImageUpload() {
+
+interface ImageUploadProps {
+    imageId: string;
+    setIsUploaded: Dispatch<SetStateAction<boolean>>;
+}
+
+export default function ImageUpload({imageId, setIsUploaded}: ImageUploadProps) {
+
+    const handleUpload = (error: UploadApiErrorResponse | null, result: UploadApiResponse, widget: any) => {
+        setIsUploaded(true);
+        console.log("uploaded " + result.info)
+    }
+
+    let uploadOptions: CldUploadWidgetPropsOptions = {
+        maxFiles: 1,
+        cropping: true,
+        croppingAspectRatio: 1,
+        showSkipCropButton: false,
+        publicId: imageId
+    }
 
     return (
-        <CldUploadWidget uploadPreset="i41pivl8">
+        <CldUploadWidget uploadPreset="default_preset" onUpload={handleUpload} options={uploadOptions} >
         {({ open }) => {
             function handleOnClick(e: React.MouseEvent<HTMLButtonElement>) {
             e.preventDefault();
