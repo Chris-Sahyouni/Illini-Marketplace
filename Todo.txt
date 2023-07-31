@@ -7,7 +7,6 @@ Front:
  - report sellers option?
  - add a not-found file
  - lock people out for trying to log in too many times
- - make a logo and an icon
  - maybe change all the fonts
  - make it so links that require sign in first add a 'sign in first' header to the log in page so users know why they were redirected there
  - restrict inputs for fields that are numbers/dates only etc

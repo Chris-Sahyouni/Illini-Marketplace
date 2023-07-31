@@ -17,13 +17,13 @@ export async function POST(request: Request) {
     }
     if (success) {
         return new Response('success', {status: 200});
-    } 
+    }
     return new Response('error', {status: 500});
 }
 
 async function createTextbook(data: ItemData, sellerId: string, itemId: string) {
     const {visibleKeys:keys, visibleValues:values} = data;
-    
+
     if (keys && values) {
         try {
             await prisma.textbook.create({

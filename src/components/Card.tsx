@@ -1,7 +1,6 @@
 import { CardData } from "../lib/types/interfaces";
 import { CldImage } from 'next-cloudinary';
 import Image from "next/image";
-import { useEffect } from "react";
 
 interface ItemProps {
     data: CardData
@@ -55,21 +54,23 @@ export function Field({name, value, index}: fieldProps) {
 
 
 function getImage(cloudSrc: string, isUploaded: boolean) {
-
+    console.log('cloud source: ' + cloudSrc + ' isUploaded: ' + isUploaded);
     if (isUploaded && cloudSrc) {
-        console.log('reached here');
+
         return (
             <>
                 <CldImage
                     src={cloudSrc}
-                    // preserveTransformations
-                    fill={true}
+                    height={130}
+                    width={152}
+                    crop="crop"
+                    gravity="custom"
                     alt='img'
                 />
             </>
         );
     }
-    console.log('cloud source: ' + cloudSrc + ' isUploaded: ' + isUploaded);
+
     return (
         <>
             <Image

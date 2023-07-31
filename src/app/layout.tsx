@@ -23,6 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <title>illini marketplace</title>
       <body className={`${inter.className} background-image ::-webkit-scrollbar`}>
         <Providers>
           <Header />

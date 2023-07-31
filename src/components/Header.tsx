@@ -5,6 +5,7 @@ import { useSession, signIn } from 'next-auth/react'
 import  Link  from 'next/link';
 import React from "react";
 import Dropdown from "./Dropdown";
+import Image from "next/image";
 
 
 export default function Header() {
@@ -28,7 +29,10 @@ export default function Header() {
             return (
                     <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                         <div className="w-1/3">
-                            Logo here
+                            <Image
+                                src='/logo.png'
+                                alt=''
+                            />
                         </div>
                         <input type="text" placeholder='Search' className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                         <div className="w-1/3 flex justify-end">
@@ -48,8 +52,15 @@ export default function Header() {
         // try and get a little arrow next to the username for the dropdown menu
         return (
             <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
-                <div className="w-1/3">
-                    Logo here
+                <div className="w-1/3 ">
+                    <Link href={'/'}>
+                        <Image
+                            src='/logo.png'
+                            alt=''
+                            width={240}
+                            height={200}
+                        />
+                    </Link>
                 </div>
                 <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
@@ -67,7 +78,12 @@ export default function Header() {
     return (
         <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                 <div className="w-1/3">
-                    Logo here
+                <Image
+                    src='/logo.png'
+                    alt=''
+                    width={100}
+                    height={100}
+                />
                 </div>
                 <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
