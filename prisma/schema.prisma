@@ -1,9 +1,8 @@
 
 
 datasource db {
-    provider="sqlserver"
+    provider="postgresql"
     url=env("DATABASE_URL")
-    shadowDatabaseUrl=env("SHADOW_DATABASE_URL")
 }
 
 generator client {
@@ -53,6 +52,7 @@ model Transit {
     from String
     to String
     mode String
+    time String
     date DateTime
     id String @id() @default(cuid())
     price Float
@@ -111,7 +111,6 @@ model Parking {
 }
 
 model Misc {
-    foo Boolean @default(true)
     id String @id() @default(cuid())
     price Float
     name String?

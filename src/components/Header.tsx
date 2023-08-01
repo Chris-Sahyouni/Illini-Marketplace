@@ -57,15 +57,15 @@ export default function Header() {
                         <Image
                             src='/logo.png'
                             alt=''
-                            width={240}
+                            width={250}
                             height={200}
                         />
                     </Link>
                 </div>
                 <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
                 <div className="w-1/3 flex justify-end">
-                    <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/sell'}>Sell</Link>
-                    <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
+                    <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/sell'}>Sell</Link>
+                    <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
                     <button className="p-2 hover:bg-orange-500 hover:outline relative rounded-sm" onClick={() => setToggleDropdown(!toggleDropdown)}>{session.user?.username}</button>
                     <>
                         {toggleDropdown ? <Dropdown options={dropdownOptions} isOpen={toggleDropdown}/> : null}

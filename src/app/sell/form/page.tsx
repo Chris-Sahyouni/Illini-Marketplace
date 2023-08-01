@@ -94,7 +94,7 @@ import {v4 as uuidv4} from "uuid";
                     id: itemId
                 }
 
-                fetch('/api/create', {
+                fetch(`/api/create/${params.get('t')}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
