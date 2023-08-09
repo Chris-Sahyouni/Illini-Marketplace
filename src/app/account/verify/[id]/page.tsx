@@ -42,11 +42,11 @@ export default function Page({ params }: { params: { id: string}}) {
     if (success) {
         return (
         <div className="flex my-10 justify-center">
-            <div className="bg-white w-1/3 justify-center flex-col">
+            <div className="bg-white w-1/3 justify-center flex-col rounded">
                 <div className="flex justify-center p-5">
                     <h1>Your email has been verified</h1>
                 </div>
-                <div className="flex text-center justify-center p-2">
+                <div className="flex text-center justify-center p-2 pb-4">
                     <p>Log in to continue</p>
                 </div>
             </div>
@@ -65,3 +65,4 @@ export default function Page({ params }: { params: { id: string}}) {
     }
 
 }
+

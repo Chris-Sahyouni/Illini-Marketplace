@@ -1,5 +1,8 @@
+import LightBox from '../components/LightBox'
 
 export default function Home() {
+
+
 
   return (
     <>

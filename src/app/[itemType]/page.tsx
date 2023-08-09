@@ -14,6 +14,7 @@ export default function Page({params}: {params: {itemType: string}}) {
     const [skipCount, setSkipCount] = useState(0);
     const [data, setData] = useState<CardData[]>([]);
 
+
     const [filters, setFilters] = useState<Array<[string, string]>>([]);
     const [ranges, setRanges] = useState<Array<[string, number[]]>>(() => {
         const initRangeState: [string, number[]][] = [];
@@ -21,6 +22,7 @@ export default function Page({params}: {params: {itemType: string}}) {
         rangeLabels?.forEach((label) => initRangeState.push([label, [0, 1000]]));
         return initRangeState;
     });
+
 
     const handleToggleFilter = (e: React.MouseEvent<HTMLInputElement>) => {
         const box = e.target as HTMLInputElement;
@@ -37,8 +39,6 @@ export default function Page({params}: {params: {itemType: string}}) {
         }
     }
 
-    // console.log("checkboxes: ", filters);
-    // console.log('ranges: ', ranges);
 
     useEffect(() => {
         const wrapper = async () => {

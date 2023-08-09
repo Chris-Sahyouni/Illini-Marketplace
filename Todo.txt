@@ -1,5 +1,4 @@
 Front:
- - make background render first while website is loading
  - add loading animations
  - let admin delete items
  - let users save items
@@ -13,6 +12,7 @@ Front:
  - some of the input fields in the sell form should be dropdowns instead of text input
  - try using material ui Select component for form inputs
  - all forms need better error messaging, ie fields left empty, incorrect password, image rejected
+ - add a your session has expired probably to the root layout
 
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
@@ -25,10 +25,8 @@ Back:
  - a way of cleaning out images that were uploaded that aren't associated with an item
 
 Database:
- - upgrade to standard tier and maybe add DTUS before deployment (Compute + Storage in Azure)
- - allow the IP address for the server
+ - allow the IP address for the server?
  - check out prisma full text search for the search funtionality
- - probably switch to postgreSQL, should be cheaper
 
 
 Testing:

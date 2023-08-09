@@ -1,9 +1,14 @@
+
 import Providers from '../components/Providers'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { Italianno } from 'next/font/google'
 import Header from '../components/Header'
 import Categories from '../components/Categories'
+import { createContext, useContext, useState } from 'react'
+import LightBox from '../components/LightBox'
+import {LightBoxProvider} from '../components/LightBoxProvider'
+
 
 const cursiveFont = Italianno({
   weight: "400",
@@ -21,22 +26,33 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+
+
   return (
     <html lang="en">
-      <title>illini marketplace</title>
+      <title>Illini Marketplace</title>
       <body className={`${inter.className} background-image ::-webkit-scrollbar`}>
         <Providers>
-          <Header />
-          <Categories />
-          {children}
-          <div className=' flex justify-center text-center'>
-            <p className={` text-white ${cursiveFont.className} font-normal text-xl absolute bottom-1`}>Created by Chris Sahyouni</p>
-          </div>
+            <LightBoxProvider>
+              <Header />
+              <Categories />
+              <LightBox />
+              {children}
+              <div className=' flex justify-center text-center'>
+                <p className={` text-white ${cursiveFont.className} font-normal text-xl absolute bottom-1`}>Created by Chris Sahyouni</p>
+              </div>
+          </LightBoxProvider>
         </Providers>
       </body>
     </html>
   )
+
 }
+
+/* -------------------------------------------------------------------------- */
+
+
+
 
 
 
