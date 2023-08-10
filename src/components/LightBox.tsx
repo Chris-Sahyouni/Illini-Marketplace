@@ -33,7 +33,7 @@ export default function LightBox() {
     } else {
          return (
              <div className="w-screen h-screen absolute bg-black bg-opacity-70 z-10 flex items-center justify-center">
-                <div className="z-40 outline flex justify-center"> 
+                <div className="z-40 flex justify-center"> 
 
                     <CldImage
                         src={context.lightBoxId}
