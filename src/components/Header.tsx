@@ -6,6 +6,7 @@ import  Link  from 'next/link';
 import React from "react";
 import Dropdown from "./Dropdown";
 import Image from "next/image";
+import SearchBar from "./SearchBar";
 
 
 export default function Header() {
@@ -16,15 +17,14 @@ export default function Header() {
 
    const [toggleDropdown, setToggleDropdown] = useState(false);
 
-   const [searchContent, setSearchContent] = useState("");
 
-   const handleSearchContentChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setSearchContent(event.target.value);
+   const handleSearchSubmit = () => {
+       
    }
 
     if (session && session.user) {
 
-        // if user is admin
+        /* ---------------  if user is admin THIS IS WAY OUT OF DATE -------------- */
         if (session.user.isAdmin) {
             return (
                     <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
@@ -34,7 +34,7 @@ export default function Header() {
                                 alt=''
                             />
                         </div>
-                        <input type="text" placeholder='Search' className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
+                        <SearchBar handleSearch={handleSearchSubmit} /> 
                         <div className="w-1/3 flex justify-end">
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/admin'} >Admin</Link>
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>
@@ -47,7 +47,8 @@ export default function Header() {
                     </div>
             );
         }
-        //
+        /* -------------------------------------------------------------------------- */
+
 
         // try and get a little arrow next to the username for the dropdown menu
         return (
@@ -62,7 +63,7 @@ export default function Header() {
                         />
                     </Link>
                 </div>
-                <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
+                <SearchBar handleSearch={handleSearchSubmit}/>
                 <div className="w-1/3 flex justify-end">
                     <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/sell'}>Sell</Link>
                     <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
@@ -75,6 +76,7 @@ export default function Header() {
         );
     }
 
+    /* ------------------------ IF USER IS NOT SIGNED IN ------------------------ */
     return (
         <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                 <div className="w-1/3">
@@ -85,7 +87,7 @@ export default function Header() {
                     height={100}
                 />
                 </div>
-                <input type="text" placeholder="Search" className="w-1/3 placeholder:font-light placeholder:italic font-normal p-2 rounded" onChange={handleSearchContentChange}/>
+                <SearchBar handleSearch={handleSearchSubmit}/>
                 <div className="w-1/3 flex justify-end">
                     <button className="p-2 hover:bg-orange-500 hover:outline rounded-sm" onClick={() => signIn()}>Sell</button>
                     <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>

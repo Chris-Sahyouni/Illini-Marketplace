@@ -1,11 +1,12 @@
 "use client"
 import Card from "@/src/components/Card";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { CardData } from "@/src/lib/types/interfaces";
-import { ItemType, typeRangeMap } from "@/src/lib/maps";
+import { typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
 import SubleaseCard from "@/src/components/SubleaseCard";
+import { SearchContext } from "@/src/components/SearchProvider";
 
 
 
@@ -39,6 +40,8 @@ export default function Page({params}: {params: {itemType: string}}) {
         }
     }
 
+    const searchContext = useContext(SearchContext);
+
 
     useEffect(() => {
         const wrapper = async () => {
@@ -63,7 +66,7 @@ export default function Page({params}: {params: {itemType: string}}) {
         setData((prevState: CardData[]) => [...newItems]);
     }
 
-
+        /* -------------------------------------------------------------------------- */
 
         return (
             <div className="h-screen flex flex-row">
