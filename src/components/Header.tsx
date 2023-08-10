@@ -18,10 +18,6 @@ export default function Header() {
    const [toggleDropdown, setToggleDropdown] = useState(false);
 
 
-   const handleSearchSubmit = () => {
-       
-   }
-
     if (session && session.user) {
 
         /* ---------------  if user is admin THIS IS WAY OUT OF DATE -------------- */
@@ -34,7 +30,7 @@ export default function Header() {
                                 alt=''
                             />
                         </div>
-                        <SearchBar handleSearch={handleSearchSubmit} /> 
+                        <SearchBar /> 
                         <div className="w-1/3 flex justify-end">
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/admin'} >Admin</Link>
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>
@@ -63,7 +59,7 @@ export default function Header() {
                         />
                     </Link>
                 </div>
-                <SearchBar handleSearch={handleSearchSubmit}/>
+                <SearchBar />
                 <div className="w-1/3 flex justify-end">
                     <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/sell'}>Sell</Link>
                     <Link className="p-2 pt-3 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>
@@ -87,7 +83,7 @@ export default function Header() {
                     height={100}
                 />
                 </div>
-                <SearchBar handleSearch={handleSearchSubmit}/>
+                <SearchBar />
                 <div className="w-1/3 flex justify-end">
                     <button className="p-2 hover:bg-orange-500 hover:outline rounded-sm" onClick={() => signIn()}>Sell</button>
                     <Link className="p-2 hover:bg-orange-500 hover:outline rounded-sm" href={'/'}>About</Link>

@@ -13,16 +13,11 @@ export async function POST(request: Request) {
             selectedFilters = ["football", 'basketball', 'concert', 'other'];
         }
 
-        // if (body.searchInput) {
-        //     console.log("");
-        //     // handle search here
-        // }
+  
         const data: Ticket[] = await prisma.ticket.findMany({
             take: 20,
             skip: 20 * skipCount,
             where: {
-                // AND: [
-                //     {
                         AND: [
                             {
                                 price: {
@@ -56,7 +51,6 @@ export async function POST(request: Request) {
             }
         });
 
-        // console.log("DATA: ", data);
         let res: CardData[] = [];
         data.forEach((item) => {
           let dat = new ItemData(undefined, undefined, undefined, item);

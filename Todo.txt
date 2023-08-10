@@ -13,6 +13,7 @@ Front:
  - try using material ui Select component for form inputs
  - all forms need better error messaging, ie fields left empty, incorrect password, image rejected
  - add a your session has expired probably to the root layout
+ - if no image is found for the id, it needs to return the placeholder (probably do this by making the image field in each model a boolean of whether or not there is one)
 
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
@@ -21,8 +22,8 @@ Back:
  - accounts need to be removed when the school email addresses are deleted
  - might run into CORS problems
  - add html to emails to make them look good
- - npm i sharp for image for optimization?
  - a way of cleaning out images that were uploaded that aren't associated with an item
+ - search should also look in the notes field for every item type
 
 Database:
  - allow the IP address for the server?

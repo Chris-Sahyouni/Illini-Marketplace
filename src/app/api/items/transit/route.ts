@@ -8,12 +8,6 @@ export async function POST(request: Request) {
     try {
         const  {filters, skipCount, ranges, searchInput}: dbRequest = await request.json();
 
-        // filters and sortBy need to be converted into usable types or values for prisma here
-
-        // if (body.searchInput) {
-        //     console.log("");
-        //     // handle search here
-        // }
         let selectedFilters: string[] = filters.map(([key, val]) => val);
         if (selectedFilters.length === 0) {
             selectedFilters = ['Peoria Charter', 'Amtrack', 'other'];

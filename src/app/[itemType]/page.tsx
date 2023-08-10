@@ -44,20 +44,39 @@ export default function Page({params}: {params: {itemType: string}}) {
 
 
     useEffect(() => {
-        const wrapper = async () => {
-            const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
-            if (newItems.length === 0 || newItems === undefined || newItems === null) {
-                console.log('invalid');
-                return;
+
+        if (searchContext.trigger) {
+            console.log('search triggered');
+            if (params.itemType === undefined) return;
+            
+            const searchWrapper = async () => {
+                const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
+                if (newItems.length === 0 || newItems === undefined || newItems === null) {
+                    console.log('invalid');
+                    return;
+                }
+                console.log(newItems);
+                setData((prevState: CardData[]) => [...newItems]);
+               // setSkipCount((prev) => prev + 1)
             }
-            console.log(newItems);
-            setData((prevState: CardData[]) => [...newItems]);
-           // setSkipCount((prev) => prev + 1)
+            searchWrapper();
+            searchContext.setTrigger(false);
+
+        } else {
+            const wrapper = async () => {
+                const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
+                if (newItems.length === 0 || newItems === undefined || newItems === null) {
+                    console.log('invalid');
+                    return;
+                }
+                console.log(newItems);
+                setData((prevState: CardData[]) => [...newItems]);
+            // setSkipCount((prev) => prev + 1)
+            }
+            wrapper();
         }
-        wrapper();
 
-
-    }, [params.itemType]);
+    }, [params.itemType, searchContext.trigger]);
 
 
     const applyFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -117,4 +136,23 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
     return parsed;
 
 }
+
+async function requestBySearch(type: string, search: string) {
+
+    const data = await fetch('api/search', {
+        method: "POST",
+        body: JSON.stringify({
+            type: type,
+            search: search
+        }),
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        }
+    });
+
+    const parsed: CardData[] = await data.json();
+    return parsed;
+}
+
 

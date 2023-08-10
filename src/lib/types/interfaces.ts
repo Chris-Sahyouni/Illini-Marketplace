@@ -27,6 +27,11 @@ export interface dbRequest {
     ranges: [string, number[]][];
 }
 
+export interface searchRequest {
+    search: string;
+    type: string;
+}
+
 export interface CardData {
     keys?: string[];
     values?: string[];
