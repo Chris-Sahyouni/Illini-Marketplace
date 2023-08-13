@@ -14,6 +14,7 @@ Front:
  - all forms need better error messaging, ie fields left empty, incorrect password, image rejected
  - add a your session has expired probably to the root layout
  - if no image is found for the id, it needs to return the placeholder (probably do this by making the image field in each model a boolean of whether or not there is one)
+ - the signature in the bg is rendering too far forward
 
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 

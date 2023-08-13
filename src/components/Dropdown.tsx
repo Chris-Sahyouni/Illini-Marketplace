@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 
 interface Props {
     options: string[];
@@ -12,6 +13,8 @@ export default function Dropdown({options, isOpen}: Props) {
     const ref = useRef<HTMLDivElement>(null);
     const [openState, setOpenState] = useState(isOpen)
 
+    const {data:session, status}  = useSession();
+
     useEffect(() => {
 
     const handleClickOut = (event: MouseEvent) => {
@@ -21,7 +24,6 @@ export default function Dropdown({options, isOpen}: Props) {
     }
 
       document.addEventListener("click", handleClickOut)
-    
 
       return () => {
         document.removeEventListener("click", (handleClickOut))
@@ -34,6 +36,9 @@ export default function Dropdown({options, isOpen}: Props) {
         return null;
     }
 
+    
+    const routes = [`/user/${session?.user.id}/my-account`, `/user/${session?.user.id}/saved`];
+
     return (
         <div className="flex flex-col bg-white absolute mt-10 rounded-lg" ref={ref}> 
             <ul>
@@ -41,7 +46,7 @@ export default function Dropdown({options, isOpen}: Props) {
                     if (index === options.length - 1) {
                         return <li key={index}><button onClick={() => signOut()} className="p-3 hover:bg-slate-200 flex w-full rounded-lg">{option}</button></li>
                     }
-                    return <li key={index}><Link href={'/'} className="p-3 hover:bg-slate-200 flex rounded-lg">{option}</Link></li>
+                    return <li key={index}><Link href={routes[index]} className="p-3 hover:bg-slate-200 flex rounded-lg">{option}</Link></li>
                 })}
             </ul>
         </div>

@@ -131,7 +131,7 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
             'Accept': "application/json",
         }
     });
-    
+    console.log(data);
     const parsed: CardData[] = await data.json();
     return parsed;
 

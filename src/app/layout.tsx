@@ -39,7 +39,7 @@ export default function RootLayout({
                 <Categories />
                 <LightBox />
                 {children}
-                <div className=' flex justify-center text-center'>
+                <div className=' flex justify-center text-center z-0'>
                   <p className={` text-white ${cursiveFont.className} font-normal text-xl absolute bottom-1`}>Created by Chris Sahyouni</p>
                 </div>
               </SearchProvider>

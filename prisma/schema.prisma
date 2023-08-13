@@ -22,7 +22,7 @@ model User {
     SubleaseSelling Sublease[]
     TicketSelling Ticket[]
     TransitSelling Transit[]
-    TextooksSelling Textbook[]
+    TextbookSelling Textbook[]
     ParkingSelling Parking[]
     MiscSelling Misc[]
 }

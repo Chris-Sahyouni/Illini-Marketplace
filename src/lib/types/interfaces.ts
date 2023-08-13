@@ -16,6 +16,11 @@ export interface newUserRequest {
     username: string;
 }
 
+export interface loginRequest {
+    username: string,
+    password: string
+}
+
 export interface itemTypeParams {
     type: string;
 }
@@ -30,6 +35,10 @@ export interface dbRequest {
 export interface searchRequest {
     search: string;
     type: string;
+}
+
+export interface userSellingRequest {
+    id: string;
 }
 
 export interface CardData {
