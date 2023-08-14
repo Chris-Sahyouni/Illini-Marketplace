@@ -41,7 +41,7 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
                     return (
                         <div className="p-2" key={`div${index}`}>
                             <h1 key={`h${index}`}>{question[0]}</h1>
-                            <input className="outline w-5/6 rounded-sm" placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
+                            <input className="outline w-5/6 rounded-sm p-1" placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
                         </div>
                     );
                 })

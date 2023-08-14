@@ -4,7 +4,6 @@ import { ItemType } from "@/src/lib/maps";
 
 export async function POST(request: Request) {
     const { id, type } = await request.json();
-    let success: boolean = false;
     try {
         switch (type) {
             case ItemType.Sublease: {
@@ -54,11 +53,15 @@ export async function POST(request: Request) {
                     }
                 });
                 break;
+            } 
+            default: {
+                return new Response(JSON.stringify(false), {status: 500});
             }
         }
+
     } catch (err) {
         console.log(err);
-        return new Response(JSON.stringify(err), {status: 500});
+        return new Response(JSON.stringify(false), {status: 500});
     }
-    return new Response(JSON.stringify(success), {status: 200});
+    return new Response(JSON.stringify(true), {status: 200});
 }
