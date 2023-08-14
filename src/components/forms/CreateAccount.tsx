@@ -41,7 +41,6 @@ export default function CreateAccount() {
      }; 
 
 
-    const inputParentDivStyles = "p-2 flex justify-center";
 
     if (submittedForm) {
         return (
@@ -51,21 +50,21 @@ export default function CreateAccount() {
 
     return (
         <div className="justify-center my-10 flex">
-            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded">
-                <div className={inputParentDivStyles}>
-                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline rounded" />
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded p-2">
+                <div className="p-2 flex justify-center mt-2">
+                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Email" className="outline rounded p-1" />
                 </div>
 
-                <div className={inputParentDivStyles}>
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded" />
+                <div className="p-2 flex justify-center">
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" />
                 </div>
 
-                <div className={inputParentDivStyles}>
-                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline rounded" />
+                <div className="p-2 flex justify-center">
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline rounded p-1" />
                 </div>
 
-                <div className={inputParentDivStyles}>
-                    <button type="submit" className="hover:outline" >Create Account</button>
+                <div className="p-2 flex justify-center">
+                    <button type="submit" className="p-2 rounded text-white bg-gradient-radial from-sky-900 to-sky-950 hover:from-sky-700 hover:to-sky-900" >Create Account</button>
                 </div>
 
             </form>

@@ -48,22 +48,21 @@ export default function LogInForm() {
     }, [handleSubmit]);
 
     
-    const inputParentDivStyles = "p-2 flex justify-center";    
 
     return (
 
         <div className="justify-center my-10 flex">
-            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded">
-                <div className={inputParentDivStyles}>
-                    <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className="outline rounded" />
+            <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded-lg p-2">
+                <div className="p-2 flex justify-center mt-2">
+                    <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className="outline rounded p-1" />
                 </div>
 
-                <div className={inputParentDivStyles}>
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded" />
+                <div className="p-2 flex justify-center">
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" />
                 </div>
 
-                <div className={inputParentDivStyles}>
-                    <button type="submit" className="hover:outline">Log in</button>
+                <div className="p-2 flex justify-center">
+                    <button type="submit" className="p-2 rounded text-white bg-gradient-radial from-sky-900 to-sky-950 hover:from-sky-700 hover:to-sky-900">Log in</button>
                 </div>
 
                 <div className='p-2 flex'>

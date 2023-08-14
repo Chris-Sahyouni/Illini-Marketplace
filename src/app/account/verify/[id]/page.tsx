@@ -34,9 +34,11 @@ export default function Page({ params }: { params: { id: string}}) {
 
 
     if (success === status.Incomplete) {
-        return (
-            <h1>loading</h1>
-        );
+        // Another spot to put a loading icon
+        return null;
+        // return (
+        //     <h1>loading</h1>
+        // );
     }
 
     if (success) {
@@ -44,7 +46,7 @@ export default function Page({ params }: { params: { id: string}}) {
         <div className="flex my-10 justify-center">
             <div className="bg-white w-1/3 justify-center flex-col rounded">
                 <div className="flex justify-center p-5">
-                    <h1>Your email has been verified</h1>
+                    <h1 className="font-bold">Your email has been verified</h1>
                 </div>
                 <div className="flex text-center justify-center p-2 pb-4">
                     <p>Log in to continue</p>

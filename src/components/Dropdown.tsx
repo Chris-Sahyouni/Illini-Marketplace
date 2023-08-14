@@ -36,8 +36,8 @@ export default function Dropdown({options, isOpen}: Props) {
         return null;
     }
 
-    
-    const routes = [`/user/${session?.user.id}/my-account`, `/user/${session?.user.id}/saved`];
+
+    const routes = [`/user/${session?.user.id}/my-account`, `/user/${session?.user.id}/saved`, `/user/${session?.user.id}/selling`];
 
     return (
         <div className="flex flex-col bg-white absolute mt-10 rounded-lg" ref={ref}> 

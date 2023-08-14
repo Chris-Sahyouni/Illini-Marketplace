@@ -46,7 +46,6 @@ export default function Page({params}: {params: {itemType: string}}) {
     useEffect(() => {
 
         if (searchContext.trigger) {
-            console.log('search triggered');
             if (params.itemType === undefined) return;
             
             const searchWrapper = async () => {

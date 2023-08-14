@@ -5,7 +5,6 @@ import build from "next/dist/build";
 import { Misc, Parking, Sublease, Textbook, Ticket, Transit } from "@prisma/client";
 
 export async function POST(request: Request) {
-    console.log("req received");
     const {id}: userSellingRequest = await request.json();
     try {
         const query = await prisma.user.findUnique({
@@ -21,7 +20,6 @@ export async function POST(request: Request) {
                 id: id
             }
         });
-        console.log("QUERY RESULT: ", query);
         let allCardData: CardData[] = []
         
         allCardData = [...buildCardData(query?.SubleaseSelling),
@@ -30,18 +28,10 @@ export async function POST(request: Request) {
                ...buildCardData(query?.TransitSelling),
                 ...buildCardData(query?.ParkingSelling),
                 ...buildCardData(query?.MiscSelling)];
-        // query.forEach((item) => {
-        //     const cardDat = buildCardData(item);
-        //     if (cardDat) {
-        //         allCardData.push(cardDat);
-        //     }
-        // })
 
-        console.log('PARSED: ', allCardData);
         return new Response(JSON.stringify(allCardData));
 
     } catch (error) {
-        console.log("ERR: ", error);
         return new Response(JSON.stringify(error), {status: 500});
     }
 }
@@ -55,7 +45,7 @@ function buildCardData(items: any) {
     if (items === undefined) {
         return [];
     }
-    
+
     let out: CardData[] = [];
     items.forEach((item: any) => {
         const keys = Object.keys(item);

@@ -13,7 +13,7 @@ export default function Header() {
 
    const  { data:session } = useSession();
 
-   const dropdownOptions = ['My Account', 'Saved', 'Sign Out'];
+   const dropdownOptions = ['My Account', 'Saved', 'Selling', 'Sign Out'];
 
    const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -30,7 +30,7 @@ export default function Header() {
                                 alt=''
                             />
                         </div>
-                        <SearchBar /> 
+                        <SearchBar />
                         <div className="w-1/3 flex justify-end">
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/admin'} >Admin</Link>
                             <Link className="p-2 hover:bg-orange-500 hover:outline" href={'/'}>Home</Link>

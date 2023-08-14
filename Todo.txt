@@ -15,7 +15,8 @@ Front:
  - add a your session has expired probably to the root layout
  - if no image is found for the id, it needs to return the placeholder (probably do this by making the image field in each model a boolean of whether or not there is one)
  - the signature in the bg is rendering too far forward
-
+ - get rid of duplicate id's in every loop-produced element
+ - make the logo its own component so it can render on the server
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
 Back:
