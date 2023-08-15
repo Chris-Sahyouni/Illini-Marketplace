@@ -17,6 +17,7 @@ export default function EditForm({ toEdit }: EditFormProps) {
         type: toEdit.type,
         id: toEdit.id,
         name: toEdit.name,
+        hasImage: toEdit.hasImage,
       }
       return build;
     });

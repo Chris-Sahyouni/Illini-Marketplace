@@ -59,7 +59,7 @@ export default function Page() {
                             <div key={`outer;${item.id}`} className="w-full col-2 flex">
                                 <div key={index} className="w-3/5 py-2">
                                     {
-                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={true} itemId={item.id ? item.id : ''} key={item.id}/>
+                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id}/>
                                     }
                                 </div>
                                 <div className="w-1/5 my-3 ml-2 flex flex-col items-start p-2">

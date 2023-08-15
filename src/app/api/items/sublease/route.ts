@@ -66,7 +66,6 @@ export async function POST(request: Request) {
           res.push(dat.getCardData());
         })
 
-
         return new Response(JSON.stringify(res));
 
     } catch (error) {

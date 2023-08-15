@@ -1,125 +1,136 @@
-
-
 datasource db {
-    provider="postgresql"
-    url=env("DATABASE_URL")
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
     previewFeatures = ["fullTextSearch"]
 }
 
 model User {
-    id String @id() @default(cuid())
-    username String @unique()
-    password String
-    email String @unique()
-    isVerified Boolean @default(false)
-    joinedDate DateTime @default(now())
-    isAdmin Boolean @default(false)
-    contact String?
-    SubleaseSelling Sublease[]
-    TicketSelling Ticket[]
-    TransitSelling Transit[]
-    TextbookSelling Textbook[]
-    ParkingSelling Parking[]
-    MiscSelling Misc[]
+    id              String     @id() @default(cuid())
+    username        String     @unique()
+    password        String
+    email           String     @unique()
+    isVerified      Boolean    @default(false)
+    joinedDate      DateTime   @default(now())
+    isAdmin         Boolean    @default(false)
+    contact         String?
+    SubleaseSelling Sublease[] @relation(name: "UserSellingSubleases")
+    TicketSelling   Ticket[]   @relation(name: "UserSellingTickets")
+    TransitSelling  Transit[]  @relation(name: "UserSellingTransit")
+    TextbookSelling Textbook[] @relation(name: "UserSellingTextbooks")
+    ParkingSelling  Parking[]  @relation(name: "UserSellingParking")
+    MiscSelling     Misc[]     @relation(name: "UserSellingMisc")
+
+    SubleaseSaved Sublease[] @relation(name: "SavedSubleases")
+    TicketSaved   Ticket[]   @relation(name: "SavedTickets")
+    TransitSaved  Transit[]  @relation(name: "SavedTransit")
+    TextbookSaved Textbook[] @relation(name: "SavedTextbooks")
+    ParkingSaved  Parking[]  @relation(name: "SavedParking")
+    MiscSaved     Misc[]     @relation(name: "SavedMisc")
 }
 
 model Sublease {
-    location String
-    image2 Bytes?
-    image3 Bytes?
-    image4 Bytes?
-    company String
-    bedrooms Int
+    location  String
+    image2    String?
+    image3    String?
+    image4    String
+    company   String
+    bedrooms  Int
     bathrooms Int
-    start DateTime
-    end DateTime
-    term String
-    id String @id() @default(cuid())
-    price Float
-    name String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
+    start     DateTime
+    end       DateTime
+    term      String
+    id        String   @id() @default(cuid())
+    price     Float
+    name      String?
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User     @relation(name: "UserSellingSubleases", fields: [sellerId], references: [id])
+    savedBy   User[]   @relation(name: "SavedSubleases")
+    sellerId  String
     createdAt DateTime @default(now())
 }
 
 model Transit {
-    from String
-    to String
-    mode String
-    time String
-    date DateTime
-    id String @id() @default(cuid())
-    price Float
-    name String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
+    from      String
+    to        String
+    mode      String
+    time      String
+    date      DateTime
+    id        String   @id() @default(cuid())
+    price     Float
+    name      String?
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User     @relation(name: "UserSellingTransit", fields: [sellerId], references: [id])
+    sellerId  String
+    savedBy   User[]   @relation(name: "SavedTransit")
     createdAt DateTime @default(now())
 }
 
 model Ticket {
-    type String
-    event String
-    date DateTime
-    seat String?
-    amount Float @default(1)
-    id String @id() @default(cuid())
-    price Float
-    name String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
+    type      String
+    event     String
+    date      DateTime
+    seat      String?
+    amount    Float    @default(1)
+    id        String   @id() @default(cuid())
+    price     Float
+    name      String?
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User     @relation(name: "UserSellingTickets", fields: [sellerId], references: [id])
+    sellerId  String
+    savedBy   User[]   @relation(name: "SavedTickets")
     createdAt DateTime @default(now())
 }
 
 model Textbook {
-    course String
-    id String @id()
-    price Float
-    name String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
+    course    String
+    id        String   @id()
+    price     Float
+    name      String?
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User     @relation(name: "UserSellingTextbooks", fields: [sellerId], references: [id])
+    sellerId  String
+    savedBy   User[]   @relation(name: "SavedTextbooks")
     createdAt DateTime @default(now())
 }
 
 model Parking {
-    location String
-    start DateTime
-    end DateTime?
-    id String @id() @default(cuid())
-    price Float
-    name String?
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
-    createdAt DateTime @default(now())
+    location  String
+    start     DateTime
+    end       DateTime?
+    id        String    @id() @default(cuid())
+    price     Float
+    name      String?
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User      @relation(name: "UserSellingParking", fields: [sellerId], references: [id])
+    sellerId  String
+    savedBy   User[]    @relation(name: "SavedParking")
+    createdAt DateTime  @default(now())
 }
 
 model Misc {
-    id String @id() @default(cuid())
-    price Float
-    name String @default("")
-    notes String?
-    contact String
-    image Bytes?
-    seller User @relation(fields: [sellerId], references: [id])
-    sellerId String
+    id        String   @id() @default(cuid())
+    price     Float
+    name      String   @default("")
+    notes     String?
+    contact   String
+    hasImage  Boolean
+    seller    User     @relation(name: "UserSellingMisc", fields: [sellerId], references: [id])
+    sellerId  String
+    savedBy   User[]   @relation(name: "SavedMisc")
     createdAt DateTime @default(now())
 }
 

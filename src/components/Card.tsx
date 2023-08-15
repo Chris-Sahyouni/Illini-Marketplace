@@ -5,6 +5,7 @@ import { CldImage } from "next-cloudinary";
 import Image from "next/image";
 import { useState, useContext } from "react";
 import { LightBoxContext } from "./LightBoxProvider";
+import { useSession } from "next-auth/react";
 
 interface ItemProps {
     data: CardData
@@ -14,7 +15,31 @@ interface ItemProps {
 
 export default function Card({data, isUploaded, itemId}: ItemProps) {
 
-if (data === undefined) return (<></>);
+    const {data:session} = useSession();
+
+    const [isSaved, setIsSaved] = useState(false);
+    const handleToggleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
+        setIsSaved(!isSaved);
+        // note the state has NOT updated yet at this point because state update is not synchronous
+        console.log('requesting');
+        const res = await fetch('http://localhost:3000/api/save', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                shouldSave: !isSaved,
+                type: data.type,
+                userId: session?.user.id,
+                itemId: itemId
+            })
+        });
+        console.log(await res.json());
+    }
+
+    if (data === undefined) return (<></>);
     return (
         <div className=" w-full h-36 rounded-xl flex-row bg-white p-2 flex">
             <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
@@ -29,6 +54,12 @@ if (data === undefined) return (<></>);
                             );
                         })
                     }
+            </div>
+            <div>
+                <div className="h-5/6"></div>
+                <button type="button" onClick={handleToggleSave}>
+                    <Image src={isSaved ? '/bookmark_icon_filled.png' : '/bookmark_icon.png'} alt='bkmrk' width={15} height={15} className=''/>
+                </button>
             </div>
         </div>
     );

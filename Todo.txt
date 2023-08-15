@@ -18,6 +18,9 @@ Front:
  - get rid of duplicate id's in every loop-produced element
  - make the logo its own component so it can render on the server
  - make it so useSession is always the first hook called to prevent bugs with not having auth on pages that require it
+ - order results by items that have images first (low priority)
+
+ - THE CREATE SUBLEASE ROUTE IS COMPLETELY EMPTY STILL
 
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
@@ -28,6 +31,7 @@ Back:
  - a way of cleaning out images that were uploaded that aren't associated with an item
  - MEMORY LEAKS IN THE SERVER??? (shouldn't be a problem because the server is this computer)
  - there will likely be bugs caused by trying to update values that are optional
+ - find a better way to update the selling page when a user updates an item than forcing a reload
 
 
 Testing:

@@ -104,7 +104,8 @@ import { STATIC_STATUS_PAGES } from "next/dist/shared/lib/constants";
                 const req: creationRequest = {
                     data: data,
                     sellerId: session.user.id,
-                    id: itemId
+                    id: itemId,
+                    hasImage: isUploaded
                 }
 
                 fetch(`/api/create/${params.get('t')}`, {
@@ -139,7 +140,7 @@ import { STATIC_STATUS_PAGES } from "next/dist/shared/lib/constants";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {} } /> : <Card data={data ? data.getCardData() : {} } isUploaded={isUploaded} itemId={itemId}/>
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded} } isUploaded={isUploaded} itemId={itemId}/>
                             }
                         </div>
                     </div>

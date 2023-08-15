@@ -9,13 +9,6 @@ export async function POST(request: Request) {
     try {
         const  {skipCount, ranges, searchInput}: dbRequest = await request.json();
 
-        // filters and sortBy need to be converted into usable types or values for prisma here
-
-        // if (body.searchInput) {
-        //     console.log("");
-        //     // handle search here
-        // }
-
         const data: Misc[] = await prisma.misc.findMany({
             take: 20,
             skip: 20 * skipCount,
