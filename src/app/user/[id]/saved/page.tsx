@@ -20,9 +20,9 @@ export default function Page() {
                 'Content-Type': "application/json",
                 'Accept': "application/json"
             },
-            body: JSON.stringify({id: session?.user.id})
+            body: JSON.stringify({id: session?.user.id, onlyIds: false})
         });
-        const parsed = await res.json();
+        const parsed: CardData[] = await res.json();
         if (parsed === undefined || parsed === null || parsed.length === 0) {
             setItems([])
         }
@@ -39,7 +39,7 @@ export default function Page() {
                             <div key={`outer;${item.id}`} className="w-full col-2 flex">
                                 <div key={index} className="w-3/5 py-2">
                                     {
-                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id}/>
+                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id} initSave={true} />
                                     }
                                 </div>
                             </div>

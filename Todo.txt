@@ -1,7 +1,6 @@
 Front:
  - add loading animations
  - let admin delete items
- - let users save items
  - forgot password recovery
  - report sellers option?
  - add a not-found file
@@ -13,7 +12,6 @@ Front:
  - try using material ui Select component for form inputs
  - all forms need better error messaging, ie fields left empty, incorrect password, image rejected
  - add a your session has expired probably to the root layout
- - if no image is found for the id, it needs to return the placeholder (probably do this by making the image field in each model a boolean of whether or not there is one)
  - the signature in the bg is rendering too far forward
  - get rid of duplicate id's in every loop-produced element
  - make the logo its own component so it can render on the server
@@ -22,13 +20,17 @@ Front:
 
  - THE CREATE SUBLEASE ROUTE IS COMPLETELY EMPTY STILL
 
+ - things can be much simpler by refactoring different funcions used across the site into lib/utilities
+
+ - organize this list
+
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
 Back:
  - listings need to be taken down after being unsold for a long period of time
  - accounts need to be removed when the school email addresses are deleted
  - add html to emails to make them look good (low priority)
- - a way of cleaning out images that were uploaded that aren't associated with an item
+ - a way of cleaning out images that were uploaded that aren't associated with an item, this could be a script that runs on a github actions cron job (high priority)
  - MEMORY LEAKS IN THE SERVER??? (shouldn't be a problem because the server is this computer)
  - there will likely be bugs caused by trying to update values that are optional
  - find a better way to update the selling page when a user updates an item than forcing a reload

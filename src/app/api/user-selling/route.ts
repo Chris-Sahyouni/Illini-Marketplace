@@ -1,6 +1,6 @@
 import { CardData, userSellingRequest } from "@/src/lib/types/interfaces";
 import { prisma } from '../../../lib/db'
-import { buildCardData } from "@/src/lib/types/models";
+import { buildCardData } from "@/src/lib/utilities";
 
 export async function POST(request: Request) {
     const {id}: userSellingRequest = await request.json();

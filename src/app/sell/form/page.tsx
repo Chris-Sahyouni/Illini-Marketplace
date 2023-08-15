@@ -140,7 +140,7 @@ import { STATIC_STATUS_PAGES } from "next/dist/shared/lib/constants";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded} } isUploaded={isUploaded} itemId={itemId}/>
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded} } isUploaded={isUploaded} itemId={itemId} initSave={false} />
                             }
                         </div>
                     </div>

@@ -1,4 +1,5 @@
 "use client"
+
 import Card from "@/src/components/Card";
 import { useEffect, useState, useContext } from "react";
 import { CardData } from "@/src/lib/types/interfaces";
@@ -7,14 +8,17 @@ import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
 import SubleaseCard from "@/src/components/SubleaseCard";
 import { SearchContext } from "@/src/components/SearchProvider";
+import { getUserSaves } from "@/src/lib/utilities";
+import { useSession } from "next-auth/react";
 
 
 
 export default function Page({params}: {params: {itemType: string}}) {
 
+    const { data:session } = useSession();
     const [skipCount, setSkipCount] = useState(0);
     const [data, setData] = useState<CardData[]>([]);
-
+    const [initSaves, setInitSaves] = useState<string[]>([])
 
     const [filters, setFilters] = useState<Array<[string, string]>>([]);
     const [ranges, setRanges] = useState<Array<[string, number[]]>>(() => {
@@ -42,12 +46,19 @@ export default function Page({params}: {params: {itemType: string}}) {
 
     const searchContext = useContext(SearchContext);
 
-
     useEffect(() => {
+
+
+        const savesWrapper = async () => {
+            const saves = await getUserSaves(session?.user.id, true);
+            setInitSaves(saves);
+        }
+        savesWrapper()
+
 
         if (searchContext.trigger) {
             if (params.itemType === undefined) return;
-            
+
             const searchWrapper = async () => {
                 const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
@@ -101,7 +112,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                             return (
                                 <div key={index} className="w-full py-2">
                                     {
-                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={itemData.hasImage} itemId={itemData.id ? itemData.id : ""} />
+                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={itemData.hasImage} itemId={itemData.id ? itemData.id : ""} initSave={itemData.id ? initSaves.includes(itemData.id) : false} />
                                     }
                                 </div>
                             );

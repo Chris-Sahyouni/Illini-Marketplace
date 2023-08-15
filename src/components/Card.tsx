@@ -11,13 +11,14 @@ interface ItemProps {
     data: CardData
     isUploaded: boolean
     itemId: string
+    initSave: boolean
 }
 
-export default function Card({data, isUploaded, itemId}: ItemProps) {
+export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
 
     const {data:session} = useSession();
 
-    const [isSaved, setIsSaved] = useState(false);
+    const [isSaved, setIsSaved] = useState(initSave);
     const handleToggleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         setIsSaved(!isSaved);

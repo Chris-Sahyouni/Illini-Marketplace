@@ -8,16 +8,23 @@ import SubleaseCard from "@/src/components/SubleaseCard";
 import Card from "@/src/components/Card"
 import Editor from "@/src/components/Editor";
 import { EditorContext } from "@/src/components/EditorProvider";
+import { getUserSaves } from "@/src/lib/utilities";
 
 
 export default function Page() {
 
-
-    const [items, setItems] = useState<CardData[]>([]);
     const { data:session } = useSession();
+    const [items, setItems] = useState<CardData[]>([]);
     const {toEdit, openEditor} = useContext(EditorContext)
+    const [initSaves, setInitSaves] = useState<string[]>([])
 
     useEffect(() => {
+
+        const savesWrapper = async () => {
+            const saves = await getUserSaves(session?.user.id, true);
+            setInitSaves(saves);
+        }
+        savesWrapper()
 
         const wrapper = async () => {
             const data = await requestItems(session?.user.id || '');
@@ -59,7 +66,7 @@ export default function Page() {
                             <div key={`outer;${item.id}`} className="w-full col-2 flex">
                                 <div key={index} className="w-3/5 py-2">
                                     {
-                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id}/>
+                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id} initSave={item.id ? initSaves.includes(item.id) : false} />
                                     }
                                 </div>
                                 <div className="w-1/5 my-3 ml-2 flex flex-col items-start p-2">

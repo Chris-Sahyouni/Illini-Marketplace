@@ -1,8 +1,8 @@
 import { prisma } from "../../../lib/db";
-import { buildCardData } from "@/src/lib/types/models";
+import { buildCardData } from "@/src/lib/utilities";
 
 export async function POST(request: Request) {
-    const { id } = await request.json();
+    const { id, onlyIds } = await request.json();
 
     if (id === undefined) {
         return new Response(JSON.stringify({}), {status: 401});
@@ -31,7 +31,12 @@ export async function POST(request: Request) {
         ...buildCardData(saved?.MiscSaved)
     ];
 
-    return new Response(JSON.stringify(allCardData), {status: 200});
+    if (onlyIds) {
+        const ids = allCardData.map(datum => datum.id);
+        return new Response(JSON.stringify(ids), {status: 200})
+    } else {
+        return new Response(JSON.stringify(allCardData), {status: 200});
+    }
 
     } catch (error) {
         console.log(error);
