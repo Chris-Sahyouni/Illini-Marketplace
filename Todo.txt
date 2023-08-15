@@ -17,21 +17,17 @@ Front:
  - the signature in the bg is rendering too far forward
  - get rid of duplicate id's in every loop-produced element
  - make the logo its own component so it can render on the server
- - there needs to be a success notification on the sell page
+ - make it so useSession is always the first hook called to prevent bugs with not having auth on pages that require it
 
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
 Back:
  - listings need to be taken down after being unsold for a long period of time
  - accounts need to be removed when the school email addresses are deleted
- - might run into CORS problems
- - add html to emails to make them look good
+ - add html to emails to make them look good (low priority)
  - a way of cleaning out images that were uploaded that aren't associated with an item
- - search should also look in the notes field for every item type
-
-Database:
- - allow the IP address for the server?
- - check out prisma full text search for the search funtionality
+ - MEMORY LEAKS IN THE SERVER??? (shouldn't be a problem because the server is this computer)
+ - there will likely be bugs caused by trying to update values that are optional
 
 
 Testing:

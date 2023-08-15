@@ -114,7 +114,7 @@ model Parking {
 model Misc {
     id String @id() @default(cuid())
     price Float
-    name String?
+    name String @default("")
     notes String?
     contact String
     image Bytes?

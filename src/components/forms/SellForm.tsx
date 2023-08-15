@@ -18,7 +18,6 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
 
     // const questions = typeQuestionMap.get(data.type);
     const questions = data.sellQuestions;
-    console.log(data);
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setHasEdited(true);
