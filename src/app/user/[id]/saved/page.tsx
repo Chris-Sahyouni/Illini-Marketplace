@@ -6,11 +6,13 @@ import { useSession } from "next-auth/react";
 import { ItemType } from "@/src/lib/maps";
 import Card from "@/src/components/Card";
 import SubleaseCard from "@/src/components/SubleaseCard";
+import { CircularProgress } from "@mui/material";
 
 export default function Page() {
 
     const {data:session} = useSession();
     const [items, setItems] = useState<CardData[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
       const wrapper = async () => {
@@ -25,11 +27,21 @@ export default function Page() {
         const parsed: CardData[] = await res.json();
         if (parsed === undefined || parsed === null || parsed.length === 0) {
             setItems([])
+            return;
         }
         setItems([...parsed]);
+        setLoading(false);
       }
       wrapper();
     }, [])
+
+    if (loading) {
+        return (
+            <div className="justify-center flex my-6 w-3/4">
+                <CircularProgress size={50} />
+            </div>
+        );
+    }
 
     return (
             <div className="w-full flex flex-col ml-8 p-2 overflow-scroll">

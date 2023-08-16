@@ -127,7 +127,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                                     </div>
                                 );
                             })
-                        : <div className='justify-center'> <CircularProgress size={50}/>  </div>
+                        : <div className='justify-center my-3'> <CircularProgress size={50}/>  </div>
                     }
                 </div>
                 <div className="w-1/4">

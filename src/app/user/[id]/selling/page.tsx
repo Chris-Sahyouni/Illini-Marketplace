@@ -6,9 +6,9 @@ import { CardData } from "@/src/lib/types/interfaces";
 import { ItemType } from "@/src/lib/maps";
 import SubleaseCard from "@/src/components/SubleaseCard";
 import Card from "@/src/components/Card"
-import Editor from "@/src/components/Editor";
 import { EditorContext } from "@/src/components/EditorProvider";
 import { getUserSaves } from "@/src/lib/utilities";
+import { CircularProgress } from "@mui/material";
 
 
 export default function Page() {
@@ -17,6 +17,7 @@ export default function Page() {
     const [items, setItems] = useState<CardData[]>([]);
     const {toEdit, openEditor} = useContext(EditorContext)
     const [initSaves, setInitSaves] = useState<string[]>([])
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
 
@@ -33,6 +34,7 @@ export default function Page() {
                 return;
             }
             setItems([...data])
+            setLoading(false);
         }
         wrapper();
     }, [session?.user.id]);
@@ -55,6 +57,14 @@ export default function Page() {
         const targetId = fullItemId?.split(';')[0].trim()
         const target: CardData | undefined = items.find((item) => item.id === targetId);
         openEditor(target)
+    }
+
+    if (loading) {
+        return (
+            <div className="justify-center flex my-6 w-3/4">
+                <CircularProgress size={50} />
+            </div>
+        );
     }
 
     return (
