@@ -28,7 +28,11 @@ export default function CreateAccount() {
         event.preventDefault();
 
         if (!isValidEmail(email)) {
-            console.error("invalid email address");
+            console.log("invalid email address");
+            return;
+        }
+        if (password.length < 8) {
+            console.log("password must be 8 characters or more");
             return;
         }
          const data: newUserRequest = {
@@ -38,7 +42,7 @@ export default function CreateAccount() {
          };
         sendRegisterRequest(data);
         setSubmittedForm(true);
-     }; 
+     };
 
 
 

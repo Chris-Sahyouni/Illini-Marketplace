@@ -18,12 +18,14 @@ export const ticketKeys:  string[] = ['event', 'price', 'date', 'seat', 'amount'
 export const parkingKeys:  string[] = ['location', 'price', 'startDate', 'endDate'];
 export const miscKeys:  string[] = ['name', 'price', 'notes'];
 
+
+
 // these strings are question and placeholder respectively
-export const subleaseQuestions:  [string, string][] = [['Address/Location', 'eg. 123 E Green, or HERE'], ['Rent (per person/month)', ''], contactPair, ['Company', 'eg. Smile'], ["How many bedrooms", ""], ['How many bathrooms', ''], ['Start Date', ''], ['End Date', ''], ['Any other information you want to add', '']];
-export const textbookQuestions:  [string, string][] = [['Course Code', 'eg. STAT 100'], ['Price', ''], contactPair];
-export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack, Peoria Charter'], ['Price', ''], ['Date', ''], ['Time', 'eg. 5:00pm']];
-export const ticketQuestions:  [string, string][] = [['What event', ''], ['Price', ''], ['Date', ''], ['Seat (if applicable)', ''], ['How many tickets', '']];
-export const parkingQuestions:  [string, string][] = [['Location', ''], ['Price', ''], ['Start Date', ''], ['End Date', '']];
+export const subleaseQuestions:  [string, string][] = [['Address/Location', 'eg. 123 E Green, or HERE'], ['Rent (per person/month)', ''], contactPair, ['Company', 'eg. Smile'], ["How many bedrooms", ""], ['How many bathrooms', ''], ['Start Date', 'YYYY-MM-DD'], ['End Date', 'YYYY-MM-DD'], ['Any other information you want to add', '']];
+export const textbookQuestions:  [string, string][] = [['Course Code', 'eg. STAT 100'], ['Price', ''], contactPair, ['Any other information you want to add', '']];
+export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack, Peoria Charter'], ['Price', ''], ['Date', 'YYYY-MM-DD'], ['Time', 'eg. 5:00pm'], ['Any other information you want to add', '']];
+export const ticketQuestions:  [string, string][] = [['What event', ''], ['Price', ''], ['Date', 'YYYY-MM-DD'], ['Seat (if applicable)', ''], ['How many tickets', ''], ['Any other information you want to add', '']];
+export const parkingQuestions:  [string, string][] = [['Location', ''], ['Price', ''], ['Start Date', 'YYYY-MM-DD'], ['End Date', 'YYYY-MM-DD'], ['Any other information you want to add', '']];
 export const miscQuestions:  [string, string][] = [['What are you selling', ''], ['Price', ''], ['Any other information you want to add', '']];
 
 
