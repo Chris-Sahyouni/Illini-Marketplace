@@ -56,16 +56,18 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
     );
 }
 
+
 /* ----------------------------- Form Validation ---------------------------- */
+
 
 function validateRollingInput(input: string, question: string | undefined) {
     if (question === undefined || input === undefined) return false;
     question = question.trim().toUpperCase();
 
     if (question.includes("INFORMATION")) {
-        if (input.length >= 10) return false;
-    } else {
         if (input.length >= 50) return false;
+    } else {
+        if (input.length >= 17) return false;
     }
 
     if (

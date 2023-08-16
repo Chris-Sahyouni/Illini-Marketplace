@@ -139,7 +139,7 @@ import {v4 as uuidv4} from "uuid";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } isUploaded={isUploaded} itemId={itemId} initSave={false} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } isUploaded={isUploaded} itemId={itemId} initSave={undefined} />
                             }
                         </div>
                     </div>

@@ -11,7 +11,7 @@ interface ItemProps {
     data: CardData
     isUploaded: boolean
     itemId: string
-    initSave: boolean
+    initSave: boolean | undefined
 }
 
 export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
@@ -21,6 +21,7 @@ export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
     const [isSaved, setIsSaved] = useState(initSave);
     const handleToggleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
+        if (initSave === undefined) return;
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
         console.log('requesting');
