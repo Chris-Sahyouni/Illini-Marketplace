@@ -10,12 +10,14 @@ import SubleaseCard from "@/src/components/SubleaseCard";
 import { SearchContext } from "@/src/components/SearchProvider";
 import { getUserSaves } from "@/src/lib/utilities";
 import { useSession } from "next-auth/react";
+import { CircularProgress } from "@mui/material";
 
 
 
 export default function Page({params}: {params: {itemType: string}}) {
 
     const { data:session } = useSession();
+    const [loading, setLoading] = useState(true);
     const [skipCount, setSkipCount] = useState(0);
     const [data, setData] = useState<CardData[]>([]);
     const [initSaves, setInitSaves] = useState<string[]>([])
@@ -47,53 +49,60 @@ export default function Page({params}: {params: {itemType: string}}) {
     const searchContext = useContext(SearchContext);
 
     useEffect(() => {
-
-
         const savesWrapper = async () => {
-            const saves = await getUserSaves(session?.user.id, true);
+            setLoading(true);
+            const saves: string[] = await getUserSaves(session?.user.id, true);
+            setLoading(false);
             setInitSaves(saves);
         }
         savesWrapper()
+    }, [])
 
 
-        if (searchContext.trigger) {
+    useEffect(() => {
+
             if (params.itemType === undefined) return;
-
+            setLoading(true);
             const searchWrapper = async () => {
                 const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
                     console.log('invalid');
                     return;
                 }
-                console.log(newItems);
+                setLoading(false);
                 setData((prevState: CardData[]) => [...newItems]);
                // setSkipCount((prev) => prev + 1)
             }
             searchWrapper();
             searchContext.setTrigger(false);
+    }, [searchContext.trigger])
 
-        } else {
+    useEffect(() => {
             const wrapper = async () => {
+                setLoading(true);
                 const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
                     console.log('invalid');
                     return;
                 }
-                console.log(newItems);
+                setLoading(false);
                 setData((prevState: CardData[]) => [...newItems]);
             // setSkipCount((prev) => prev + 1)
             }
             wrapper();
-        }
 
-    }, [params.itemType, searchContext.trigger]);
+    }, [params.itemType]);
+
 
 
     const applyFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        setLoading(true)
         const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
+        setLoading(false);
         setData((prevState: CardData[]) => [...newItems]);
     }
+
 
         /* -------------------------------------------------------------------------- */
 
@@ -108,15 +117,17 @@ export default function Page({params}: {params: {itemType: string}}) {
                 </div>
                 <div className=" w-1/2 items-center flex flex-col mx-auto p-2 overflow-scroll">
                     {
-                        data.map((itemData: CardData, index: number) => {
-                            return (
-                                <div key={index} className="w-full py-2">
-                                    {
-                                        (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={itemData.hasImage} itemId={itemData.id ? itemData.id : ""} initSave={itemData.id ? initSaves.includes(itemData.id) : false} />
-                                    }
-                                </div>
-                            );
-                        })
+                        !loading ?
+                            data.map((itemData: CardData, index: number) => {
+                                return (
+                                    <div key={index} className="w-full py-2">
+                                        {
+                                            (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={itemData.hasImage} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} />
+                                        }
+                                    </div>
+                                );
+                            })
+                        : <div className='justify-center'> <CircularProgress size={50}/>  </div>
                     }
                 </div>
                 <div className="w-1/4">
@@ -141,7 +152,6 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
             'Accept': "application/json",
         }
     });
-    console.log(data);
     const parsed: CardData[] = await data.json();
     return parsed;
 

@@ -44,7 +44,7 @@ export interface userSellingRequest {
 export interface CardData {
     keys?: string[];
     values?: string[];
-    id?: string;
+    id: string;
     name?: string;
     type?: ItemType;
     hasImage: boolean;

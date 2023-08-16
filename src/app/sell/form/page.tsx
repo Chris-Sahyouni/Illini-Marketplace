@@ -10,7 +10,6 @@ import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
 import { ItemData } from "@/src/lib/types/models";
 import SubleaseCard from "@/src/components/SubleaseCard";
 import {v4 as uuidv4} from "uuid";
-import { STATIC_STATUS_PAGES } from "next/dist/shared/lib/constants";
 
 
     export default function Page() {
@@ -140,7 +139,7 @@ import { STATIC_STATUS_PAGES } from "next/dist/shared/lib/constants";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded} } isUploaded={isUploaded} itemId={itemId} initSave={false} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } isUploaded={isUploaded} itemId={itemId} initSave={false} />
                             }
                         </div>
                     </div>

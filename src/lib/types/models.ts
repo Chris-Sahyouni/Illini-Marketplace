@@ -11,7 +11,7 @@ export class ItemData {
     visibleKeys:  string[] | undefined = [];
     visibleValues: string[] = [];
     sellQuestions:  [string, string][] | undefined = [];
-    id?: string = "";
+    id: string = "";
     name?: string = "";
     type: ItemType = ItemType.UnResolved;
     hasImage: boolean = false;
