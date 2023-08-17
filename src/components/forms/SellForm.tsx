@@ -1,8 +1,9 @@
 "use client"
 
 import { ItemData, } from "@/src/lib/types/models";
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import ImageUpload from "../ImageUpload";
+import { useSession } from "next-auth/react";
 
 
 interface SellProps {
@@ -14,6 +15,9 @@ interface SellProps {
 }
 
 export default function SellForm({data, setData, setHasEdited, imgId, setIsUploaded}: SellProps) {
+
+    const { data:session } = useSession();
+
     const questions = data.sellQuestions;
 
     const handleSelectInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -42,6 +46,19 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
             return updated as ItemData;
         });
     }
+
+    useEffect(() => {
+        let i: number = -1;
+        if (data.visibleKeys) {
+            for (let k = 0; k < data.visibleKeys.length; k++) {
+                if (data.visibleKeys[k] === 'contact') {
+                    i = k;
+                    break;
+                }
+            }
+        }
+        if (i >= 0) data.visibleValues[i] = session?.user.contact || '';
+    }, [])
 
 
     return (

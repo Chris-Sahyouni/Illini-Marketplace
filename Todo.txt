@@ -6,9 +6,7 @@ Front:
  - add a not-found file
  - lock people out for trying to log in too many times
  - maybe change all the fonts
- - restrict inputs for fields that are numbers/dates only etc
- - input fields in the sell form need a character limit
- - some of the input fields in the sell form should be dropdowns instead of text input
+ - restrict inputs for fields that are numbers/dates only etc (for on submit now)
  - try using material ui Select component for form inputs
  - all forms need better error messaging, ie fields left empty, incorrect password, image rejected
  - add a your session has expired probably to the root layout

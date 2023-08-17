@@ -8,6 +8,7 @@ export interface User {
     email?: string;
     accessToken?: string;
     isAdmin?: boolean;
+    contact?: string;
 }
 
 export interface newUserRequest {

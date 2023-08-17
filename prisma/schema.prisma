@@ -16,7 +16,7 @@ model User {
     isVerified      Boolean    @default(false)
     joinedDate      DateTime   @default(now())
     isAdmin         Boolean    @default(false)
-    contact         String?
+    contact         String     @default("")
     SubleaseSelling Sublease[] @relation(name: "UserSellingSubleases")
     TicketSelling   Ticket[]   @relation(name: "UserSellingTickets")
     TransitSelling  Transit[]  @relation(name: "UserSellingTransit")

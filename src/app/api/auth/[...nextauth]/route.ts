@@ -27,7 +27,7 @@ const handler = NextAuth({
                   username: credentials?.username,
                   password: credentials?.password,
               }),
-                headers: { 
+                headers: {
                   "Content-Type": "application/json"
                 }
               });
@@ -64,7 +64,6 @@ const handler = NextAuth({
         return session;
       }
     }
-    
 
 });
 
