@@ -14,10 +14,19 @@ interface SellProps {
 }
 
 export default function SellForm({data, setData, setHasEdited, imgId, setIsUploaded}: SellProps) {
-
-
-    // const questions = typeQuestionMap.get(data.type);
     const questions = data.sellQuestions;
+
+    const handleSelectInputChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setHasEdited(true);
+        const idStr: string | null = e.target.getAttribute('id');
+        const idx: number = Number(idStr);
+        setData((prev) => {
+            let updated: Partial<ItemData> = {...prev};
+             console.log(updated.visibleValues)
+            if (updated.visibleValues !== undefined) updated.visibleValues[idx] = e.target.value;
+            return updated as ItemData;
+        });
+    }
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setHasEdited(true);
@@ -40,10 +49,21 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
             <div className="w-1/2">
             {
                 questions?.map((question, index) => {
+                    const options = shouldRenderSelect(question[0]);
                     return (
                         <div className="p-2" key={`div${index}`}>
                             <h1 key={`h${index}`}>{question[0]}</h1>
-                            <input className="outline w-5/6 rounded-sm p-1 valid:border-green-500 invalid:border-red-600 " placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
+                            {
+                                options ? <select className="outline rounded w-5/6 p-1" value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleSelectInputChange} id={index.toString()}>
+                                    {
+                                        options.map((option) => {
+                                            return <option className="outline" key={option} value={option}>{option}</option>
+                                        })
+                                    }
+                                </select>
+                                :
+                                <input className="outline w-5/6 rounded-sm p-1 valid:border-green-500 invalid:border-red-600 " placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
+                                }
                         </div>
                     );
                 })
@@ -129,4 +149,20 @@ function validateRollingInput(input: string, question: string | undefined) {
     }
 
     return true;
+}
+
+function shouldRenderSelect(question: string | undefined) {
+    if (question === undefined) return undefined;
+    question  = question.trim().toUpperCase();
+
+    if (question.includes('MODE')) {
+        return ['Peoria Charter', 'Amtrack', 'other'];
+    }
+    if (question.includes("TERM")) {
+        return ['fall', 'spring', 'summer'];
+    }
+    if (question.includes('EVENT')) {
+        return ['football', 'basketball', 'concert', 'other'];
+    }
+    return undefined;
 }
