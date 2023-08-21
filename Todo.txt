@@ -33,6 +33,7 @@ Back:
  - MEMORY LEAKS IN THE SERVER??? (shouldn't be a problem because the server is this computer)
  - there will likely be bugs caused by trying to update values that are optional
  - find a better way to update the selling page when a user updates an item than forcing a reload
+ - add a redirect for signing out definitely and maybe signing in
 
 
 Testing:
