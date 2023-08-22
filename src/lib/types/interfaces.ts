@@ -48,12 +48,12 @@ export interface CardData {
     id: string;
     name?: string;
     type?: ItemType;
-    hasImage: boolean;
+    numImages: number;
 }
 
 export interface creationRequest {
     id: string;
     data: ItemData;
     sellerId: string;
-    hasImage: boolean;
+    numImages: number;
 }

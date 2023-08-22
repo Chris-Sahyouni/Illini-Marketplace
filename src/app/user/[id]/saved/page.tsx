@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { CardData } from "@/src/lib/types/interfaces";
 import { useSession } from "next-auth/react";
 import { ItemType } from "@/src/lib/maps";
-import Card from "@/src/components/Card";
-import SubleaseCard from "@/src/components/SubleaseCard";
+import Card from "@/src/components/Card Related/Card";
+import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import { CircularProgress } from "@mui/material";
 
 export default function Page() {
@@ -51,7 +51,7 @@ export default function Page() {
                             <div key={`outer;${item.id}`} className="w-full col-2 flex">
                                 <div key={index} className="w-3/5 py-2">
                                     {
-                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id} initSave={true} />
+                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} itemId={item.id} initSave={true} numUploaded={item.numImages} /> : <Card data={item} isUploaded={item.numImages > 0} itemId={item.id ? item.id : ''} key={item.id} initSave={true} />
                                     }
                                 </div>
                             </div>

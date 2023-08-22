@@ -1,12 +1,12 @@
 "use client"
 
-import Card from "@/src/components/Card";
+import Card from "@/src/components/Card Related/Card";
 import { useEffect, useState, useContext } from "react";
 import { CardData } from "@/src/lib/types/interfaces";
 import { typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
-import SubleaseCard from "@/src/components/SubleaseCard";
+import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import { SearchContext } from "@/src/components/SearchProvider";
 import { getUserSaves } from "@/src/lib/utilities";
 import { useSession } from "next-auth/react";
@@ -122,7 +122,9 @@ export default function Page({params}: {params: {itemType: string}}) {
                                 return (
                                     <div key={index} className="w-full py-2">
                                         {
-                                            (params.itemType === 'sublease') ? <SubleaseCard data={itemData} key={itemData.id} /> : <Card data={itemData} key={itemData.id} isUploaded={itemData.hasImage} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} />
+                                            (params.itemType === 'sublease') 
+                                            ? <SubleaseCard data={itemData} key={itemData.id} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} numUploaded={itemData.numImages} />
+                                            : <Card data={itemData} key={itemData.id} isUploaded={itemData.numImages > 0} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} />
                                         }
                                     </div>
                                 );

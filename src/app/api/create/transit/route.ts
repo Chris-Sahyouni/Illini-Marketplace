@@ -6,9 +6,9 @@ import { creationRequest } from '@/src/lib/types/interfaces';
 
 export async function POST(request: Request) {
     const body: creationRequest = await request.json();
-    const { data, sellerId, id, hasImage} = body;
+    const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createTransit(data, sellerId, id, hasImage);
+    success = await createTransit(data, sellerId, id, numImages);
     if (success) {
         return new Response('success', {status: 200});
     }
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 }
 
 
-async function createTransit(data: ItemData, sellerId: string, itemId: string, hasImage: boolean) {
+async function createTransit(data: ItemData, sellerId: string, itemId: string, numImages: number) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -33,7 +33,7 @@ async function createTransit(data: ItemData, sellerId: string, itemId: string, h
                     notes: values[keys.indexOf("notes")],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
-                    hasImage: hasImage,
+                    numImages: numImages,
                     seller: {
                         connect: {
                             id: sellerId

@@ -4,19 +4,23 @@ import { ItemData, } from "@/src/lib/types/models";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import ImageUpload from "../ImageUpload";
 import { useSession } from "next-auth/react";
+import { ItemType } from "@/src/lib/maps";
 
 
 interface SellProps {
     data: ItemData;
     setData: Dispatch<SetStateAction<ItemData>>
     setHasEdited: Dispatch<SetStateAction<boolean>>
-    setIsUploaded: Dispatch<SetStateAction<boolean>>;
+    setNumImages: Dispatch<SetStateAction<number>>;
     imgId: string
 }
 
-export default function SellForm({data, setData, setHasEdited, imgId, setIsUploaded}: SellProps) {
+export default function SellForm({data, setData, setHasEdited, imgId, setNumImages}: SellProps) {
 
     const { data:session } = useSession();
+    const [maxImages, setMaxImages] = useState(data.type === ItemType.Sublease ? 4 : 1);
+
+    // console.log('i: ', imgIndex);
 
     const questions = data.sellQuestions;
 
@@ -87,7 +91,24 @@ export default function SellForm({data, setData, setHasEdited, imgId, setIsUploa
             }
             </div>
             <div className=" w-1/2 justify-center flex ">
-                <ImageUpload imageId={imgId} setIsUploaded={setIsUploaded}/>
+                {/* <div className="p-1"> */}
+                    <ImageUpload imageId={imgId} index={1} max={maxImages} setImgIndex={setNumImages}/>
+                {/* </div> */}
+                {/* {
+                    itemType === ItemType.Sublease ?
+                    <>
+                        <div className="p-1">
+                            <ImageUpload imageId={imgId} setIsUploaded={setIsUploaded} index={2} />
+                        </div>
+                        <div className="p-1">
+                            <ImageUpload imageId={imgId} setIsUploaded={setIsUploaded} index={3} />
+                        </div>
+                        <div className="p-1">
+                            <ImageUpload imageId={imgId} setIsUploaded={setIsUploaded} index={4} />
+                        </div>
+                    </>
+                    : null
+                } */}
             </div>
         </div>
     );

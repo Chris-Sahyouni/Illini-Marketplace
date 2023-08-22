@@ -34,9 +34,7 @@ model User {
 
 model Sublease {
     location  String
-    image2    String?
-    image3    String?
-    image4    String
+    numImages Int      @default(0)
     company   String
     bedrooms  Int
     bathrooms Int
@@ -48,7 +46,6 @@ model Sublease {
     name      String?
     notes     String?
     contact   String
-    hasImage  Boolean
     seller    User     @relation(name: "UserSellingSubleases", fields: [sellerId], references: [id])
     savedBy   User[]   @relation(name: "SavedSubleases")
     sellerId  String
@@ -66,7 +63,7 @@ model Transit {
     name      String?
     notes     String?
     contact   String
-    hasImage  Boolean
+    numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTransit", fields: [sellerId], references: [id])
     sellerId  String
     savedBy   User[]   @relation(name: "SavedTransit")
@@ -84,7 +81,7 @@ model Ticket {
     name      String?
     notes     String?
     contact   String
-    hasImage  Boolean
+    numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTickets", fields: [sellerId], references: [id])
     sellerId  String
     savedBy   User[]   @relation(name: "SavedTickets")
@@ -98,7 +95,7 @@ model Textbook {
     name      String?
     notes     String?
     contact   String
-    hasImage  Boolean
+    numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTextbooks", fields: [sellerId], references: [id])
     sellerId  String
     savedBy   User[]   @relation(name: "SavedTextbooks")
@@ -114,7 +111,7 @@ model Parking {
     name      String?
     notes     String?
     contact   String
-    hasImage  Boolean
+    numImages Int       @default(0)
     seller    User      @relation(name: "UserSellingParking", fields: [sellerId], references: [id])
     sellerId  String
     savedBy   User[]    @relation(name: "SavedParking")
@@ -127,7 +124,7 @@ model Misc {
     name      String   @default("")
     notes     String?
     contact   String
-    hasImage  Boolean
+    numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingMisc", fields: [sellerId], references: [id])
     sellerId  String
     savedBy   User[]   @relation(name: "SavedMisc")

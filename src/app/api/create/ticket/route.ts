@@ -7,16 +7,16 @@ import { creationRequest } from '@/src/lib/types/interfaces';
 
 export async function POST(request: Request) {
     const body: creationRequest = await request.json();
-    const { data, sellerId, id, hasImage} = body;
+    const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createTicket(data, sellerId, id, hasImage);
+    success = await createTicket(data, sellerId, id, numImages);
     if (success) {
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});
 }
 
-async function createTicket(data: ItemData, sellerId: string, itemId: string, hasImage: boolean) {
+async function createTicket(data: ItemData, sellerId: string, itemId: string, numImages: number) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -33,7 +33,7 @@ async function createTicket(data: ItemData, sellerId: string, itemId: string, ha
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     notes: values[keys.indexOf("notes")],
-                    hasImage: hasImage,
+                    numImages: numImages,
                     seller: {
                         connect: {
                             id: sellerId

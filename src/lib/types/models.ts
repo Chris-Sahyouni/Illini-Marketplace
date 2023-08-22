@@ -14,7 +14,7 @@ export class ItemData {
     id: string = "";
     name?: string = "";
     type: ItemType = ItemType.UnResolved;
-    hasImage: boolean = false;
+    numImages: number = 0;
     // image
 
     public constructor(sublease?: Sublease, textbook?: Textbook, transit?: Transit, ticket?: Ticket, parking?: Parking, misc?: Misc) {
@@ -46,42 +46,42 @@ export class ItemData {
 
     private constructFromTextbook(prismaItem: Textbook) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Textbook);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
     private constructFromSublease(prismaItem: Sublease) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Sublease);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
     private constructFromTransit(prismaItem: Transit) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Transit);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
     private constructFromTicket(prismaItem: Ticket) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Ticket);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
     private constructFromParking(prismaItem: Parking) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Parking);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
 
     private constructFromMisc(prismaItem: Misc) {
         this.id = prismaItem.id;
-        this.hasImage = prismaItem.hasImage;
+        this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Misc);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -111,7 +111,7 @@ export class ItemData {
             values: this.visibleValues,
             id: this.id,
             type: this.type,
-            hasImage: this.hasImage,
+            numImages: this.numImages,
         }
         return data;
     }

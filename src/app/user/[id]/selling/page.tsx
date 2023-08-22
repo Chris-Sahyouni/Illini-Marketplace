@@ -4,8 +4,8 @@ import { useContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 import { CardData } from "@/src/lib/types/interfaces";
 import { ItemType } from "@/src/lib/maps";
-import SubleaseCard from "@/src/components/SubleaseCard";
-import Card from "@/src/components/Card"
+import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
+import Card from "@/src/components/Card Related/Card"
 import { EditorContext } from "@/src/components/EditorProvider";
 import { getUserSaves } from "@/src/lib/utilities";
 import { CircularProgress } from "@mui/material";
@@ -76,7 +76,7 @@ export default function Page() {
                             <div key={`outer;${item.id}`} className="w-full col-2 flex">
                                 <div key={index} className="w-3/5 py-2">
                                     {
-                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} /> : <Card data={item} isUploaded={item.hasImage} itemId={item.id ? item.id : ''} key={item.id} initSave={item.id ? initSaves.includes(item.id) : false} />
+                                        item.type === ItemType.Sublease ? <SubleaseCard data={item} key={item.id} itemId={item.id} initSave={item.id ? initSaves.includes(item.id) : false} numUploaded={item.numImages} /> : <Card data={item} isUploaded={item.numImages > 0} itemId={item.id ? item.id : ''} key={item.id} initSave={item.id ? initSaves.includes(item.id) : false} />
                                     }
                                 </div>
                                 <div className="w-1/5 my-3 ml-2 flex flex-col items-start p-2">

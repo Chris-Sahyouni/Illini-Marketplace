@@ -1,6 +1,6 @@
 "use client"
 
-import Card from "@/src/components/Card";
+import Card from "@/src/components/Card Related/Card";
 import { useState, useEffect } from "react";
 import SellForm from "@/src/components/forms/SellForm";
 import { useSearchParams } from 'next/navigation'
@@ -8,7 +8,7 @@ import { creationRequest } from "@/src/lib/types/interfaces";
 import { useSession } from "next-auth/react";
 import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
 import { ItemData } from "@/src/lib/types/models";
-import SubleaseCard from "@/src/components/SubleaseCard";
+import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import {v4 as uuidv4} from "uuid";
 
 
@@ -26,8 +26,14 @@ import {v4 as uuidv4} from "uuid";
         const  { data:session } = useSession();
         const [status, setStatus] = useState(Status.NotYetRequested);
         const [hasEdited, setHasEdited] = useState(false);
-        const [itemId, setItemId] = useState(uuidv4());
-        const [isUploaded, setIsUploaded] = useState(false)
+        const [itemId, setItemId] = useState('');
+        const [uuidGenerated, setUuidGenerated] = useState(false)
+        const [numImg, setNumImg] = useState(0)
+
+        if (!uuidGenerated) {
+            setItemId(uuidv4());
+            setUuidGenerated(true);
+        }
 
 
         const initData = (itemType: ItemType) => {
@@ -43,7 +49,6 @@ import {v4 as uuidv4} from "uuid";
         }
 
        const assignType = () => {
-        console.log('here')
         switch (params.get('t')) {
             case 'sublease': {
                 initData(ItemType.Sublease);
@@ -104,7 +109,7 @@ import {v4 as uuidv4} from "uuid";
                     data: data,
                     sellerId: session.user.id,
                     id: itemId,
-                    hasImage: isUploaded
+                    numImages: data.numImages
                 }
 
                 fetch(`/api/create/${params.get('t')}`, {
@@ -131,7 +136,7 @@ import {v4 as uuidv4} from "uuid";
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setIsUploaded={setIsUploaded}/>
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setNumImages={setNumImg}/>
                 </div>
 
                 <div className="w-full flex flex-row">
@@ -139,7 +144,7 @@ import {v4 as uuidv4} from "uuid";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } /> : <Card data={data ? data.getCardData() : {hasImage: isUploaded, id: ''} } isUploaded={isUploaded} itemId={itemId} initSave={undefined} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {id: '', numImages: 0} } itemId={itemId} initSave={undefined} numUploaded={numImg} /> : <Card data={data ? data.getCardData() : {numImages: numImg, id: ''} } isUploaded={numImg > 0} itemId={itemId} initSave={undefined} />
                             }
                         </div>
                     </div>

@@ -1,11 +1,12 @@
 'use client'
 
-import { CardData } from "../lib/types/interfaces";
-import { CldImage } from "next-cloudinary";
+import { CardData } from "../../lib/types/interfaces";
 import Image from "next/image";
-import { useState, useContext } from "react";
-import { LightBoxContext } from "./LightBoxProvider";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
+import Field from "./Field";
+import CardImage from "./CardImage";
+import { CircularProgress } from "@mui/material";
 
 interface ItemProps {
     data: CardData
@@ -18,7 +19,33 @@ export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
 
     const {data:session} = useSession();
 
+    console.log("card id: ", itemId);
+
     const [isSaved, setIsSaved] = useState(initSave);
+    const [loading, setLoading] = useState(false);
+    const [imageId, setImageId] = useState('')
+
+    useEffect(() => {
+        const wrapper = async () => {
+            setLoading(true)
+            const res = await fetch('http://localhost:3000/api/images', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    id: itemId
+                })
+            });
+            const images: string[] = await res.json();
+            console.log(images);
+            if (images.length > 0) setImageId(images[0]);
+            setLoading(false);
+        }
+        if (isUploaded) wrapper();
+    }, [isUploaded])
+
     const handleToggleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault()
         if (initSave === undefined) return;
@@ -45,7 +72,11 @@ export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
     return (
         <div className=" w-full h-36 rounded-xl flex-row bg-white p-2 flex">
             <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
-                <CardImage id={itemId || ''} isUploaded={isUploaded} />
+                {
+                    loading
+                    ? <CircularProgress size={50} />
+                    : <CardImage id={imageId} isUploaded={isUploaded} />
+                }
             </div>
             <div className="columns-2 px-2 w-3/4 pl-4">
                     {
@@ -66,67 +97,5 @@ export default function Card({data, isUploaded, itemId, initSave}: ItemProps) {
         </div>
     );
 }
-
-/* -------------------------------------------------------------------------- */
-
-interface fieldProps {
-    name: string;
-    value: string;
-    index: number;
-}
-
-export function Field({name, value, index}: fieldProps) {
-
-    return (
-        <div className="flex flex-row py-2" key={index}> 
-            <p className="font-bold pr-1" key={`key${index}`}>{name}:</p>
-            <p key={`val${index}`}>{value}</p>
-        </div>
-    );
-}
-
-
-/* -------------------------------------------------------------------------- */
-
-
-interface CardImageProps {
-    id: string;
-    isUploaded: boolean;
-}
-
-export  function CardImage({ id, isUploaded }: CardImageProps) {
-
-
-    const context = useContext(LightBoxContext);
-
-    if (isUploaded && id) {
-
-        return (
-            <>
-                <button onClick={() => context.boxState(id)}>
-                    <CldImage
-                        src={id}
-                        height={130}
-                        width={152}
-                        crop="crop"
-                        gravity="custom"
-                        alt='img'
-                    />
-                </button>
-            </>
-        );
-    }
-
-    return (
-        <>
-            <Image
-                src={'/placeholder.png'}
-                fill={true}
-                alt='img'
-            />
-        </>
-    )
-}
-
 
 

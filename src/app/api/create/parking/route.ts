@@ -8,16 +8,16 @@ import { ItemType } from '@/src/lib/maps';
 
 export async function POST(request: Request) {
     const body: creationRequest = await request.json();
-    const { data, sellerId, id, hasImage} = body;
+    const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createParking(data, sellerId, id, hasImage);
+    success = await createParking(data, sellerId, id, numImages);
     if (success) {
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});
 }
 
-async function createParking(data: ItemData, sellerId: string, itemId: string, hasImage: boolean) {
+async function createParking(data: ItemData, sellerId: string, itemId: string, numImages: number) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -32,7 +32,7 @@ async function createParking(data: ItemData, sellerId: string, itemId: string, h
                     name: values[keys.indexOf('location')],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
-                    hasImage: hasImage,
+                    numImages: numImages,
                     seller: {
                         connect: {
                             id: sellerId

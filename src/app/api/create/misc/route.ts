@@ -8,16 +8,16 @@ import { ItemType } from '@/src/lib/maps';
 
 export async function POST(request: Request) {
     const body: creationRequest = await request.json();
-    const { data, sellerId, id, hasImage} = body;
+    const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createMisc(data, sellerId, id, hasImage);
+    success = await createMisc(data, sellerId, id, numImages);
     if (success) {
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});
 }
 
-async function createMisc(data: ItemData, sellerId: string, itemId: string, hasImage: boolean) {
+async function createMisc(data: ItemData, sellerId: string, itemId: string, numImages: number) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -29,7 +29,7 @@ async function createMisc(data: ItemData, sellerId: string, itemId: string, hasI
                     notes: values[keys.indexOf("notes")],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
-                    hasImage: hasImage,
+                    numImages: numImages,
                     seller: {
                         connect: {
                             id: sellerId

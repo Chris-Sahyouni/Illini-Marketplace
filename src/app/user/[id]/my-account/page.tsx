@@ -109,7 +109,7 @@ export default function Page() {
             <div>
                 { !loading ?
                     <>
-                        <button className="text-blue-600 hover:text-blue-400 p-1 mt-4" onClick={() => setPasswordInputBox(true)}>change my password</button>
+                        <button className="text-blue-600 hover:text-blue-400 p-1 mt-4" onClick={() => setPasswordInputBox(!passwordInputBox)}>change my password</button>
                         {
                             passwordInputBox ?
                             <div className='p-1 mt-2'>
