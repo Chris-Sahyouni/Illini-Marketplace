@@ -9,14 +9,14 @@ export async function POST(request: Request) {
     const body: creationRequest = await request.json();
     const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createTicket(data, sellerId, id, numImages);
+    success = await createTicket(data, sellerId, id, numImages, body.notes);
     if (success) {
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});
 }
 
-async function createTicket(data: ItemData, sellerId: string, itemId: string, numImages: number) {
+async function createTicket(data: ItemData, sellerId: string, itemId: string, numImages: number, notes: string) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -32,7 +32,7 @@ async function createTicket(data: ItemData, sellerId: string, itemId: string, nu
                     amount: Number(values[keys.indexOf("amount")]),
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
-                    notes: values[keys.indexOf("notes")],
+                    notes,
                     numImages: numImages,
                     seller: {
                         connect: {

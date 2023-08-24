@@ -12,9 +12,10 @@ interface ItemProps {
     itemId: string
     initSave: boolean | undefined
     numUploaded: number
+    sellNotes?: string
 }
 
-export default function SubleaseCard({data, itemId, initSave, numUploaded}: ItemProps) {
+export default function SubleaseCard({data, itemId, initSave, numUploaded, sellNotes}: ItemProps) {
 
     const { data:session } = useSession();
     const [isSaved, setIsSaved] = useState(initSave);
@@ -82,15 +83,20 @@ if (data === undefined) return (<></>);
                     <CardImage id={images[3]} isUploaded={images[3] !== ''} />
                 </div>
             </div>
-            <div className="columns-2 px-2 w-3/4 pl-4">
-                    {
-                        data.keys?.map((field, index) => {
-                            const val: string | undefined = data.values?.at(index);
-                            return (
-                                <Field name={field} value={val ? val : ""} index={index} key={field}/>
-                            );
-                        })
-                    }
+            <div className="px-2 w-3/4 pl-4">
+                <div className="columns-2">
+                        {
+                            data.keys?.map((field, index) => {
+                                const val: string | undefined = data.values?.at(index);
+                                return (
+                                    <Field name={field} value={val ? val : ""} index={index} key={field} padding={1.5} />
+                                );
+                            })
+                        }
+                </div>
+                <div className="break-words w-full overflow-scroll">
+                    {sellNotes ? sellNotes : data.notes}
+                </div>
             </div>
             <div>
                 <div className="h-5/6 "></div>

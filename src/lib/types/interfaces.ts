@@ -49,6 +49,7 @@ export interface CardData {
     name?: string;
     type?: ItemType;
     numImages: number;
+    notes: string;
 }
 
 export interface creationRequest {
@@ -56,4 +57,5 @@ export interface creationRequest {
     data: ItemData;
     sellerId: string;
     numImages: number;
+    notes: string;
 }

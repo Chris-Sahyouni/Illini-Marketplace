@@ -17,6 +17,7 @@ Front:
  - order results by items that have images first (low priority)
  - make forms auto fill characters like - for dates and : for time (low priority)
  - make sure notes is visible on every type
+ - sell form validation shouldn't require notes field to be not be empty
 
  - THE CREATE SUBLEASE ROUTE IS COMPLETELY EMPTY STILL
 
@@ -39,7 +40,7 @@ Back:
  - note that to delete a folder from cloudinary, all its contents have to be deleted first
  - cloudinary preset must be changed back to default_preset
  - allow the server IP to the cloudinary admin api
-
+ - add a db seed script
 
 Testing:
  - react tests

@@ -123,7 +123,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                                     <div key={index} className="w-full py-2">
                                         {
                                             (params.itemType === 'sublease') 
-                                            ? <SubleaseCard data={itemData} key={itemData.id} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} numUploaded={itemData.numImages} />
+                                            ? <SubleaseCard data={itemData} key={itemData.id} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} numUploaded={itemData.numImages}  />
                                             : <Card data={itemData} key={itemData.id} isUploaded={itemData.numImages > 0} itemId={itemData.id} initSave={initSaves.includes(itemData.id)} />
                                         }
                                     </div>

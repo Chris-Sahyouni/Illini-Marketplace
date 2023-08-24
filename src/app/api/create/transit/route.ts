@@ -8,7 +8,7 @@ export async function POST(request: Request) {
     const body: creationRequest = await request.json();
     const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createTransit(data, sellerId, id, numImages);
+    success = await createTransit(data, sellerId, id, numImages, body.notes);
     if (success) {
         return new Response('success', {status: 200});
     }
@@ -16,7 +16,7 @@ export async function POST(request: Request) {
 }
 
 
-async function createTransit(data: ItemData, sellerId: string, itemId: string, numImages: number) {
+async function createTransit(data: ItemData, sellerId: string, itemId: string, numImages: number, notes: string) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -30,7 +30,7 @@ async function createTransit(data: ItemData, sellerId: string, itemId: string, n
                     to: values[keys.indexOf("to")],
                     date: values[keys.indexOf("date")],
                     name: "",
-                    notes: values[keys.indexOf("notes")],
+                    notes,
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     numImages: numImages,

@@ -38,7 +38,7 @@ export default function ImageUpload({imageId, index, max, setImgIndex}: ImageUpl
             open();
             }
             return (
-            <button className="button bg-blue-600 text-white rounded h-1/4 my-auto p-3 hover:bg-blue-400" onClick={handleOnClick} disabled={index > max}>
+            <button className="button bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 text-white rounded h-1/4 my-auto p-3" onClick={handleOnClick} disabled={index > max}>
                 Upload an Image (opt)
             </button>
             );

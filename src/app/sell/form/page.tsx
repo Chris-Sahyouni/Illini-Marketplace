@@ -10,6 +10,7 @@ import { ItemType, typeKeyMap, typeQuestionMap } from "@/src/lib/maps";
 import { ItemData } from "@/src/lib/types/models";
 import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import {v4 as uuidv4} from "uuid";
+import { CircularProgress } from "@mui/material";
 
 
     export default function Page() {
@@ -29,6 +30,7 @@ import {v4 as uuidv4} from "uuid";
         const [itemId, setItemId] = useState('');
         const [uuidGenerated, setUuidGenerated] = useState(false)
         const [numImg, setNumImg] = useState(0)
+        const [notes, setNotes] = useState("")
 
         if (!uuidGenerated) {
             setItemId(uuidv4());
@@ -81,6 +83,14 @@ import {v4 as uuidv4} from "uuid";
             assignType();
         }, [])
 
+        if (status === Status.Loading) {
+            return (
+                <div className="flex justify-center my-4">
+                    <CircularProgress size={50} />
+                </div>
+            );
+        }
+
         if (status == Status.Success) {
             return (
                 <div className="flex justify-center my-4">
@@ -109,7 +119,8 @@ import {v4 as uuidv4} from "uuid";
                     data: data,
                     sellerId: session.user.id,
                     id: itemId,
-                    numImages: data.numImages
+                    numImages: data.numImages,
+                    notes: data.notes
                 }
 
                 fetch(`/api/create/${params.get('t')}`, {
@@ -136,7 +147,7 @@ import {v4 as uuidv4} from "uuid";
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setNumImages={setNumImg}/>
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setNumImages={setNumImg} notes={notes} setNotes={setNotes} />
                 </div>
 
                 <div className="w-full flex flex-row">
@@ -144,12 +155,12 @@ import {v4 as uuidv4} from "uuid";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {id: '', numImages: 0} } itemId={itemId} initSave={undefined} numUploaded={numImg} /> : <Card data={data ? data.getCardData() : {numImages: numImg, id: ''} } isUploaded={numImg > 0} itemId={itemId} initSave={undefined} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {id: '', numImages: 0, notes: ""} } itemId={itemId} initSave={undefined} numUploaded={numImg} sellNotes={notes} /> : <Card data={data ? data.getCardData() : {numImages: numImg, id: '', notes: ""} } isUploaded={numImg > 0} itemId={itemId} initSave={undefined} sellNotes={notes} />
                             }
                         </div>
                     </div>
                     {/*for this button disabled, the button does not get disabled until the sell form inputs become controlled, fix this*/}
-                    <button className="ml-8 bg-blue-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={data.visibleValues.includes("") || !hasEdited} onClick={handleSubmit}>submit</button>
+                    <button className="ml-8 bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={data.visibleValues.includes("") || !hasEdited} onClick={handleSubmit}>submit</button>
                 </div>
 
             </div>

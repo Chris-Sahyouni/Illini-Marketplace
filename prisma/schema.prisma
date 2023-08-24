@@ -44,7 +44,7 @@ model Sublease {
     id        String   @id() @default(cuid())
     price     Float
     name      String?
-    notes     String?
+    notes     String?   @default("")
     contact   String
     seller    User     @relation(name: "UserSellingSubleases", fields: [sellerId], references: [id])
     savedBy   User[]   @relation(name: "SavedSubleases")
@@ -61,7 +61,7 @@ model Transit {
     id        String   @id() @default(cuid())
     price     Float
     name      String?
-    notes     String?
+    notes     String?   @default("")
     contact   String
     numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTransit", fields: [sellerId], references: [id])
@@ -79,7 +79,7 @@ model Ticket {
     id        String   @id() @default(cuid())
     price     Float
     name      String?
-    notes     String?
+    notes     String?   @default("")
     contact   String
     numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTickets", fields: [sellerId], references: [id])
@@ -93,7 +93,7 @@ model Textbook {
     id        String   @id()
     price     Float
     name      String?
-    notes     String?
+    notes     String?   @default("")
     contact   String
     numImages Int      @default(0)
     seller    User     @relation(name: "UserSellingTextbooks", fields: [sellerId], references: [id])
@@ -109,7 +109,7 @@ model Parking {
     id        String    @id() @default(cuid())
     price     Float
     name      String?
-    notes     String?
+    notes     String?    @default("")
     contact   String
     numImages Int       @default(0)
     seller    User      @relation(name: "UserSellingParking", fields: [sellerId], references: [id])
@@ -119,16 +119,17 @@ model Parking {
 }
 
 model Misc {
-    id        String   @id() @default(cuid())
-    price     Float
-    name      String   @default("")
-    notes     String?
-    contact   String
-    numImages Int      @default(0)
-    seller    User     @relation(name: "UserSellingMisc", fields: [sellerId], references: [id])
-    sellerId  String
-    savedBy   User[]   @relation(name: "SavedMisc")
-    createdAt DateTime @default(now())
+    id          String   @id() @default(cuid())
+    price       Float
+    name        String   @default("")
+    description String   @default("")
+    notes       String?   @default("")
+    contact     String
+    numImages   Int      @default(0)
+    seller      User     @relation(name: "UserSellingMisc", fields: [sellerId], references: [id])
+    sellerId    String
+    savedBy     User[]   @relation(name: "SavedMisc")
+    createdAt   DateTime @default(now())
 }
 
 model bannedEmail {

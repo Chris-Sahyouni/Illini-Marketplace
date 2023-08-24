@@ -10,7 +10,6 @@ interface CardImageProps {
 
 export default function CardImage({ id, isUploaded }: CardImageProps) {
 
-
     const context = useContext(LightBoxContext);
 
     if (isUploaded && id) {

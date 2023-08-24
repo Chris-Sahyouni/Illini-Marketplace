@@ -11,12 +11,12 @@ export enum ItemType {
 const contactPair: [string, string] = ['How would you like to be contacted?', 'eg. 123-456-7890, or snap: john_doe123, etc'];
 
 // is company really necessary?
-export const subleaseKeys:  string[] = ["location", "price", "contact", "company", "bedrooms", "bathrooms", "term", "start", "end", "notes"];
+export const subleaseKeys:  string[] = ["location", "price", "contact", "company", "bedrooms", "bathrooms", "term", "start", "end"];
 export const textbookKeys:  string[] = ['course', 'price', 'contact'];
-export const transitKeys:  string[] = ['mode', 'price', 'date', 'time'];
+export const transitKeys:  string[] = ['mode', 'price', 'date', 'time', 'from', 'to'];
 export const ticketKeys:  string[] = ['event', 'price', 'date', 'seat', 'amount'];
-export const parkingKeys:  string[] = ['location', 'price', 'startDate', 'endDate'];
-export const miscKeys:  string[] = ['name', 'price', 'notes'];
+export const parkingKeys:  string[] = ['location', 'price', 'start', 'end'];
+export const miscKeys:  string[] = ['name', 'price', 'description'];
 
 /* -------------------------------- Questions ------------------------------- */
 
@@ -29,36 +29,33 @@ export const subleaseQuestions:  [string, string][] = [['Address/Location', 'eg.
                                                        ['How many bathrooms', ''], 
                                                        ['Term', ''],
                                                        ['Start Date', 'YYYY-MM-DD'], 
-                                                       ['End Date', 'YYYY-MM-DD'], 
-                                                       ['Any other information you want to add', '']];
+                                                       ['End Date', 'YYYY-MM-DD']];
 
 export const textbookQuestions:  [string, string][] = [['Course Code', 'eg. STAT 100'], 
                                                        ['Price', ''], 
-                                                       contactPair, 
-                                                       ['Any other information you want to add', '']];
+                                                       contactPair];
 
 export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack, Peoria Charter'], 
                                                       ['Price', ''], 
                                                       ['Date', 'YYYY-MM-DD'], 
-                                                      ['Time', 'eg. 5:00pm'], 
-                                                      ['Any other information you want to add', '']];
+                                                      ['Time', 'eg. 5:00pm'],
+                                                      ['From', 'Departure location'],
+                                                      ['To', 'Destination']];
 
 export const ticketQuestions:  [string, string][] = [['What event', ''], 
                                                      ['Price', ''], 
                                                      ['Date', 'YYYY-MM-DD'], 
                                                      ['Seat (if applicable)', ''], 
-                                                     ['How many tickets', ''], 
-                                                     ['Any other information you want to add', '']];
+                                                     ['How many tickets', '']];
 
 export const parkingQuestions:  [string, string][] = [['Location', ''], 
                                                       ['Price', ''], 
                                                       ['Start Date', 'YYYY-MM-DD'], 
-                                                      ['End Date', 'YYYY-MM-DD'], 
-                                                      ['Any other information you want to add', '']];
+                                                      ['End Date', 'YYYY-MM-DD']];
 
 export const miscQuestions:  [string, string][] = [['What are you selling', ''], 
-                                                   ['Price', ''], 
-                                                   ['Any other information you want to add', '']];
+                                                   ['Price', ''],
+                                                   ['Description', '']];
 
 /* -------------------------------------------------------------------------- */
 

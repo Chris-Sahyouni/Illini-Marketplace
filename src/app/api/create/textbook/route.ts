@@ -10,14 +10,14 @@ export async function POST(request: Request) {
     const body: creationRequest = await request.json();
     const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
-    success = await createTextbook(data, sellerId, id, numImages);
+    success = await createTextbook(data, sellerId, id, numImages, body.notes);
     if (success) {
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});
 }
 
-async function createTextbook(data: ItemData, sellerId: string, itemId: string, numImages: number) {
+async function createTextbook(data: ItemData, sellerId: string, itemId: string, numImages: number, notes: string) {
     const {visibleKeys:keys, visibleValues:values} = data;
 
     if (keys && values) {
@@ -27,10 +27,10 @@ async function createTextbook(data: ItemData, sellerId: string, itemId: string, 
                     id: itemId,
                     course: values[keys.indexOf('course')],
                     name: values[keys.indexOf('course')],
-                    notes: values[keys.indexOf("notes")],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     numImages: numImages,
+                    notes,
                     seller: {
                         connect: {
                             id: sellerId

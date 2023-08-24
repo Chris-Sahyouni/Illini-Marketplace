@@ -15,7 +15,7 @@ export class ItemData {
     name?: string = "";
     type: ItemType = ItemType.UnResolved;
     numImages: number = 0;
-    // image
+    notes: string = "";
 
     public constructor(sublease?: Sublease, textbook?: Textbook, transit?: Transit, ticket?: Ticket, parking?: Parking, misc?: Misc) {
         if (sublease) {
@@ -46,6 +46,7 @@ export class ItemData {
 
     private constructFromTextbook(prismaItem: Textbook) {
         this.id = prismaItem.id;
+        this.notes = prismaItem.notes || "";
         this.numImages = prismaItem.numImages;
         this.constructGeneric(ItemType.Textbook);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
@@ -54,6 +55,7 @@ export class ItemData {
     private constructFromSublease(prismaItem: Sublease) {
         this.id = prismaItem.id;
         this.numImages = prismaItem.numImages;
+        this.notes = prismaItem.notes || "";
         this.constructGeneric(ItemType.Sublease);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -61,6 +63,7 @@ export class ItemData {
     private constructFromTransit(prismaItem: Transit) {
         this.id = prismaItem.id;
         this.numImages = prismaItem.numImages;
+        this.notes = prismaItem.notes || "";
         this.constructGeneric(ItemType.Transit);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -68,6 +71,7 @@ export class ItemData {
     private constructFromTicket(prismaItem: Ticket) {
         this.id = prismaItem.id;
         this.numImages = prismaItem.numImages;
+        this.notes = prismaItem.notes || "";
         this.constructGeneric(ItemType.Ticket);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -75,6 +79,7 @@ export class ItemData {
     private constructFromParking(prismaItem: Parking) {
         this.id = prismaItem.id;
         this.numImages = prismaItem.numImages;
+        this.notes = prismaItem.notes || "";
         this.constructGeneric(ItemType.Parking);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -82,6 +87,7 @@ export class ItemData {
     private constructFromMisc(prismaItem: Misc) {
         this.id = prismaItem.id;
         this.numImages = prismaItem.numImages;
+        this.notes = prismaItem.notes || "";
         this.constructGeneric(ItemType.Misc);
         this.assignVisibleValues(Object.keys(prismaItem), Object.values(prismaItem));
     }
@@ -112,6 +118,7 @@ export class ItemData {
             id: this.id,
             type: this.type,
             numImages: this.numImages,
+            notes: this.notes
         }
         return data;
     }
