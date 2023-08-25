@@ -19,7 +19,7 @@ export default function CardImage({ id, isUploaded }: CardImageProps) {
                 <button onClick={() => context.boxState(id)}>
                     <CldImage
                         src={id}
-                        height={130}
+                        height={148}
                         width={152}
                         crop="crop"
                         gravity="custom"

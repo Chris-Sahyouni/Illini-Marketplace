@@ -112,7 +112,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                     <div className="bg-white rounded w-full px-4 py-2 h-fit flex flex-col">
                         <CheckBoxes itemType={params.itemType} handler={handleToggleFilter} />
                         <Ranges itemType={params.itemType} handler={setRanges} />
-                        <button className='w-20 bg-blue-600 text-white hover:bg-blue-400 rounded' type="button" onClick={applyFilters}>Apply</button>
+                        <button className='p-1 w-20 text-white rounded bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-300 hover:to-blue-400' type="button" onClick={applyFilters}>Apply</button>
                     </div>
                 </div>
                 <div className=" w-1/2 items-center flex flex-col mx-auto p-2 overflow-scroll">

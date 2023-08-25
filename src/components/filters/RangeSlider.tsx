@@ -6,11 +6,12 @@ interface sliderProps {
     index: number;
     setParentState: Dispatch<SetStateAction<[string, number[]][]>>;
     stepSize: number;
+    max: number;
 }
 
-export function RangeSlider({index, setParentState, stepSize}: sliderProps) {
+export function RangeSlider({index, setParentState, stepSize, max}: sliderProps) {
 
-    const [state, setState] = useState<number[]>([0, 100])
+    const [state, setState] = useState<number[]>([0, max])
     const handleChange = (event: Event, newValue: number | number[]) => {
         setState(newValue as number[])
         setParentState((prev) => {
@@ -19,7 +20,6 @@ export function RangeSlider({index, setParentState, stepSize}: sliderProps) {
         })
     }
 
-    // step size should be 10 for subleases
     return (
         <>
             <Slider
@@ -29,6 +29,8 @@ export function RangeSlider({index, setParentState, stepSize}: sliderProps) {
                 disableSwap
                 step={stepSize}
                 size='small'
+                max={max}
+                defaultValue={[0, max]}
             />
         </>
       

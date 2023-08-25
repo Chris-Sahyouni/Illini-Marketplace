@@ -41,6 +41,7 @@ Back:
  - cloudinary preset must be changed back to default_preset
  - allow the server IP to the cloudinary admin api
  - add a db seed script
+ - add a cron job to recalculate the maximum ranges daily
 
 Testing:
  - react tests
