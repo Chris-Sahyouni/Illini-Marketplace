@@ -11,13 +11,12 @@ interface SellProps {
     data: ItemData;
     setData: Dispatch<SetStateAction<ItemData>>
     setHasEdited: Dispatch<SetStateAction<boolean>>
-    setNumImages: Dispatch<SetStateAction<number>>;
     imgId: string
     notes: string;
     setNotes: Dispatch<SetStateAction<string>>
 }
 
-export default function SellForm({data, setData, setHasEdited, imgId, setNumImages, notes, setNotes}: SellProps) {
+export default function SellForm({data, setData, setHasEdited, imgId, notes, setNotes}: SellProps) {
 
     const { data:session } = useSession();
     const [maxImages, setMaxImages] = useState(data.type === ItemType.Sublease ? 4 : 1);
@@ -95,7 +94,7 @@ export default function SellForm({data, setData, setHasEdited, imgId, setNumImag
             </div>
             </div>
             <div className=" w-1/2 justify-center flex ">
-                <ImageUpload imageId={imgId} index={1} max={maxImages} setImgIndex={setNumImages}/>
+                <ImageUpload imageId={imgId} max={maxImages} />
             </div>
         </div>
     );

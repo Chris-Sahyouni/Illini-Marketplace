@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, createContext } from "react";
-import { CardData } from "../lib/types/interfaces";
+import { CardData } from "../../lib/types/interfaces";
 
 interface EditorContextType {
     toEdit: CardData | undefined;

@@ -7,8 +7,8 @@ import { typeRangeMap } from "@/src/lib/maps";
 import { CheckBoxes } from "@/src/components/filters/CheckBoxes";
 import { Ranges } from "@/src/components/filters/Ranges";
 import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
-import { SearchContext } from "@/src/components/SearchProvider";
-import { getUserSaves } from "@/src/lib/utilities";
+import { SearchContext } from "@/src/components/providers/SearchProvider";
+import { getUserSaves } from "@/src/lib/client-utils";
 import { useSession } from "next-auth/react";
 import { CircularProgress } from "@mui/material";
 

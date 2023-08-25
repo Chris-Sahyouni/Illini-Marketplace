@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { useState } from "react";
-import { EditorProvider } from "@/src/components/EditorProvider";
+import { EditorProvider } from "@/src/components/providers/EditorProvider";
 import Editor from "@/src/components/Editor";
 
 export default function MyAccountLayout({

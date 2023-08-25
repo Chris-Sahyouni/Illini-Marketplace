@@ -1,7 +1,7 @@
 'use client'
 
 import { useContext, useEffect, useState } from "react";
-import { LightBoxContext } from "./LightBoxProvider";
+import { LightBoxContext } from "./providers/LightBoxProvider";
 import { CldImage } from "next-cloudinary";
 
 export default function LightBox() {

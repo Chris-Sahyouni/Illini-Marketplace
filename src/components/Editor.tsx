@@ -1,6 +1,6 @@
 import { CardData } from "../lib/types/interfaces";
 import { useContext, useEffect, useState } from "react";
-import { EditorContext } from "./EditorProvider";
+import { EditorContext } from "./providers/EditorProvider";
 import EditForm from "./forms/EditForm";
 
 export default function Editor() {

@@ -6,8 +6,8 @@ import { CardData } from "@/src/lib/types/interfaces";
 import { ItemType } from "@/src/lib/maps";
 import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import Card from "@/src/components/Card Related/Card"
-import { EditorContext } from "@/src/components/EditorProvider";
-import { getUserSaves } from "@/src/lib/utilities";
+import { EditorContext } from "@/src/components/providers/EditorProvider";
+import { getUserSaves } from "@/src/lib/client-utils";
 import { CircularProgress } from "@mui/material";
 
 

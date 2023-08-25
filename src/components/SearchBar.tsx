@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useContext, useState } from "react";
-import { SearchContext } from "./SearchProvider";
+import { SearchContext } from "./providers/SearchProvider";
 import { useParams } from "next/navigation";
 
 

@@ -1,7 +1,7 @@
 "use client"
 
 import Card from "@/src/components/Card Related/Card";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import SellForm from "@/src/components/forms/SellForm";
 import { useSearchParams } from 'next/navigation'
 import { creationRequest } from "@/src/lib/types/interfaces";
@@ -11,6 +11,7 @@ import { ItemData } from "@/src/lib/types/models";
 import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import {v4 as uuidv4} from "uuid";
 import { CircularProgress } from "@mui/material";
+import { SellContext } from "@/src/components/providers/SellProvider";
 
 
     export default function Page() {
@@ -29,8 +30,9 @@ import { CircularProgress } from "@mui/material";
         const [hasEdited, setHasEdited] = useState(false);
         const [itemId, setItemId] = useState('');
         const [uuidGenerated, setUuidGenerated] = useState(false)
-        const [numImg, setNumImg] = useState(0)
         const [notes, setNotes] = useState("")
+
+        const context = useContext(SellContext);
 
         if (!uuidGenerated) {
             setItemId(uuidv4());
@@ -119,7 +121,7 @@ import { CircularProgress } from "@mui/material";
                     data: data,
                     sellerId: session.user.id,
                     id: itemId,
-                    numImages: data.numImages,
+                    numImages: context.numImages,
                     notes: data.notes
                 }
 
@@ -147,7 +149,7 @@ import { CircularProgress } from "@mui/material";
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} setNumImages={setNumImg} notes={notes} setNotes={setNotes} />
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} notes={notes} setNotes={setNotes} />
                 </div>
 
                 <div className="w-full flex flex-row">
@@ -155,7 +157,7 @@ import { CircularProgress } from "@mui/material";
                     <div className=" h-1/2 w-1/2">
                         <div className="p-2">
                             {
-                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {id: '', numImages: 0, notes: ""} } itemId={itemId} initSave={undefined} numUploaded={numImg} sellNotes={notes} /> : <Card data={data ? data.getCardData() : {numImages: numImg, id: '', notes: ""} } isUploaded={numImg > 0} itemId={itemId} initSave={undefined} sellNotes={notes} />
+                                params.get('t') === 'sublease' ? <SubleaseCard data={data ? data.getCardData() : {id: '', numImages: 0, notes: ""} } itemId={itemId} initSave={undefined} numUploaded={context.numImages} sellNotes={notes} /> : <Card data={data ? data.getCardData() : {numImages: context.numImages, id: '', notes: ""} } isUploaded={context.numImages > 0} itemId={itemId} initSave={undefined} sellNotes={notes} />
                             }
                         </div>
                     </div>

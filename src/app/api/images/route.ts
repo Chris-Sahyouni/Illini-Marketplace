@@ -1,5 +1,5 @@
 
-import * as cloudinary from 'cloudinary'
+import { fetchImageIds } from "@/src/lib/server-utils";
 
 export async function POST(request: Request) {
     const { id } = await request.json()
@@ -12,27 +12,5 @@ export async function POST(request: Request) {
     }
 }
 
-const cloudinaryConfig = {
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-  };
-  
-cloudinary.v2.config(cloudinaryConfig);
 
-export async function fetchImageIds(folder: string) {
-    try {
-        const res = await cloudinary.v2.api.resources({
-            type: "upload",
-            prefix: folder,
-            max_results: 4,
-        });
-        console.log('RES: ', res);
-        const publicIDs: string[] = res.resources.map((resource: any) => resource.public_id);
-        console.log("IDS: ", publicIDs);
-        return publicIDs;
-    } catch (error) {
-        console.log(error);
-    }
-}
 

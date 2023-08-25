@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { CldImage } from "next-cloudinary";
 import { useContext } from "react";
-import { LightBoxContext } from "../LightBoxProvider";
+import { LightBoxContext } from "../providers/LightBoxProvider";
 
 interface CardImageProps {
     id: string;
@@ -13,7 +13,7 @@ export default function CardImage({ id, isUploaded }: CardImageProps) {
     const context = useContext(LightBoxContext);
 
     if (isUploaded && id) {
-        console.log('id: ', id);
+
         return (
             <>
                 <button onClick={() => context.boxState(id)}>
@@ -29,8 +29,7 @@ export default function CardImage({ id, isUploaded }: CardImageProps) {
             </>
         );
     }
-    console.log('uploaded: ', isUploaded);
-    console.log("id: ", id);
+
     return (
         <>
             <Image

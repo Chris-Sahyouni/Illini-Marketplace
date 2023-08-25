@@ -1,6 +1,6 @@
 import { CardData } from "@/src/lib/types/interfaces";
 import { useContext, useState, Dispatch, SetStateAction } from "react";
-import { EditorContext } from "../EditorProvider";
+import { EditorContext } from "../providers/EditorProvider";
 
 
 interface EditFormProps {

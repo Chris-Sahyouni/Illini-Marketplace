@@ -1,5 +1,5 @@
 import { prisma } from "../../../lib/db";
-import { buildCardData } from "@/src/lib/utilities";
+import { buildCardData } from "@/src/lib/client-utils";
 
 export async function POST(request: Request) {
     const { id, onlyIds } = await request.json();

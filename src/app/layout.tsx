@@ -1,13 +1,13 @@
 
-import Providers from '../components/Providers'
+import Providers from '../components/providers/AuthProvider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 import { Italianno } from 'next/font/google'
 import Header from '../components/Header'
 import Categories from '../components/Categories'
 import LightBox from '../components/LightBox'
-import {LightBoxProvider} from '../components/LightBoxProvider'
-import { SearchProvider } from '../components/SearchProvider'
+import {LightBoxProvider} from '../components/providers/LightBoxProvider'
+import { SearchProvider } from '../components/providers/SearchProvider'
 
 
 const cursiveFont = Italianno({
