@@ -21,6 +21,20 @@ export async function POST(request: Request) {
     console.log('SAFE: ', safe);
     if (safe) success = await createTransit(data, sellerId, id, numImages, body.notes);
     if (success) {
+
+        const stats = await prisma.rangeMaxes.findFirst();
+        const newPrice = data.visibleKeys ? Number(data.visibleValues[data.visibleKeys.indexOf('price')]) : 0;
+        if (stats && newPrice > stats.transitPrice) {
+            await prisma.rangeMaxes.update({
+                where: {
+                    id: stats.id
+                },
+                data: {
+                    transitPrice: newPrice
+                }
+            })
+        }
+
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});

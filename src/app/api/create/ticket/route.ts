@@ -21,6 +21,23 @@ export async function POST(request: Request) {
     console.log('SAFE: ', safe);
     if (safe) success = await createTicket(data, sellerId, id, numImages, body.notes);
     if (success) {
+
+        const stats = await prisma.rangeMaxes.findFirst();
+        const newPrice = data.visibleKeys ? Number(data.visibleValues[data.visibleKeys.indexOf('price')]) : 0;
+        const newAmount = data.visibleKeys ? Number(data.visibleValues[data.visibleKeys.indexOf('amount')]) : 0;
+        
+        if (stats && newPrice > stats.textbookPrice) {
+            await prisma.rangeMaxes.update({
+                where: {
+                    id: stats.id
+                },
+                data: {
+                    ticketPrice: Math.max(newPrice, stats.ticketPrice),
+                    ticketAmount: Math.max(newAmount, stats.ticketAmount)
+                }
+            })
+        }
+
         return new Response('success', {status: 200});
     }
     return new Response('error', {status: 500});

@@ -36,6 +36,10 @@ export function Ranges({itemType, handler}: rangeProps) {
                 if (res) setMaxes([res.textbookPrice]);
                 break;
             }
+            case 'transit': {
+                if (res) setMaxes([res.transitPrice]);
+                break;
+            }
             case "parking": {
                 if (res) setMaxes([res.parkingPrice]);
                 break;
