@@ -1,10 +1,11 @@
 "use client"
 
 import { ItemData } from "@/src/lib/types/models";
-import { useState, Dispatch, SetStateAction, useEffect } from "react";
+import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import ImageUpload from "../ImageUpload";
 import { useSession } from "next-auth/react";
 import { ItemType } from "@/src/lib/maps";
+import { time } from "console";
 
 
 interface SellProps {
@@ -21,15 +22,21 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
 
     const { data:session } = useSession();
     const [maxImages, setMaxImages] = useState(data.type === ItemType.Sublease ? 4 : 1);
+    const [validity, setValidity] = useState<string[]>(() => {
+        let init: string[] = [];
+        if (data.visibleKeys) for (let i = 0; i < data.visibleKeys?.length; i++) {
+            init.push("")
+        }
+        return init;
+    })
 
     useEffect(() => {
-        console.log(data.visibleValues)
         if (data.visibleValues.includes('')) {
             setCanSubmit(false)
         } else {
             setCanSubmit(true)
         }
-    })
+    });
 
     const questions = data.sellQuestions;
 
@@ -60,6 +67,16 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
         });
     }
 
+    const handleBlur = (e: React.FocusEvent<HTMLInputElement> | React.FocusEvent<HTMLSelectElement>) => {
+        let copy = [...validity];
+        const idx = Number(e.target.getAttribute("id"));
+        const questionPair = questions ? questions[idx] : undefined
+        const question = questionPair ? questionPair[0] : undefined
+        const valid = validateOnBlur(e.target.value, question);
+        copy[idx] = valid ? 'outline-green-500' : 'outline-red-500';
+        setValidity(copy);
+    }
+
     useEffect(() => {
         let i: number = -1;
         if (data.visibleKeys) {
@@ -84,7 +101,7 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
                         <div className="p-2" key={`div${index}`}>
                             <h1 key={`h${index}`}>{question[0]}</h1>
                             {
-                                options ? <select className="outline rounded w-5/6 p-1" value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleSelectInputChange} id={index.toString()}>
+                                options ? <select className={`outline ${validity[index]} rounded w-5/6 p-1`} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleSelectInputChange} id={index.toString()} onBlur={handleBlur} >
                                     {
                                         options.map((option) => {
                                             return <option className="outline" key={option} value={option}>{option}</option>
@@ -92,7 +109,7 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
                                     }
                                 </select>
                                 :
-                                <input className="outline w-5/6 rounded-sm p-1 valid:border-green-500 invalid:border-red-600 " placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange}/>
+                                <input className={`outline ${validity[index]} w-5/6 rounded-sm p-1 `} placeholder={question[1]} key={`input${index}`} id={index.toString()} value={data.visibleValues[index] ? data.visibleValues[index] : ""} onChange={handleInputChange} onBlur={handleBlur}  />
                             }
                         </div>
                     );
@@ -112,6 +129,19 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
 
 
 /* ----------------------------- Form Validation ---------------------------- */
+
+function validateOnBlur(input: string, question: string | undefined) {
+    if (!input || input.length === 0 || !question) return false;
+    if (question.toUpperCase().includes('DATE')) {
+        const dateRegEx = /^\d{4}-\d{2}-\d{2}$/
+        return dateRegEx.test(input);
+    }
+    if (question.toUpperCase().includes("TIME")) {
+        const timeRegEx = /^(1[012]|[1-9]):[0-5][0-9][ap]m$/
+        return timeRegEx.test(input);
+    }
+    return true;
+}
 
 
 function validateRollingInput(input: string, question: string | undefined) {
@@ -150,7 +180,6 @@ function validateRollingInput(input: string, question: string | undefined) {
 
     if (question === "TIME") {
         if (input === '') return true;
-        // const timeRegEx = /^(1[012]|[1-9]):[0-5][0-9][ap]m$/
         const format1 = 'H:Mmxy';
         const format2 = 'Hh:Mmxy';
         const i = input.length - 1;

@@ -146,7 +146,6 @@ import { SellContext } from "@/src/components/providers/SellProvider";
             }
         }
 
-        console.log(canSubmit);
         return (
             <div className="h-screen">
 
@@ -162,7 +161,7 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                             }
                         </div>
                     </div>
-                    <button className="ml-8 bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 disabled:from-slate-400 disabled:to-slate-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={!canSubmit} onClick={handleSubmit}>submit</button>
+                    <button className="ml-8 bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 disabled:from-gray-400 disabled:to-gray-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={!canSubmit} onClick={handleSubmit}>submit</button>
                 </div>
 
             </div>
