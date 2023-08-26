@@ -37,7 +37,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
             break;
         }
         case ItemType.Ticket: {
-            setPadding(1.5);
+            setPadding(1);
             break;
         }
         case ItemType.Parking: {

@@ -84,12 +84,12 @@ if (data === undefined) return (<></>);
                 </div>
             </div>
             <div className="px-2 w-3/4 pl-4">
-                <div className="columns-2">
+                <div className="columns-2 h-3/4 outline">
                         {
                             data.keys?.map((field, index) => {
                                 const val: string | undefined = data.values?.at(index);
                                 return (
-                                    <Field name={field} value={val ? val : ""} index={index} key={field} padding={1.5} />
+                                    <Field name={field} value={val ? val : ""} index={index} key={field} padding={1} />
                                 );
                             })
                         }

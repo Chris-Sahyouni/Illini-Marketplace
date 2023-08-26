@@ -31,6 +31,7 @@ import { SellContext } from "@/src/components/providers/SellProvider";
         const [itemId, setItemId] = useState('');
         const [uuidGenerated, setUuidGenerated] = useState(false)
         const [notes, setNotes] = useState("")
+        const [canSubmit, setCanSubmit] = useState(false)
 
         const context = useContext(SellContext);
 
@@ -47,6 +48,7 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                 newData.visibleKeys = typeKeyMap.get(itemType);
                 newData.sellQuestions = typeQuestionMap.get(itemType);
                 newData.visibleValues = new Array(newData.visibleKeys?.length);
+                for (let i = 0; i < newData.visibleValues.length; i++) newData.visibleValues[i] = "";
                 newData.getCardData = prev.getCardData;
                 return newData as ItemData;
             })
@@ -144,14 +146,13 @@ import { SellContext } from "@/src/components/providers/SellProvider";
             }
         }
 
-
+        console.log(canSubmit);
         return (
             <div className="h-screen">
 
                 <div className="h-1/2 overflow-scroll">
-                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} notes={notes} setNotes={setNotes} />
+                    <SellForm data={data} setData={setData} setHasEdited={setHasEdited} imgId={itemId} notes={notes} setNotes={setNotes} setCanSubmit={setCanSubmit} />
                 </div>
-
                 <div className="w-full flex flex-row">
                     <div className="w-1/4"></div>
                     <div className=" h-1/2 w-1/2">
@@ -161,10 +162,11 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                             }
                         </div>
                     </div>
-                    {/*for this button disabled, the button does not get disabled until the sell form inputs become controlled, fix this*/}
-                    <button className="ml-8 bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={data.visibleValues.includes("") || !hasEdited} onClick={handleSubmit}>submit</button>
+                    <button className="ml-8 bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 disabled:from-slate-400 disabled:to-slate-600 h-fit my-auto p-4 rounded-lg text-white" type="button" disabled={!canSubmit} onClick={handleSubmit}>submit</button>
                 </div>
 
             </div>
         )
     }
+
+    /* -------------------------------------------------------------------------- */

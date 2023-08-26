@@ -1,6 +1,6 @@
 "use client"
 
-import { ItemData, } from "@/src/lib/types/models";
+import { ItemData } from "@/src/lib/types/models";
 import { useState, Dispatch, SetStateAction, useEffect } from "react";
 import ImageUpload from "../ImageUpload";
 import { useSession } from "next-auth/react";
@@ -14,12 +14,22 @@ interface SellProps {
     imgId: string
     notes: string;
     setNotes: Dispatch<SetStateAction<string>>
+    setCanSubmit: Dispatch<SetStateAction<boolean>>
 }
 
-export default function SellForm({data, setData, setHasEdited, imgId, notes, setNotes}: SellProps) {
+export default function SellForm({data, setData, setHasEdited, imgId, notes, setNotes, setCanSubmit}: SellProps) {
 
     const { data:session } = useSession();
     const [maxImages, setMaxImages] = useState(data.type === ItemType.Sublease ? 4 : 1);
+
+    useEffect(() => {
+        console.log(data.visibleValues)
+        if (data.visibleValues.includes('')) {
+            setCanSubmit(false)
+        } else {
+            setCanSubmit(true)
+        }
+    })
 
     const questions = data.sellQuestions;
 
