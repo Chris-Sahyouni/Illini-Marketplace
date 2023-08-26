@@ -113,7 +113,6 @@ import { SellContext } from "@/src/components/providers/SellProvider";
             );
         }
 
-        // there should be lots of checks here before the request even gets sent
         const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
 
             setStatus(Status.Loading);
@@ -168,4 +167,3 @@ import { SellContext } from "@/src/components/providers/SellProvider";
         )
     }
 
-    /* -------------------------------------------------------------------------- */

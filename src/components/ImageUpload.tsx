@@ -37,8 +37,11 @@ export default function ImageUpload({imageId, max}: ImageUploadProps) {
             open();
             }
             return (
-            <button className="button bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 text-white rounded h-1/4 my-auto p-3" onClick={handleOnClick} disabled={context.numImages > max}>
-                Upload an Image (opt)
+            <button className="button bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-200 hover:to-blue-400 disabled:from-gray-400 disabled:to-gray-600 text-white rounded h-1/4 my-auto p-3" onClick={handleOnClick} disabled={context.numImages >= max}>
+                {
+                    max === 4 ? `Upload up to ${max - context.numImages} images (opt)` : 'Upload an Image (opt)'
+                }
+               
             </button>
             );
         }}
