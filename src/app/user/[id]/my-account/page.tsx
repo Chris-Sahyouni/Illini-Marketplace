@@ -95,7 +95,7 @@ export default function Page() {
                 {
                     contactInputBox ?
                     <div className="flex-col w-1/3">
-                        <input type="text" value={defaultContact} onChange={(e) => {console.log(defaultContact); setDefaultContact(e.target.value)}} className="outline rounded p-1" />
+                        <input type="text" value={defaultContact} onChange={(e) => {setDefaultContact(e.target.value)}} className="outline rounded p-1" maxLength={20} />
                         <p className=" text-xs text-gray-500">Note: changes to this may not appear until you sign out and back in</p>
                     </div>
                     : <p className="p-1 text-lg mr-3">{defaultContact}</p>

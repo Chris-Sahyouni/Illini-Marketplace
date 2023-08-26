@@ -56,11 +56,11 @@ export default function CreateAccount() {
         <div className="justify-center my-10 flex">
             <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded p-2">
                 <div className="p-2 flex justify-center mt-2">
-                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Illinois email" className="outline rounded p-1" />
+                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Illinois email" className="outline rounded p-1" maxLength={40} />
                 </div>
 
                 <div className="p-2 flex justify-center">
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" />
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" maxLength={40}/>
                 </div>
 
                 <div className="p-2 flex justify-center">
