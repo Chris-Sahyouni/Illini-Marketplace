@@ -28,8 +28,8 @@ export const subleaseQuestions:  [string, string][] = [['Address/Location', 'eg.
                                                        ["How many bedrooms", ""], 
                                                        ['How many bathrooms', ''], 
                                                        ['Term', ''],
-                                                       ['Start Date', 'YYYY-MM-DD'], 
-                                                       ['End Date', 'YYYY-MM-DD']];
+                                                       ['Start Date', 'MM-DD-YYYY'], 
+                                                       ['End Date', 'MM-DD-YYYY']];
 
 export const textbookQuestions:  [string, string][] = [['Course Code', 'eg. STAT 100'], 
                                                        ['Price', ''], 
@@ -37,7 +37,7 @@ export const textbookQuestions:  [string, string][] = [['Course Code', 'eg. STAT
 
 export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack, Peoria Charter'], 
                                                       ['Price', ''], 
-                                                      ['Date', 'YYYY-MM-DD'], 
+                                                      ['Date', 'MM-DD-YYYY'], 
                                                       ['Time', 'eg. 5:00pm'],
                                                       ['From', 'Departure location'],
                                                       ['To', 'Destination'],
@@ -45,14 +45,14 @@ export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack
 
 export const ticketQuestions:  [string, string][] = [['What event', ''], 
                                                      ['Price', ''], 
-                                                     ['Date', 'YYYY-MM-DD'], 
+                                                     ['Date', 'MM-DD-YYYY'], 
                                                      ['How many tickets', ''],
                                                       contactPair];
 
 export const parkingQuestions:  [string, string][] = [['Location', ''], 
                                                       ['Price', ''], 
-                                                      ['Start Date', 'YYYY-MM-DD'], 
-                                                      ['End Date', 'YYYY-MM-DD'],
+                                                      ['Start Date', 'MM-DD-YYYY'], 
+                                                      ['End Date', 'MM-DD-YYYY'],
                                                       contactPair];
 
 export const miscQuestions:  [string, string][] = [['What are you selling', ''], 

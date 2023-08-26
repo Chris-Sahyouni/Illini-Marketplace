@@ -169,9 +169,9 @@ function validateRollingInput(input: string, question: string | undefined) {
     if (question.includes('DATE')) {
         if (input === '') return true;
         const i = input.length - 1;
-        const format = 'YYYY-MM-DD'
+        const format = 'Mm-Dd-YYYY';
         if (input.length > format.length) return false;
-        if ('YMD'.includes(format[i])) {
+        if ('YMmDd'.includes(format[i])) {
             return /^[0-9]*$/.test(input[i]);
         } else {
             return input[i] === "-";
