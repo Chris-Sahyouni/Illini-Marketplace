@@ -2,14 +2,14 @@
 
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CircularProgress } from "@mui/material";
 
 export default function LogInForm() {
 
-    const {data:session, status} = useSession();
+
     const router = useRouter()
 
     const [username, setUserName] = useState("");
@@ -23,7 +23,33 @@ export default function LogInForm() {
     }
 
     const [error, setError] = useState("");
+
     const [loading, setLoading] = useState(false);
+
+    const [attempts, setAttempts] = useState(0);
+    const [lockout, setLockout] = useState(false);
+
+    useEffect(() => {
+        console.log('attempt: ', attempts);
+        if (attempts % 2 === 0 && attempts !== 0) {
+            setLockout(true);
+
+            let countdown = 30;
+            const countdownInterval = setInterval(() => {
+                if (countdown > 0) {
+                    setError(`Too many log in attempts: ${countdown} seconds remaining`);
+                    countdown--;
+                } else {
+                    setError('');
+                    clearInterval(countdownInterval);
+                    setLockout(false);
+                }
+              }, 1000);
+
+            setError('');
+        }
+    }, [attempts])
+
 
     const handleSubmit = useCallback( async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -33,12 +59,12 @@ export default function LogInForm() {
             username: username,
             password: password,
             redirect: false,
-            // callbackUrl: "/"
         });
-        if (result && result.ok) {
-            router.push('/')
-        } else {
+        if (result && result.error) {
+            setAttempts((prev) => prev + 1);
             setError('username or password is incorrect');
+        } else {
+             router.push('/')
         }
         setLoading(false);
     }, [username, password] );
@@ -80,7 +106,7 @@ export default function LogInForm() {
                     </div>
                     :
                     <div className="p-2 flex justify-center">
-                        <button type="submit" className="p-2 rounded text-white bg-gradient-radial from-sky-900 to-sky-950 hover:from-sky-700 hover:to-sky-900" disabled={username === "" || password === ""}>Log in</button>
+                        <button type="submit" className="p-2 rounded text-white bg-gradient-radial from-sky-900 to-sky-950 hover:from-sky-700 hover:to-sky-900" disabled={username === "" || password === "" || lockout}>Log in</button>
                     </div>
                 }
                 <div className='p-2 flex'>
