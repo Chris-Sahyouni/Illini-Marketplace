@@ -7,6 +7,7 @@ import React from "react";
 import Dropdown from "./Dropdown";
 import Image from "next/image";
 import SearchBar from "./SearchBar";
+import Logo from "./Logo";
 
 
 export default function Header() {
@@ -25,10 +26,7 @@ export default function Header() {
             return (
                     <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                         <div className="w-1/3">
-                            <Image
-                                src='/logo.png'
-                                alt=''
-                            />
+                            <Logo />
                         </div>
                         <SearchBar />
                         <div className="w-1/3 flex justify-end">
@@ -51,12 +49,7 @@ export default function Header() {
             <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                 <div className="w-1/3 ">
                     <Link href={'/'}>
-                        <Image
-                            src='/logo.png'
-                            alt=''
-                            width={250}
-                            height={200}
-                        />
+                        <Logo />
                     </Link>
                 </div>
                 <SearchBar />
@@ -76,12 +69,9 @@ export default function Header() {
     return (
         <div className="flex bg-orange-600 p-3 font-bold text-lg justify-between">
                 <div className="w-1/3">
-                <Image
-                    src='/logo.png'
-                    alt=''
-                    width={100}
-                    height={100}
-                />
+                    <Link href={'/'}>
+                        <Logo />
+                    </Link>
                 </div>
                 <SearchBar />
                 <div className="w-1/3 flex justify-end">
