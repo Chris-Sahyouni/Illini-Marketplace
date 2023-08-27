@@ -9,7 +9,6 @@ import { CircularProgress } from "@mui/material";
 
 export default function LogInForm() {
 
-
     const router = useRouter()
 
     const [username, setUserName] = useState("");
@@ -31,7 +30,7 @@ export default function LogInForm() {
 
     useEffect(() => {
         console.log('attempt: ', attempts);
-        if (attempts % 2 === 0 && attempts !== 0) {
+        if (attempts % 8 === 0 && attempts !== 0) {
             setLockout(true);
 
             let countdown = 30;

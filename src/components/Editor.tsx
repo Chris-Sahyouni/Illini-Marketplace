@@ -1,5 +1,4 @@
-import { CardData } from "../lib/types/interfaces";
-import { useContext, useEffect, useState } from "react";
+import { useContext } from "react";
 import { EditorContext } from "./providers/EditorProvider";
 import EditForm from "./forms/EditForm";
 

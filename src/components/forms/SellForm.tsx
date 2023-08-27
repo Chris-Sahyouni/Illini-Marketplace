@@ -133,7 +133,7 @@ export default function SellForm({data, setData, setHasEdited, imgId, notes, set
 function validateOnBlur(input: string, question: string | undefined) {
     if (!input || input.length === 0 || !question) return false;
     if (question.toUpperCase().includes('DATE')) {
-        const dateRegEx = /^\d{4}-\d{2}-\d{2}$/
+        const dateRegEx = /^\d{2}-\d{2}-\d{4}$/
         return dateRegEx.test(input);
     }
     if (question.toUpperCase().includes("TIME")) {
