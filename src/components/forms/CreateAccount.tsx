@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { newUserRequest } from "@/src/lib/types/interfaces";
 import VerifyRequest from "../VerifyRequest";
+import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 export default function CreateAccount() {
 
@@ -44,8 +46,6 @@ export default function CreateAccount() {
         setSubmittedForm(true);
      };
 
-
-
     if (submittedForm) {
         return (
             <VerifyRequest />
@@ -64,15 +64,18 @@ export default function CreateAccount() {
                 </div>
 
                 <div className="p-2 flex justify-center">
-                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline rounded p-1" />
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline rounded p-1" maxLength={40} />
                 </div>
 
                 <div className="p-2 flex justify-center">
                     <button type="submit" className="p-2 rounded text-white bg-gradient-radial from-sky-900 to-sky-950 hover:from-sky-700 hover:to-sky-900" >Create Account</button>
                 </div>
-
+                <div className='p-2 flex'>
+                    <button onClick={() => signIn()} className="text-blue-400 mx-auto hover:text-blue-600">Log in</button>
+                    <Link href={'/account/forgot-pass'} className="text-blue-400 mx-auto hover:text-blue-600">Forgot Password?</Link>
+                </div>
             </form>
-        </div>  
+        </div> 
     );
 }
 
@@ -88,18 +91,16 @@ export function isValidEmail(email: string): boolean {
     return email.endsWith("@illinois.edu");
 }
 
-export function sendRegisterRequest(data: newUserRequest) {
+export async function sendRegisterRequest(data: newUserRequest) {
 
-    fetch('/api/new_user', {
+    const res = await fetch('/api/new_user', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {
             "Content-Type": "application/json",
             "Accept": "application/json"
         }
-    }).then((res: Response) => {
-        if (res.status === 200) {
-            return res.json();
-        }
-    })
+    });
+    const parse = await res.json();
+    return parse;
 }

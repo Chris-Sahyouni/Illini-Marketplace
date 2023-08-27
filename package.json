@@ -27,6 +27,7 @@
     "eslint-config-next": "13.4.3",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.0",
+    "nanoid": "^4.0.2",
     "next": "13.4.3",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.16.3",
