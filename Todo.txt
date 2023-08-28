@@ -11,6 +11,8 @@ Front:
  - make forms auto fill characters like - for dates and : for time (low priority)
  - switch all the input classNames to the nice looking kind
 
+ - dont forget skip counts
+
  - things can be much simpler by refactoring different funcions used across the site into lib/utilities
 
  - organize this list

@@ -33,7 +33,6 @@ export function RangeSlider({index, setParentState, stepSize, max}: sliderProps)
                 defaultValue={[0, max]}
             />
         </>
-      
     );
 
 }

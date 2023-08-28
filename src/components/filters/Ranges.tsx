@@ -64,7 +64,6 @@ export function Ranges({itemType, handler}: rangeProps) {
         <div>
             {
                 rangeKeys?.map((property, index) => {
-                    console.log(property + ': ' + maxes[index]);
                   return (
                     <div className="flex flex-col pb-4 pl-1 pt-1" key={property}>
                         <p className='font-bold' key={`p${property}`}>{property}</p>

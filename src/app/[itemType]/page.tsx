@@ -17,18 +17,28 @@ import { CircularProgress } from "@mui/material";
 export default function Page({params}: {params: {itemType: string}}) {
 
     const { data:session } = useSession();
+
     const [loading, setLoading] = useState(true);
+
     const [skipCount, setSkipCount] = useState(0);
+
     const [data, setData] = useState<CardData[]>([]);
-    const [initSaves, setInitSaves] = useState<string[]>([])
+
+    const [initSaves, setInitSaves] = useState<string[]>([]);
+
+    const [loadingMore, setLoadingMore] = useState(false);
+
+    const [canLoadMore, setCanLoadMore] = useState(true);
 
     const [filters, setFilters] = useState<Array<[string, string]>>([]);
+
     const [ranges, setRanges] = useState<Array<[string, number[]]>>(() => {
         const initRangeState: [string, number[]][] = [];
         const rangeLabels = typeRangeMap.get(params.itemType);
         rangeLabels?.forEach((label) => initRangeState.push([label, [0, 1000]]));
         return initRangeState;
     });
+
 
 
     const handleToggleFilter = (e: React.MouseEvent<HTMLInputElement>) => {
@@ -60,9 +70,9 @@ export default function Page({params}: {params: {itemType: string}}) {
 
 
     useEffect(() => {
-
             if (params.itemType === undefined) return;
             setLoading(true);
+            setSkipCount(0);
             const searchWrapper = async () => {
                 const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
@@ -71,7 +81,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                 }
                 setLoading(false);
                 setData((prevState: CardData[]) => [...newItems]);
-               // setSkipCount((prev) => prev + 1)
+                setSkipCount((prev) => prev + 1)
             }
             searchWrapper();
             searchContext.setTrigger(false);
@@ -85,13 +95,27 @@ export default function Page({params}: {params: {itemType: string}}) {
                     console.log('invalid');
                     return;
                 }
-                setLoading(false);
                 setData((prevState: CardData[]) => [...newItems]);
-            // setSkipCount((prev) => prev + 1)
+                setSkipCount((prev) => prev + 1)
+                setLoading(false);
             }
             wrapper();
 
     }, [params.itemType]);
+
+    const handleLoadMore = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        setLoadingMore(true);
+        const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
+        if (newItems.length === 0 || newItems === undefined || newItems === null) {
+            console.log('invalid');
+            setCanLoadMore(false);
+            setLoadingMore(false);
+            return;
+        }
+        setData((prevState: CardData[]) => [...prevState, ...newItems]);
+        setSkipCount((prev) => prev + 1)
+        setLoadingMore(false);
+    }
 
 
 
@@ -130,10 +154,19 @@ export default function Page({params}: {params: {itemType: string}}) {
                                 );
                             })
                         : <div className='justify-center my-3'> <CircularProgress size={50}/>  </div>
+
+                    }
+                    {  canLoadMore ?
+                        loading || data.length === 0 ? null :
+                            !loadingMore ?
+                                <div>
+                                    <button className='p-2 w-30 text-white rounded bg-gradient-radial from-blue-400 to-blue-600 hover:from-blue-300 hover:to-blue-400' type="button" onClick={handleLoadMore} disabled={!canLoadMore} >load more</button>
+                                </div>
+                            : <CircularProgress size={50} />
+                        : null
                     }
                 </div>
                 <div className="w-1/4">
-
                 </div>
             </div>
         );
