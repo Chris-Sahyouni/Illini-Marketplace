@@ -8,6 +8,7 @@ import { CircularProgress } from "@mui/material";
 export default function Page() {
 
     const { data:session } = useSession();
+
     const [defaultContact, setDefaultContact] = useState<string | undefined>(session?.user.contact);
     const [contactInputBox, setContactInputBox] = useState(false);
     const [passwordInputBox, setPasswordInputBox] = useState(false);

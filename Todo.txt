@@ -4,14 +4,12 @@ Front:
  - add a not-found file
  - maybe change all the fonts
  - sell form needs error message
- - add a your session has expired probably to the root layout
+ - add a notification for the when the user is auto-signed out for session expiration
  - the signature in the bg is rendering too far forward
  - get rid of duplicate id's in every loop-produced element
  - order results by items that have images first (low priority)
  - make forms auto fill characters like - for dates and : for time (low priority)
  - switch all the input classNames to the nice looking kind
-
- - dont forget skip counts
 
  - things can be much simpler by refactoring different funcions used across the site into lib/utilities
 
@@ -23,6 +21,8 @@ Front:
 
  - building and class group chats
 
+ - Next auth has a different hook than useSession for server side, use this on more pages to reduce client side load
+
 ALL LOCALHOST URLS NEED TO BE CHANGED BEFORE DEPLOYMENT
 
 Back:
@@ -31,10 +31,8 @@ Back:
  - add html to emails to make them look good (low priority)
  - a way of cleaning out images that were uploaded that aren't associated with an item, this could be a script that runs on a github actions cron job (high priority)
  - MEMORY LEAKS IN THE SERVER??? (shouldn't be a problem because the server is this computer)
- - there will likely be bugs caused by trying to update values that are optional
- - find a better way to update the selling page when a user updates an item than forcing a reload
+ - find a better way to update the selling page when a user updates an item than forcing a reload 
  - add a redirect for signing out definitely
- - make it so deleting an item also deletes its image from cloudinary
  - allow the server IP to the cloudinary admin api
  - add a db seed script
  - add a cron job to recalculate the maximum ranges daily

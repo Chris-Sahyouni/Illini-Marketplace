@@ -40,11 +40,11 @@ export default function Dropdown({options, isOpen}: Props) {
     const routes = [`/user/${session?.user.id}/my-account`, `/user/${session?.user.id}/saved`, `/user/${session?.user.id}/selling`];
 
     return (
-        <div className="flex flex-col bg-white absolute mt-10 rounded-lg" ref={ref}> 
+        <div className="flex flex-col bg-white absolute mt-10 rounded-lg" ref={ref}>
             <ul>
                 {options.map((option, index) => {
                     if (index === options.length - 1) {
-                        return <li key={index}><button onClick={() => signOut()} className="p-3 hover:bg-slate-200 flex w-full rounded-lg">{option}</button></li>
+                        return <li key={index}><button onClick={() => signOut({ callbackUrl: "/" })} className="p-3 hover:bg-slate-200 flex w-full rounded-lg">{option}</button></li>
                     }
                     return <li key={index}><Link href={routes[index]} className="p-3 hover:bg-slate-200 flex rounded-lg">{option}</Link></li>
                 })}

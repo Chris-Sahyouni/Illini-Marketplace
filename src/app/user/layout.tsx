@@ -1,8 +1,7 @@
 'use client'
 
 import Link from "next/link";
-import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 import { EditorProvider } from "@/src/components/providers/EditorProvider";
 import Editor from "@/src/components/Editor";
 
@@ -13,6 +12,10 @@ export default function MyAccountLayout({
   }) {
 
     const { data:session } = useSession();
+
+    if (!session || new Date() > new Date(session.expires)) {
+        signOut({ callbackUrl: "/" });
+    }
 
     return (
         <section>
