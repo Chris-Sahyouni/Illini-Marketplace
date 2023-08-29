@@ -70,16 +70,16 @@ if (data === undefined) return (<></>);
     return (
         <div className=" w-full h-60 rounded-xl flex-row bg-white p-2 flex">
             <div className=" w-1/3 grid grid-cols-2 grid-rows-2">
-                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
+                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
                     <CardImage id={images[0]} isUploaded={images[0] !== ''} />
                 </div>
-                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
+                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
                     <CardImage id={images[1]} isUploaded={images[1] !== ''} />
                 </div>
-                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
+                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
                     <CardImage id={images[2]} isUploaded={images[2] !== ''} />
                 </div>
-                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
+                <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
                     <CardImage id={images[3]} isUploaded={images[3] !== ''} />
                 </div>
             </div>

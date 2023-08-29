@@ -18,6 +18,7 @@ export default function Page() {
     const {toEdit, openEditor} = useContext(EditorContext)
     const [initSaves, setInitSaves] = useState<string[]>([])
     const [loading, setLoading] = useState(true)
+    const [deleteLoading, setDeleteLoading] = useState(false)
 
     useEffect(() => {
 
@@ -40,16 +41,20 @@ export default function Page() {
     }, [session?.user.id]);
 
     const handleDelete = async (e: React.MouseEvent<HTMLButtonElement>) => {
+        setDeleteLoading(true);
         const fullItemId = e.currentTarget.getAttribute('id')
         const targetId = fullItemId?.split(';')[0].trim()
         const target: CardData | undefined = items.find((item) => item.id === targetId);
 
-        await deleteItem(targetId, target?.type).then((res) => {
-            if (res) {
-                const [target, ...rest] = items;
-                setItems([...rest]);
-            }
-        })
+        const res = await deleteItem(targetId, target?.type)
+        if (res) {
+            console.log("removing")
+            const copy = [...items];
+            let newState: CardData[] = []
+            if (target) newState = copy.filter((card) => card.id !== target.id);
+            setItems([...newState]);
+        }
+        setDeleteLoading(false);
     }
 
     const handleEdit = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -80,8 +85,8 @@ export default function Page() {
                                     }
                                 </div>
                                 <div className="w-1/5 my-3 ml-2 flex flex-col items-start p-2">
-                                    <button className="py-2 px-5 bg-gradient-radial from-blue-400 to-blue-600 hover:bg-gradient-radial hover:from-blue-300 hover:to-blue-600 text-white rounded" type="button" onClick={handleEdit} id={`${item.id};edit`}>Edit</button>
-                                    <button className="py-2 px-3 mt-2 bg-gradient-radial from-red-400 to-red-600 hover:bg-gradient-radial hover:from-red-300 hover:to-red-600 text-white rounded" type="button" onClick={handleDelete} id={`${item.id};delete`}>Delete</button>
+                                    <button className="py-2 px-5 bg-gradient-radial from-blue-400 to-blue-600 hover:bg-gradient-radial hover:from-blue-300 hover:to-blue-600 text-white rounded" type="button" onClick={handleEdit} id={`${item.id};edit`} disabled={deleteLoading} >Edit</button>
+                                    <button className="py-2 px-3 mt-2 bg-gradient-radial from-red-400 to-red-600 hover:bg-gradient-radial hover:from-red-300 hover:to-red-600 text-white rounded" type="button" onClick={handleDelete} id={`${item.id};delete`} disabled={deleteLoading} >Delete</button>
                                 </div>
                             </div>
                         );

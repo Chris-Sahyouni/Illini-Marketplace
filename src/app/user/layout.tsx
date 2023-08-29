@@ -13,7 +13,7 @@ export default function MyAccountLayout({
 
     const { data:session } = useSession();
 
-    if (!session || new Date() > new Date(session.expires)) {
+    if (session && new Date() > new Date(session.expires)) {
         signOut({ callbackUrl: "/" });
     }
 
