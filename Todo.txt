@@ -3,6 +3,7 @@ BEFORE LAUNCH:
  - allow all necessary ip addresses for the server, cloudinary, webpurify, etc
  - create a production branch on github
  - get some web analytics
+ - change urls
 
 
 

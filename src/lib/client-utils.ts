@@ -70,7 +70,7 @@ export function buildCardData(items: any) {
 
 export function shouldRenderSelect(question: string | undefined) {
     if (question === undefined) return undefined;
-    question  = question.trim().toUpperCase();
+    question = question.trim().toUpperCase();
 
     if (question.includes('MODE')) {
         return ['Peoria Charter', 'Amtrack', 'other'];
@@ -78,7 +78,7 @@ export function shouldRenderSelect(question: string | undefined) {
     if (question.includes("TERM")) {
         return ['fall', 'spring', 'summer'];
     }
-    if (question.includes('EVENT')) {
+    if (question.includes('TYPE')) {
         return ['football', 'basketball', 'concert', 'other'];
     }
     return undefined;

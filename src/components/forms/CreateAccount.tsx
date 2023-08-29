@@ -24,17 +24,22 @@ export default function CreateAccount() {
     }
 
     const [submittedForm, setSubmittedForm] = useState(false);
+    const [error, setError] = useState("");
 
      const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault();
 
         if (!isValidEmail(email)) {
-            console.log("invalid email address");
+            setError("not a valid illinois email address");
             return;
         }
         if (password.length < 8) {
-            console.log("password must be 8 characters or more");
+            setError("password must be 8 characters or more");
+            return;
+        }
+        if (password != confirmPassword) {
+            setError("passwords do not match");
             return;
         }
          const data: newUserRequest = {
@@ -55,16 +60,19 @@ export default function CreateAccount() {
     return (
         <div className="justify-center my-10 flex">
             <form onSubmit={handleSubmit} className="w-1/3 bg-white h-full rounded p-2">
+                <div className="flex justify-center text-red-400">
+                    {error}
+                </div>
                 <div className="p-2 flex justify-center mt-2">
-                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Illinois email" className="outline rounded p-1" maxLength={40} />
+                    <input type="text" value={email} onChange={handleEmailChange} placeholder="Illinois email" className={`p-1 outline  min-w-0 rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} maxLength={40} />
                 </div>
 
                 <div className="p-2 flex justify-center">
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" maxLength={40}/>
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className={`p-1 outline  min-w-0 rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} maxLength={40}/>
                 </div>
 
                 <div className="p-2 flex justify-center">
-                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className="outline rounded p-1" maxLength={40} />
+                    <input type="password" value={confirmPassword} onChange={handleConfirmPasswordChange} placeholder="Confirm your password" className={`p-1 outline  min-w-0 rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} maxLength={40} />
                 </div>
 
                 <div className="p-2 flex justify-center">

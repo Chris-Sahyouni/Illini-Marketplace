@@ -92,11 +92,11 @@ export default function LogInForm() {
                     {error}
                 </div>
                 <div className="p-2 flex justify-center mt-2">
-                    <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className="outline rounded p-1" maxLength={30} />
+                    <input type="text" value={username} onChange={handleUserNameChange} placeholder="NetId" className={`p-1 outline min-w-0 rounded border border-solid border-neutral-300 bg-white px-3 text-base font-normal text-neutral-700 outline-none transition duration-200 ease-in-out focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} maxLength={30} />
                 </div>
 
                 <div className="p-2 flex justify-center">
-                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className="outline rounded p-1" maxLength={40} />
+                    <input type="password" value={password} onChange={handlePasswordChange} placeholder="Password" className={`p-1 outline  min-w-0 rounded border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} maxLength={40} />
                 </div>
                 {
                     loading ?

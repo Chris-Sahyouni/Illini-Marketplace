@@ -14,7 +14,7 @@ const contactPair: [string, string] = ['How would you like to be contacted?', 'e
 export const subleaseKeys:  string[] = ["location", "price", "contact", "company", "bedrooms", "bathrooms", "term", "start", "end"];
 export const textbookKeys:  string[] = ['course', 'price', 'contact'];
 export const transitKeys:  string[] = ['mode', 'price', 'date', 'time', 'from', 'to', 'contact'];
-export const ticketKeys:  string[] = ['event', 'price', 'date', 'amount', 'contact'];
+export const ticketKeys:  string[] = ['type', 'event', 'price', 'date', 'amount', 'contact'];
 export const parkingKeys:  string[] = ['location', 'price', 'start', 'end', 'contact'];
 export const miscKeys:  string[] = ['name', 'price', 'description', 'contact'];
 
@@ -43,8 +43,9 @@ export const transitQuestions:  [string, string][] = [['What mode', 'eg. Amtrack
                                                       ['To', 'Destination'],
                                                        contactPair];
 
-export const ticketQuestions:  [string, string][] = [['What event', ''], 
-                                                     ['Price', ''], 
+export const ticketQuestions:  [string, string][] = [['Type', ''],
+                                                     ['What event', 'eg. illinois vs wisconsin'], 
+                                                     ['Price', ''],
                                                      ['Date', 'MM-DD-YYYY'], 
                                                      ['How many tickets', ''],
                                                       contactPair];

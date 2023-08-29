@@ -1,7 +1,8 @@
+
 import Link from "next/link";
 
 export default function Page() {   
-    
+
     return (
         <div className="bg-white w-fit h-contain mx-auto flex flex-col text-center my-6 rounded-lg">
             <h1 className="p-4 font-bold text-lg">Which category do you want to sell in?</h1>
@@ -15,13 +16,4 @@ export default function Page() {
             </div>
         </div>
     );
-} 
-
-// enum ItemType {
-//     Sublease,
-//     Textbook,
-//     Transit,
-//     Ticket,
-//     Parking,
-//     Misc
-// }
+}
