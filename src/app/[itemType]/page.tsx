@@ -13,7 +13,6 @@ import { useSession } from "next-auth/react";
 import { CircularProgress } from "@mui/material";
 
 
-
 export default function Page({params}: {params: {itemType: string}}) {
 
     const { data:session } = useSession();
