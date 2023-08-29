@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+const { createSecureHeaders } = require('next-secure-headers');
+
+ 
+
+module.exports ={
+    async headers() {
+        return [{ source: "/(.*)", headers: createSecureHeaders() }]
+    }
+};
