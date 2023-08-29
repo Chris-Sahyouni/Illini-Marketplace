@@ -12,7 +12,7 @@ export async function POST(request: Request) {
         if (selectedFilters.length === 0) {
             selectedFilters = ['fall', 'spring', 'summer'];
         }
-
+        console.log(selectedFilters)
 
         const data: Sublease[] = await prisma.sublease.findMany({
             take: 20,

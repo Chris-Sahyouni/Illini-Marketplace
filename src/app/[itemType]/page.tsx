@@ -118,6 +118,7 @@ export default function Page({params}: {params: {itemType: string}}) {
 
     const applyFilters = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
+        setSkipCount(0);
         setLoading(true)
         const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
         setLoading(false);
