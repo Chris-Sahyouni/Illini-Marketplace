@@ -8,7 +8,7 @@ import Categories from '../components/Categories'
 import LightBox from '../components/LightBox'
 import {LightBoxProvider} from '../components/providers/LightBoxProvider'
 import { SearchProvider } from '../components/providers/SearchProvider'
-
+import Script from 'next/script'
 
 const cursiveFont = Italianno({
   weight: "400",
@@ -31,6 +31,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <title>Illini Marketplace</title>
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-CYQNRXSPG1"></Script>
+      <Script id="google-analytics">
+        {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-CYQNRXSPG1');
+        `}
+      </Script>
       <body className={`${inter.className} background-image ::-webkit-scrollbar`}>
         <Providers>
             <LightBoxProvider>

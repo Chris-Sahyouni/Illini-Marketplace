@@ -6,8 +6,6 @@ BEFORE LAUNCH:
  - change urls
 
 
-
-
 Front:
  - let admin delete items
  - report sellers option?
