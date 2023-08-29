@@ -41,7 +41,6 @@ export default function ImageUpload({imageId, max}: ImageUploadProps) {
                 {
                     max === 4 ? `Upload up to ${max - context.numImages} images (opt)` : 'Upload an Image (opt)'
                 }
-               
             </button>
             );
         }}

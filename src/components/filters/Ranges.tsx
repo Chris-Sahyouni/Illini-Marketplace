@@ -15,7 +15,7 @@ export function Ranges({itemType, handler}: rangeProps) {
     useEffect(() => {
         const wrapper = async () => {
           setLoading(true)
-          const response = await fetch('http://localhost:3000/api/range-max');
+          const response = await fetch('https://illinimarketplace.com/api/range-max');
           const res = await response.json();
           switch (itemType) {
             case "sublease": {

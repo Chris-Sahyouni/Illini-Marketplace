@@ -25,7 +25,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch('http://localhost:3000/api/images', {
+            const res = await fetch('https://illinimarketplace.com/api/images', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",

@@ -34,11 +34,7 @@ export default function Page({ params }: { params: { id: string}}) {
 
 
     if (success === status.Incomplete) {
-        // Another spot to put a loading icon
         return null;
-        // return (
-        //     <h1>loading</h1>
-        // );
     }
 
     if (success) {

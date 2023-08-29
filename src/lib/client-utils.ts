@@ -7,7 +7,7 @@ export async function getUserSaves(id: string | undefined, onlyIds: boolean) {
     if (id === undefined) {
         return [];
     }
-    const res = await fetch('http://localhost:3000/api/user-saved', {
+    const res = await fetch('https://illinimarketplace.com/api/user-saved', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     });
 
     // this will need to change before deployment
-    const magicLink= `http://localhost:3000/account/verify/${user.id}`;
+    const magicLink= `https://illinimarketplace.com/account/verify/${user.id}`;
 
     transporter.sendMail({
         to: body.email,

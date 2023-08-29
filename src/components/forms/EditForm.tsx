@@ -41,11 +41,6 @@ export default function EditForm({ toEdit }: EditFormProps) {
             if (updated.values) updated.values[index] = e.target.value;
             setEditable(updated);
 
-            // setEditable((prev) => {
-            //     let updated = {...prev};
-            //     if (updated.values) updated.values[index] = e.target.value;
-            //     return updated;
-            // })
         }
     }
 
@@ -77,7 +72,7 @@ export default function EditForm({ toEdit }: EditFormProps) {
 
     const handleSave = async () => {
 
-        const res = await fetch('http://localhost:3000/api/update', {
+        const res = await fetch('https://illinimarketplace.com/api/update', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

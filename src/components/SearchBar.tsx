@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { SearchContext } from "./providers/SearchProvider";
 import { useParams } from "next/navigation";
 

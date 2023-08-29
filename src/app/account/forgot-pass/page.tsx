@@ -19,7 +19,7 @@ export default function Page() {
         setLoading(true);
         // do email stuff here AND SET THE USER PASSWORD TO THE TEMPORARY PASS
         const tmpPass = nanoid();
-        const res = await fetch('http://localhost:3000/api/update-pass', {
+        const res = await fetch('https://illinimarketplace.com/api/update-pass', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

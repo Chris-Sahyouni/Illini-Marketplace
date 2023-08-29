@@ -6,7 +6,6 @@ import { loginRequest } from '@/src/lib/types/interfaces';
 
 export async function POST(request: Request) {
     const body: loginRequest = await request.json();
-    console.log("received pass", body.password);
     const user = await prisma.user.findFirst({
         where: {
             username: body.username

@@ -42,7 +42,3 @@ export async function POST(request: Request) {
     }
 
 }
-    /**
-     * $2b$10$dsqlQhJCEsQrsHntWnA3iuBgY1YbVzu5prhmTiT8xh/WwGSRqeFJW
-     * $2b$10$dsqlQhJCEsQrsHntWnA3iuBgY1YbVzu5prhmTiT8xh/WwGSRqeFJW
-     */

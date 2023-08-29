@@ -10,15 +10,11 @@ export async function POST(request: Request) {
     const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
     let safe: boolean = numImages === 0;
-    console.log(numImages);
     if (numImages > 0) {
-        console.log('checking image safety');
         const imgId = await fetchImageIds(id);
-        console.log('IMAGE ID: ', imgId);
         const url = `https://res.cloudinary.com/dhjby3hpo/image/upload/${imgId}`
         if (imgId) safe = await moderateImage(url, process.env.WEB_PURIFY_API_KEY || '');
     }
-    console.log('SAFE: ', safe);
     if (safe) success = await createTransit(data, sellerId, id, numImages, body.notes);
     if (success) {
 
