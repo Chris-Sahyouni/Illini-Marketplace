@@ -67,3 +67,19 @@ export function buildCardData(items: any) {
     });
     return out;
 }
+
+export function shouldRenderSelect(question: string | undefined) {
+    if (question === undefined) return undefined;
+    question  = question.trim().toUpperCase();
+
+    if (question.includes('MODE')) {
+        return ['Peoria Charter', 'Amtrack', 'other'];
+    }
+    if (question.includes("TERM")) {
+        return ['fall', 'spring', 'summer'];
+    }
+    if (question.includes('EVENT')) {
+        return ['football', 'basketball', 'concert', 'other'];
+    }
+    return undefined;
+}

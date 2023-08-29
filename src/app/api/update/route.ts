@@ -23,12 +23,12 @@ export async function POST(request: Request) {
                         location: vals[keys.indexOf('location')],
                         company: vals[keys.indexOf("company")],
                         bedrooms: Number(vals[keys.indexOf("bedrooms")]),
-                        bathrooms: Number(vals[keys.indexOf("")]),
+                        bathrooms: Number(vals[keys.indexOf("bathrooms")]),
                         start: vals[keys.indexOf("start")],
                         end: vals[keys.indexOf("end")],
                         term: vals[keys.indexOf("term")],
                         price: Number(vals[keys.indexOf('price')]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf("contact")],
                     }
                 })
@@ -42,7 +42,7 @@ export async function POST(request: Request) {
                     data: {
                         course: vals[keys.indexOf("course")],
                         price: Number(vals[keys.indexOf("price")]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf('contact')],
                     }
                 })
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
                     },
                     data: {
                         price: Number(vals[keys.indexOf("price")]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf('contact')],
                         from: vals[keys.indexOf("from")],
                         to: vals[keys.indexOf("to")],
@@ -73,11 +73,10 @@ export async function POST(request: Request) {
                     },
                     data: {
                         price: Number(vals[keys.indexOf("price")]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf('contact')],
                         type: vals[keys.indexOf("type")],
                         event: vals[keys.indexOf("event")],
-                        seat: vals[keys.indexOf("seat")],
                         amount: Number(vals[keys.indexOf("amount")]),
                     }
                 })
@@ -90,7 +89,7 @@ export async function POST(request: Request) {
                     },
                     data: {
                         price: Number(vals[keys.indexOf("price")]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf('contact')],
                         location: vals[keys.indexOf("location")],
                         start: vals[keys.indexOf("start")],
@@ -100,15 +99,15 @@ export async function POST(request: Request) {
                 break;
             }
             case ItemType.Misc: {
-                updated = await prisma.transit.update({
+                updated = await prisma.misc.update({
                     where: {
                         id: item.id
                     },
                     data: {
                         price: Number(vals[keys.indexOf("price")]),
-                        notes: vals[keys.indexOf("notes")],
+                        notes: item.notes,
                         contact: vals[keys.indexOf('contact')],
-                        name: vals[keys.indexOf("name")],
+                        description: vals[keys.indexOf("description")],
                     }
                 })
                 break;

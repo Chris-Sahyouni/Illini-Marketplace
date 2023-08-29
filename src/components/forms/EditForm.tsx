@@ -1,7 +1,7 @@
 import { CardData } from "@/src/lib/types/interfaces";
-import { useContext, useState, Dispatch, SetStateAction } from "react";
+import { useContext, useState } from "react";
 import { EditorContext } from "../providers/EditorProvider";
-
+import { shouldRenderSelect } from "@/src/lib/client-utils";
 
 interface EditFormProps {
     toEdit: CardData;
@@ -33,14 +33,19 @@ export default function EditForm({ toEdit }: EditFormProps) {
 
     const keys = toEdit.keys || [];
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement>) => {
         const index = Number(e.target.getAttribute('id'));
         if (editable.values) {
-            setEditable((prev) => {
-                let updated = {...prev};
-                if (updated.values) updated.values[index] = e.target.value;
-                return updated;
-            })
+
+            let updated = {...editable};
+            if (updated.values) updated.values[index] = e.target.value;
+            setEditable(updated);
+
+            // setEditable((prev) => {
+            //     let updated = {...prev};
+            //     if (updated.values) updated.values[index] = e.target.value;
+            //     return updated;
+            // })
         }
     }
 
@@ -89,6 +94,22 @@ export default function EditForm({ toEdit }: EditFormProps) {
         <div className="h-full w-full rounded bg-white p-3">
             {
                 keys.map((key, index) => {
+                    let options = shouldRenderSelect(key)
+                    if (options) {
+                        return (
+                            <div key={`div-${key}`} className="p-1 m-1 my-2 col-2 flex">
+                                <h1 key={`label-${key}`} className="font-bold text-lg p-1 ">{key}:</h1>
+                                <select className={`p-1 ml-1 outline ${validity[index]} relative m-0 block w-1/3 min-w-0 flex-auto rounded-l border border-solid border-neutral-300 bg-white bg-clip-padding px-3 py-[0.25rem] text-base font-normal leading-[1.6] text-neutral-700 outline-none transition duration-200 ease-in-out focus:z-[3] focus:border-primary focus:text-neutral-700 focus:shadow-[inset_0_0_0_1px_rgb(10,113,202)] focus:outline-none dark:border-neutral-600 dark:placeholder:text-neutral-400 dark:focus:border-primary`} value={editable.values ? editable.values[index] : ""} onChange={handleChange} id={index.toString()} onBlur={handleBlur} >
+                                    {
+                                        options.map((option) => {
+                                            return <option className="outline" key={option} value={option}>{option}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                          );
+                    }
+
                   return (
                     <div key={`div-${key}`} className="p-1 m-1 my-2 col-2 flex">
                         <h1 key={`label-${key}`} className="font-bold text-lg p-1 ">{key}:</h1>

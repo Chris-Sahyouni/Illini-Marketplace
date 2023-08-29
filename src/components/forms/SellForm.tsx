@@ -5,7 +5,7 @@ import React, { useState, Dispatch, SetStateAction, useEffect } from "react";
 import ImageUpload from "../ImageUpload";
 import { useSession } from "next-auth/react";
 import { ItemType } from "@/src/lib/maps";
-import { time } from "console";
+import { shouldRenderSelect } from "@/src/lib/client-utils";
 
 
 interface SellProps {
@@ -214,18 +214,4 @@ function validateRollingInput(input: string, question: string | undefined) {
     return true;
 }
 
-function shouldRenderSelect(question: string | undefined) {
-    if (question === undefined) return undefined;
-    question  = question.trim().toUpperCase();
 
-    if (question.includes('MODE')) {
-        return ['Peoria Charter', 'Amtrack', 'other'];
-    }
-    if (question.includes("TERM")) {
-        return ['fall', 'spring', 'summer'];
-    }
-    if (question.includes('EVENT')) {
-        return ['football', 'basketball', 'concert', 'other'];
-    }
-    return undefined;
-}

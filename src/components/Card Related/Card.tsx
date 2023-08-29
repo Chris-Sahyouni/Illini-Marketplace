@@ -95,7 +95,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     if (data === undefined) return (<></>);
     return (
         <div className=" w-full h-40 rounded-xl flex-row bg-white p-2 flex">
-            <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80">
+            <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
                 {
                     loading
                     ? <CircularProgress size={50} />

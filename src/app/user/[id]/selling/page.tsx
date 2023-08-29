@@ -49,9 +49,8 @@ export default function Page() {
         const res = await deleteItem(targetId, target?.type)
         if (res) {
             console.log("removing")
-            const copy = [...items];
             let newState: CardData[] = []
-            if (target) newState = copy.filter((card) => card.id !== target.id);
+            if (target) newState = items.filter((card) => card.id !== target.id);
             setItems([...newState]);
         }
         setDeleteLoading(false);
