@@ -76,6 +76,7 @@ export default function Page({params}: {params: {itemType: string}}) {
             const searchWrapper = async () => {
                 const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
+                    setLoading(false);
                     return;
                 }
                 setLoading(false);
@@ -91,6 +92,7 @@ export default function Page({params}: {params: {itemType: string}}) {
                 setLoading(true);
                 const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
+                    setLoading(false);
                     return;
                 }
                 setData((prevState: CardData[]) => [...newItems]);
@@ -121,8 +123,8 @@ export default function Page({params}: {params: {itemType: string}}) {
         setSkipCount(0);
         setLoading(true)
         const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
-        setLoading(false);
         setData((prevState: CardData[]) => [...newItems]);
+        setLoading(false);
     }
 
 
