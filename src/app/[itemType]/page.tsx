@@ -76,7 +76,6 @@ export default function Page({params}: {params: {itemType: string}}) {
             const searchWrapper = async () => {
                 const newItems: CardData[] = await requestBySearch(params.itemType, searchContext.content);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
-                    console.log('invalid');
                     return;
                 }
                 setLoading(false);
@@ -92,7 +91,6 @@ export default function Page({params}: {params: {itemType: string}}) {
                 setLoading(true);
                 const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
                 if (newItems.length === 0 || newItems === undefined || newItems === null) {
-                    console.log('invalid');
                     return;
                 }
                 setData((prevState: CardData[]) => [...newItems]);
@@ -107,7 +105,6 @@ export default function Page({params}: {params: {itemType: string}}) {
         setLoadingMore(true);
         const newItems: CardData[] = await requestItems(params.itemType, skipCount, filters, ranges);
         if (newItems.length === 0 || newItems === undefined || newItems === null) {
-            console.log('invalid');
             setCanLoadMore(false);
             setLoadingMore(false);
             return;

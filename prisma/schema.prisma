@@ -38,8 +38,8 @@ model Sublease {
     company   String
     bedrooms  Int
     bathrooms Int
-    start     DateTime
-    end       DateTime
+    start     String
+    end       String
     term      String
     id        String   @id() @default(cuid())
     price     Float
@@ -57,7 +57,7 @@ model Transit {
     to        String
     mode      String
     time      String
-    date      DateTime
+    date      String
     id        String   @id() @default(cuid())
     price     Float
     name      String?
@@ -73,7 +73,7 @@ model Transit {
 model Ticket {
     type      String
     event     String
-    date      DateTime
+    date      String
     amount    Float    @default(1)
     id        String   @id() @default(cuid())
     price     Float
@@ -103,8 +103,8 @@ model Textbook {
 
 model Parking {
     location  String
-    start     DateTime
-    end       DateTime?
+    start     String
+    end       String
     id        String    @id() @default(cuid())
     price     Float
     name      String?

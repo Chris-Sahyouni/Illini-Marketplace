@@ -12,12 +12,22 @@ export async function POST(request: Request) {
     let safe: boolean = numImages === 0;
     if (numImages > 0) {
         const imgIds = await fetchImageIds(id);
-        for (let i = 0; i < numImages; i++) {
+        // for (let i = 0; i < numImages; i++) {
+        //     if (imgIds) {
+        //         const url = `https://res.cloudinary.com/dhjby3hpo/image/upload/${imgIds[i]}`
+        //         safe = await moderateImage(url, process.env.WEB_PURIFY_API_KEY || '');
+        //     }
+        // }
+        const moderate = async (index: number) => {
             if (imgIds) {
-                const url = `https://res.cloudinary.com/dhjby3hpo/image/upload/${imgIds[i]}`
-                safe = await moderateImage(url, process.env.WEB_PURIFY_API_KEY || '');
+                const url = `https://res.cloudinary.com/dhjby3hpo/image/upload/${imgIds[index]}`
+                return await moderateImage(url, process.env.WEB_PURIFY_API_KEY || '');
             }
         }
+        let promises: Array<Promise<boolean | undefined>> = []
+        for (let i = 0; i < numImages; i++) promises.push(moderate(i))
+        const moderateRes = await Promise.all(promises);
+        safe = moderateRes.includes(false);
     }
     if (safe) success = await createSublease(data, sellerId, id, numImages, body.notes);
     if (success) {
