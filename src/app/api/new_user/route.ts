@@ -25,7 +25,7 @@ export async function POST(request: Request) {
         // give this some html
         text: `Follow this link to verify your account: ${magicLink}`,
     },
-    (err) => {
+    (err: Error | null) => {
         console.log(err?.message);
     });
 
