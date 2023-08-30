@@ -21,7 +21,6 @@ export async function getUserSaves(id: string | undefined, onlyIds: boolean) {
     return await res.json();
 }
 
-
 export function buildCardData(items: any) {
 
     if (items === undefined) return [];
