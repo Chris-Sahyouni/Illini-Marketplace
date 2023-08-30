@@ -4,7 +4,6 @@ import { Misc } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 
-
 export async function POST(request: Request) {
     try {
         const  {skipCount, ranges, searchInput}: dbRequest = await request.json();
