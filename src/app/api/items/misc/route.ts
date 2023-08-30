@@ -1,14 +1,15 @@
 import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
-import type { Misc } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 
 export async function POST(request: Request) {
+
+
     try {
         const  {skipCount, ranges, searchInput}: dbRequest = await request.json();
 
-        const data: Misc[] = await prisma.misc.findMany({
+        const data = await prisma.misc.findMany({
             take: 20,
             skip: 20 * skipCount,
             where: {

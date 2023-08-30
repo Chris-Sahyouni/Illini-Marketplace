@@ -1,5 +1,4 @@
 import { searchRequest } from '@/src/lib/types/interfaces'
-import type { Parking, Sublease, Ticket, Transit, Misc, Textbook } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 import { prisma } from '@/src/lib/db';
@@ -16,42 +15,42 @@ export async function POST(request: Request) {
         switch (type) {
             case 'sublease': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(item as Sublease);
+                    let dat = new ItemData(item as any);
                     res.push(dat.getCardData());
                 });
                 break;
             }
             case 'textbook': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(undefined, item as Textbook);
+                    let dat = new ItemData(undefined, item as any);
                     res.push(dat.getCardData());
                 });
                 break;
             }
             case 'transit': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(undefined, undefined, item as Transit);
+                    let dat = new ItemData(undefined, undefined, item as any);
                     res.push(dat.getCardData());
                 });
                 break;
             }
             case 'ticket': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(undefined, undefined, undefined, item as Ticket);
+                    let dat = new ItemData(undefined, undefined, undefined, item as any);
                     res.push(dat.getCardData());
                 });
                 break;
             }
             case 'parking': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(undefined, undefined, undefined, undefined, item as Parking);
+                    let dat = new ItemData(undefined, undefined, undefined, undefined, item as any);
                     res.push(dat.getCardData());
                 });
                 break;
             }
             case 'misc': {
                 data?.forEach((item) => {
-                    let dat = new ItemData(undefined, undefined, undefined, undefined, undefined, item as Misc);
+                    let dat = new ItemData(undefined, undefined, undefined, undefined, undefined, item as any);
                     res.push(dat.getCardData());
                 });
                 break;
@@ -69,7 +68,7 @@ export async function POST(request: Request) {
 async function searchDB(type: string, query: string) {
     switch (type) {
         case 'sublease': {
-            const data: Sublease[] = await prisma.sublease.findMany({
+            const data = await prisma.sublease.findMany({
                 where: {
                     OR: [
                         {
@@ -88,7 +87,7 @@ async function searchDB(type: string, query: string) {
             return data;
         }
         case 'textbook': {
-            const data: Textbook[] = await prisma.textbook.findMany({
+            const data = await prisma.textbook.findMany({
                 where: {
                     OR: [
                         {
@@ -107,7 +106,7 @@ async function searchDB(type: string, query: string) {
             return data;
         }
         case 'transit': {
-            const data: Transit[] = await prisma.transit.findMany({
+            const data = await prisma.transit.findMany({
                 where: {
                     OR: [
                         {
@@ -136,7 +135,7 @@ async function searchDB(type: string, query: string) {
             return data;
         }
         case 'parking': {
-            const data: Parking[] = await prisma.parking.findMany({
+            const data = await prisma.parking.findMany({
                 where: {
                     OR: [
                         {
@@ -155,7 +154,7 @@ async function searchDB(type: string, query: string) {
             return data;
         }
         case 'ticket': {
-            const data: Ticket[] = await prisma.ticket.findMany({
+            const data = await prisma.ticket.findMany({
                 where: {
                     OR: [
                         {
@@ -174,7 +173,7 @@ async function searchDB(type: string, query: string) {
             return data;
         }
         case 'misc': {
-            const data: Misc[] = await prisma.misc.findMany({
+            const data = await prisma.misc.findMany({
                 where: {
                     OR: [
                         {

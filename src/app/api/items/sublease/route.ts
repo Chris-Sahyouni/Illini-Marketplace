@@ -1,6 +1,5 @@
 import { prisma } from '../../../../lib/db'
 import { dbRequest } from '@/src/lib/types/interfaces'
-import type { Sublease } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 
@@ -14,7 +13,7 @@ export async function POST(request: Request) {
         }
         console.log(selectedFilters)
 
-        const data: Sublease[] = await prisma.sublease.findMany({
+        const data = await prisma.sublease.findMany({
             take: 20,
             skip: 20 * skipCount,
             where: {
