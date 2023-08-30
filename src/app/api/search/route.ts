@@ -1,5 +1,5 @@
 import { searchRequest } from '@/src/lib/types/interfaces'
-import { Parking, Sublease, Ticket, Transit, Misc, Textbook } from '@prisma/client';
+import type { Parking, Sublease, Ticket, Transit, Misc, Textbook } from '@prisma/client';
 import { CardData } from '@/src/lib/types/interfaces';
 import { ItemData } from '@/src/lib/types/models';
 import { prisma } from '@/src/lib/db';

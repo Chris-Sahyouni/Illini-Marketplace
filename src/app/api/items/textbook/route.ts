@@ -1,6 +1,6 @@
 import { prisma } from '../../../../lib/db'
 import { CardData, dbRequest } from '@/src/lib/types/interfaces'
-import { Textbook } from '@prisma/client';
+import type { Textbook } from '@prisma/client';
 import { ItemData} from '@/src/lib/types/models';
 
 
