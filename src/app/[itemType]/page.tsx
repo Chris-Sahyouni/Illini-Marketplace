@@ -193,7 +193,7 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
 
 async function requestBySearch(type: string, search: string) {
 
-    const data = await fetch('api/search', {
+    const data = await fetch('https://illinimarketplace.com/api/search', {
         method: "POST",
         body: JSON.stringify({
             type: type,

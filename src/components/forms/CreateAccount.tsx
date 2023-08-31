@@ -101,7 +101,7 @@ export function isValidEmail(email: string): boolean {
 
 export async function sendRegisterRequest(data: newUserRequest) {
 
-    const res = await fetch('/api/new_user', {
+    const res = await fetch('https://illinimarketplace.com/api/new_user', {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

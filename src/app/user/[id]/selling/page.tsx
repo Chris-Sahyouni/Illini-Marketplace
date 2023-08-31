@@ -104,7 +104,7 @@ async function requestItems(id: string) {
         return [];
     }
 
-    const res = await fetch('http://localhost:3000/api/user-selling', {
+    const res = await fetch('https://illinimarketplace.com/api/user-selling', {
         method: "POST",
         body: JSON.stringify({id: id}),
         headers: {
@@ -119,7 +119,7 @@ async function requestItems(id: string) {
 
 async function deleteItem(id: string | undefined, type: ItemType | undefined) {
     if (!id || !type) return;
-    const res = await fetch('http://localhost:3000/api/delete', {
+    const res = await fetch('https://illinimarketplace.com/api/delete', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

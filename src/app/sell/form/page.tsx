@@ -126,7 +126,7 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                     notes: data.notes
                 }
 
-                fetch(`/api/create/${params.get('t')}`, {
+                fetch(`https://illinimarketplace.com/api/create/${params.get('t')}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

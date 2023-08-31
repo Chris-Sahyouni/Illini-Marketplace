@@ -5,6 +5,7 @@ BEFORE LAUNCH:
  - get some web analytics
  - change urls
 
+- add log trailing
 
 Front:
  - let admin delete items

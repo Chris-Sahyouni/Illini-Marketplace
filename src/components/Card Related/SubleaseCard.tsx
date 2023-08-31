@@ -49,7 +49,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
         console.log('requesting');
-        const res = await fetch('http://localhost:3000/api/save', {
+        const res = await fetch('https://illinimarketplace.com/api/save', {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

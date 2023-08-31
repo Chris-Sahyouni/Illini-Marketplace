@@ -16,7 +16,7 @@ export default function Page() {
 
     useEffect(() => {
       const wrapper = async () => {
-        const res = await fetch('http://localhost:3000/api/user-saved', {
+        const res = await fetch('https://illinimarketplace.com/api/user-saved', {
             method: "POST",
             headers: {
                 'Content-Type': "application/json",
