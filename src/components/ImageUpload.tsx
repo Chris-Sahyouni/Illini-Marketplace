@@ -2,7 +2,7 @@
 
 import { CldUploadWidget, CldUploadWidgetPropsOptions } from 'next-cloudinary';
 import { UploadApiResponse, UploadApiErrorResponse } from 'cloudinary';
-import { Dispatch, SetStateAction, useContext } from 'react';
+import { useContext } from 'react';
 import { SellContext } from './providers/SellProvider';
 
 

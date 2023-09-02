@@ -15,7 +15,7 @@ export function Ranges({itemType, handler}: rangeProps) {
     useEffect(() => {
         const wrapper = async () => {
           setLoading(true)
-          const response = await fetch('https://illinimarketplace.com/api/range-max', {
+          const response = await fetch(`${process.env.BASE_URL}/api/range-max`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

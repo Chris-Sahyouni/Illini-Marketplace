@@ -16,7 +16,7 @@ export default function Page({ params }: { params: { id: string}}) {
         try {
             const { id } = params;
             const verify = async () => {
-                let res = await fetch('https://illinimarketplace.com/api/verify', {
+                let res = await fetch(`${process.env.BASE_URL}/api/verify`, {
                     method: "POST",
                     body: JSON.stringify({ id }),
                     headers: {

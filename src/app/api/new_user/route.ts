@@ -16,7 +16,7 @@ export async function POST(request: Request) {
     });
 
     // this will need to change before deployment
-    const magicLink= `https://illinimarketplace.com/account/verify/${user.id}`;
+    const magicLink= `${process.env.BASE_URL}/account/verify/${user.id}`;
 
     transporter.sendMail({
         to: body.email,

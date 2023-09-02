@@ -72,7 +72,7 @@ export default function EditForm({ toEdit }: EditFormProps) {
 
     const handleSave = async () => {
 
-        const res = await fetch('https://illinimarketplace.com/api/update', {
+        const res = await fetch(`${process.env.BASE_URL}/api/update`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

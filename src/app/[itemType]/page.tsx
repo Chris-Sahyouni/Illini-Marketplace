@@ -174,7 +174,7 @@ export default function Page({params}: {params: {itemType: string}}) {
 /* -------------------------------------------------------------------------- */
 
 async function requestItems(type: string, skipCount: number, filters: [string, string][], ranges: [string, number[]][])  {
-    const data = await fetch(`api/items/${type}`, {
+    const data = await fetch(`${process.env.BASE_URL}/api/items/${type}`, {
         method: "POST",
         body: JSON.stringify({
             skipCount: skipCount,
@@ -193,7 +193,7 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
 
 async function requestBySearch(type: string, search: string) {
 
-    const data = await fetch('https://illinimarketplace.com/api/search', {
+    const data = await fetch(`${process.env.BASE_URL}/api/search`, {
         method: "POST",
         body: JSON.stringify({
             type: type,

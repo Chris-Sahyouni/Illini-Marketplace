@@ -54,7 +54,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch('https://illinimarketplace.com/api/images', {
+            const res = await fetch(`${process.env.BASE_URL}/api/images`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -76,7 +76,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
         if (initSave === undefined) return;
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
-        const res = await fetch('https://illinimarketplace.com/api/save', {
+        const res = await fetch(`${process.env.BASE_URL}/api/save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

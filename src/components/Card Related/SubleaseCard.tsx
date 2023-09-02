@@ -25,7 +25,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch('https://illinimarketplace.com/api/images', {
+            const res = await fetch(`${process.env.BASE_URL}/api/images`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -49,7 +49,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
         console.log('requesting');
-        const res = await fetch('https://illinimarketplace.com/api/save', {
+        const res = await fetch(`${process.env.BASE_URL}/api/save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
