@@ -49,7 +49,6 @@ export default function Page() {
 
         const res = await deleteItem(targetId, target?.type)
         if (res) {
-            console.log("removing")
             let newState: CardData[] = []
             if (target) newState = items.filter((card) => card.id !== target.id);
             setItems([...newState]);
@@ -119,7 +118,10 @@ async function requestItems(id: string) {
 }
 
 async function deleteItem(id: string | undefined, type: ItemType | undefined) {
-    if (!id || !type) return;
+    if (!id) {
+        return;
+    };
+
     const res = await fetch(`${config.scheme}://${config.url}/api/delete`, {
         method: "POST",
         headers: {

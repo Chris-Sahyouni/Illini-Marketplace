@@ -48,7 +48,6 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
                 })
             });
             const images: string[] = await res.json();
-            console.log(images);
             setImages(images);
             setLoading(false);
         }
@@ -60,8 +59,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
         if (initSave === undefined) return;
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
-        console.log('requesting');
-        const res = await fetch(`/api/save`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +72,6 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
                 itemId: itemId
             })
         });
-        console.log(await res.json());
     }
 
 if (data === undefined) return (<></>);

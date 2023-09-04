@@ -13,8 +13,6 @@ export default function CardImage({ id, isUploaded, dimensions }: CardImageProps
 
     const context = useContext(LightBoxContext);
 
-    console.log('dimensions: ', dimensions);
-
     if (isUploaded && id) {
 
         return (

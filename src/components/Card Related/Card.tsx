@@ -65,7 +65,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch(`/api/images`, {
+            const res = await fetch(`${config.scheme}://${config.url}/api/images`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
