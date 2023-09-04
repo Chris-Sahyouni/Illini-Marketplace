@@ -2,7 +2,7 @@ import * as bcrypt from 'bcrypt';
 import { prisma } from '../../../lib/db';
 import { newUserRequest } from '@/src/lib/types/interfaces';
 import { transporter } from '@/src/lib/nodemailer';
-
+import { config } from '@/src/lib/url_config';
 
 export async function POST(request: Request) {
     const body: newUserRequest = await request.json();
