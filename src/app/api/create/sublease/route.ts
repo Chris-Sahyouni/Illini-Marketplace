@@ -21,7 +21,8 @@ export async function POST(request: Request) {
         let promises: Array<Promise<boolean | undefined>> = []
         for (let i = 0; i < numImages; i++) promises.push(moderate(i))
         const moderateRes = await Promise.all(promises);
-        safe = moderateRes.includes(false);
+        console.log("MODERATE RES", moderateRes)
+        safe = !(moderateRes.includes(false));
     }
     if (safe) success = await createSublease(data, sellerId, id, numImages, body.notes);
     if (success) {
@@ -45,6 +46,9 @@ export async function POST(request: Request) {
         }
 
         return new Response('success', {status: 200});
+    } else {
+        console.log("success, ", success);
+        console.log("safe, ", safe);
     }
     return new Response('error', {status: 500});
 }
@@ -60,7 +64,6 @@ async function createSublease(data: ItemData, sellerId: string, itemId: string, 
                     location: values[keys.indexOf("location")],
                     bathrooms: Number(values[keys.indexOf('bathrooms')]),
                     bedrooms: Number(values[keys.indexOf('bedrooms')]),
-                    name: values[keys.indexOf('location')],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     company: values[keys.indexOf("company")],

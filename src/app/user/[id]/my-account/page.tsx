@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { CircularProgress } from "@mui/material";
+import { config } from "@/src/lib/url_config";
 
 export default function Page() {
 
@@ -29,7 +30,7 @@ export default function Page() {
             return;
         }
         setLoading(true);
-        const res = await fetch(`${process.env.BASE_URL}/api/update-pass`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/update-pass`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -53,7 +54,7 @@ export default function Page() {
         const handleEnter = async (e: KeyboardEvent) => {
             if (contactInputBox && e.key === 'Enter') {
                 setContactInputBox(false);
-                await fetch(`${process.env.BASE_URL}/api/update-user`, {
+                await fetch(`${config.scheme}://${config.url}/api/update-user`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",

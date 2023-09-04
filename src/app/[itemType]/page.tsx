@@ -11,6 +11,7 @@ import { SearchContext } from "@/src/components/providers/SearchProvider";
 import { getUserSaves } from "@/src/lib/client-utils";
 import { useSession } from "next-auth/react";
 import { CircularProgress } from "@mui/material";
+import { config } from "@/src/lib/url_config";
 
 
 export default function Page({params}: {params: {itemType: string}}) {
@@ -174,7 +175,7 @@ export default function Page({params}: {params: {itemType: string}}) {
 /* -------------------------------------------------------------------------- */
 
 async function requestItems(type: string, skipCount: number, filters: [string, string][], ranges: [string, number[]][])  {
-    const data = await fetch(`${process.env.BASE_URL}/api/items/${type}`, {
+    const data = await fetch(`${config.scheme}://${config.url}/api/items/${type}`, {
         method: "POST",
         body: JSON.stringify({
             skipCount: skipCount,
@@ -193,7 +194,7 @@ async function requestItems(type: string, skipCount: number, filters: [string, s
 
 async function requestBySearch(type: string, search: string) {
 
-    const data = await fetch(`${process.env.BASE_URL}/api/search`, {
+    const data = await fetch(`${config.scheme}://${config.url}/api/search`, {
         method: "POST",
         body: JSON.stringify({
             type: type,

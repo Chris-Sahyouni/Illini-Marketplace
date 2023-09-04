@@ -1,13 +1,13 @@
 import { Sublease, Textbook, Transit, Ticket, Parking, Misc } from "@prisma/client";
 import { CardData } from "./types/interfaces";
 import { ItemData } from "./types/models";
-
+import { config } from "@/src/lib/url_config";
 
 export async function getUserSaves(id: string | undefined, onlyIds: boolean) {
     if (id === undefined) {
         return [];
     }
-    const res = await fetch(`${process.env.BASE_URL}/api/user-saved`, {
+    const res = await fetch(`${config.scheme}://${config.url}/api/user-saved`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

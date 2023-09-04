@@ -3,6 +3,7 @@
 import { CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { nanoid } from "nanoid";
+import { config } from "@/src/lib/url_config";
 
 export default function Page() {
 
@@ -19,7 +20,7 @@ export default function Page() {
         setLoading(true);
         // do email stuff here AND SET THE USER PASSWORD TO THE TEMPORARY PASS
         const tmpPass = nanoid();
-        const res = await fetch(`${process.env.BASE_URL}/api/update-pass`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/update-pass`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

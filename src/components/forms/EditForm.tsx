@@ -2,6 +2,7 @@ import { CardData } from "@/src/lib/types/interfaces";
 import { useContext, useState } from "react";
 import { EditorContext } from "../providers/EditorProvider";
 import { shouldRenderSelect } from "@/src/lib/client-utils";
+import { config } from "@/src/lib/url_config";
 
 interface EditFormProps {
     toEdit: CardData;
@@ -72,7 +73,7 @@ export default function EditForm({ toEdit }: EditFormProps) {
 
     const handleSave = async () => {
 
-        const res = await fetch(`${process.env.BASE_URL}/api/update`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/update`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

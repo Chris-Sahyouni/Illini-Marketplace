@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react";
+import { config } from "@/src/lib/url_config";
 
 export default function Page({ params }: { params: { id: string}}) {
 
@@ -16,7 +17,7 @@ export default function Page({ params }: { params: { id: string}}) {
         try {
             const { id } = params;
             const verify = async () => {
-                let res = await fetch(`${process.env.BASE_URL}/api/verify`, {
+                let res = await fetch(`${config.scheme}://${config.url}/api/verify`, {
                     method: "POST",
                     body: JSON.stringify({ id }),
                     headers: {

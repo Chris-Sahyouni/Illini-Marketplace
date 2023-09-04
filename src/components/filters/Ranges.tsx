@@ -1,6 +1,7 @@
 import { typeRangeMap } from "@/src/lib/maps";
 import { RangeSlider } from "./RangeSlider";
 import {Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { config } from "@/src/lib/url_config";
 
 interface rangeProps {
     itemType: string;
@@ -15,7 +16,7 @@ export function Ranges({itemType, handler}: rangeProps) {
     useEffect(() => {
         const wrapper = async () => {
           setLoading(true)
-          const response = await fetch(`${process.env.BASE_URL}/api/range-max`, {
+          const response = await fetch(`${config.scheme}://${config.url}/api/range-max`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

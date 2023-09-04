@@ -5,7 +5,7 @@ const cloudinaryConfig = {
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
   };
-  
+
 cloudinary.v2.config(cloudinaryConfig);
 
 export async function fetchImageIds(folder: string) {
@@ -30,6 +30,10 @@ export async function moderateImage(imageUrl: string, apiKey: string) {
     const body = await res.json();
     console.log('moderate image: ', res);
     console.log('moderate image: ', body);
-    const {nudity, nudityPartial, weapon, alcohol, drugs, offensive, gore} = body;
-    return weapon < 50 && gore < 50 && alcohol < 50 && drugs < 40 && nudity < 40 && nudityPartial < 40 && offensive < 65;
+    const {nudity, nuditypartial, weapon, alcohol, drugs, offensive, gore} = body.rsp;
+
+    if (Number(weapon) < 50 && Number(gore) < 50 && Number(alcohol) < 50 && Number(drugs) < 40 && Number(nudity) < 40 && Number(nuditypartial) < 40 && Number(offensive) < 65) {
+        return true;
+    }
+    return false;
 }

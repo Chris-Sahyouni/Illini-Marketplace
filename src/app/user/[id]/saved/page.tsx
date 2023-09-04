@@ -7,6 +7,7 @@ import { ItemType } from "@/src/lib/maps";
 import Card from "@/src/components/Card Related/Card";
 import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import { CircularProgress } from "@mui/material";
+import { config } from "@/src/lib/url_config";
 
 export default function Page() {
 
@@ -16,7 +17,7 @@ export default function Page() {
 
     useEffect(() => {
       const wrapper = async () => {
-        const res = await fetch(`${process.env.BASE_URL}/api/user-saved`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/user-saved`, {
             method: "POST",
             headers: {
                 'Content-Type': "application/json",

@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { CardData } from "../../lib/types/interfaces";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import Field from "./Field";
 import CardImage from "./CardImage";
+import { config } from "@/src/lib/url_config";
 
 interface ItemProps {
     data: CardData
@@ -21,11 +22,22 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
     const [isSaved, setIsSaved] = useState(initSave);
     const [loading, setLoading] = useState(false);
     const [images, setImages] = useState<string[]>(['', '', '', '']);
+    const [imgDimensions, setImgDimensions] = useState({width: 0, height: 0,})
+
+    const imgContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (imgContainerRef.current) {
+          const { width, height } = imgContainerRef.current.getBoundingClientRect();
+          setImgDimensions({ width: width/2 , height: height/2 });
+        }
+      }, []);
+
 
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch(`${process.env.BASE_URL}/api/images`, {
+            const res = await fetch(`${config.scheme}://${config.url}/api/images`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -49,7 +61,7 @@ export default function SubleaseCard({data, itemId, initSave, numUploaded, sellN
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
         console.log('requesting');
-        const res = await fetch(`${process.env.BASE_URL}/api/save`, {
+        const res = await fetch(`/api/save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -69,18 +81,18 @@ if (data === undefined) return (<></>);
 
     return (
         <div className=" w-full h-60 rounded-xl flex-row bg-white p-2 flex">
-            <div className=" w-1/3 grid grid-cols-2 grid-rows-2">
+            <div className=" w-1/3 grid grid-cols-2 grid-rows-2" ref={imgContainerRef}>
                 <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
-                    <CardImage id={images[0]} isUploaded={images[0] !== ''} />
+                    <CardImage id={images[0]} isUploaded={images[0] !== ''} dimensions={imgDimensions} />
                 </div>
                 <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
-                    <CardImage id={images[1]} isUploaded={images[1] !== ''} />
+                    <CardImage id={images[1]} isUploaded={images[1] !== ''} dimensions={imgDimensions} />
                 </div>
                 <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
-                    <CardImage id={images[2]} isUploaded={images[2] !== ''} />
+                    <CardImage id={images[2]} isUploaded={images[2] !== ''} dimensions={imgDimensions} />
                 </div>
                 <div className="w-full h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
-                    <CardImage id={images[3]} isUploaded={images[3] !== ''} />
+                    <CardImage id={images[3]} isUploaded={images[3] !== ''} dimensions={imgDimensions} />
                 </div>
             </div>
             <div className="px-2 w-3/4 pl-4">

@@ -5,6 +5,7 @@ import { newUserRequest } from "@/src/lib/types/interfaces";
 import VerifyRequest from "../VerifyRequest";
 import Link from "next/link";
 import { signIn } from "next-auth/react";
+import { config } from "@/src/lib/url_config";
 
 export default function CreateAccount() {
 
@@ -101,7 +102,7 @@ export function isValidEmail(email: string): boolean {
 
 export async function sendRegisterRequest(data: newUserRequest) {
 
-    const res = await fetch(`${process.env.BASE_URL}/api/new_user`, {
+    const res = await fetch(`${config.scheme}://${config.url}/api/new_user`, {
         method: "POST",
         body: JSON.stringify(data),
         headers: {

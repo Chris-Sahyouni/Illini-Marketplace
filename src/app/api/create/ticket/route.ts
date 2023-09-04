@@ -48,7 +48,6 @@ async function createTicket(data: ItemData, sellerId: string, itemId: string, nu
                 data: {
                     id: itemId,
                     type: values[keys.indexOf('type')],
-                    name: values[keys.indexOf('event')],
                     event: values[keys.indexOf("event")],
                     date: values[keys.indexOf("date")],
                     amount: Number(values[keys.indexOf("amount")]),

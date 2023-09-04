@@ -50,7 +50,6 @@ async function createTransit(data: ItemData, sellerId: string, itemId: string, n
                     time: values[keys.indexOf("time")],
                     to: values[keys.indexOf("to")],
                     date: values[keys.indexOf("date")],
-                    name: "",
                     notes,
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],

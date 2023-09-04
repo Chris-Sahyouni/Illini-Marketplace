@@ -1,5 +1,6 @@
 import NextAuth from "next-auth/next";
 import CredentialsProvider  from "next-auth/providers/credentials";
+import { config } from "@/src/lib/url_config";
 
 const handler = NextAuth({
     providers: [
@@ -21,7 +22,7 @@ const handler = NextAuth({
               // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
               // You can also use the `req` object to obtain additional parameters
               // (i.e., the request IP address)
-              const res = await fetch(`${process.env.BASE_URL}/api/login`, {
+              const res = await fetch(`${config.scheme}://${config.url}/api/login`, {
                 method: 'POST',
                 body: JSON.stringify({
                   username: credentials?.username,

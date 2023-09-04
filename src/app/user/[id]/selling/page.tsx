@@ -9,6 +9,7 @@ import Card from "@/src/components/Card Related/Card"
 import { EditorContext } from "@/src/components/providers/EditorProvider";
 import { getUserSaves } from "@/src/lib/client-utils";
 import { CircularProgress } from "@mui/material";
+import { config } from "@/src/lib/url_config";
 
 
 export default function Page() {
@@ -104,7 +105,7 @@ async function requestItems(id: string) {
         return [];
     }
 
-    const res = await fetch(`${process.env.BASE_URL}/api/user-selling`, {
+    const res = await fetch(`${config.scheme}://${config.url}/api/user-selling`, {
         method: "POST",
         body: JSON.stringify({id: id}),
         headers: {
@@ -119,7 +120,7 @@ async function requestItems(id: string) {
 
 async function deleteItem(id: string | undefined, type: ItemType | undefined) {
     if (!id || !type) return;
-    const res = await fetch('${process.env.BASE_URL}/api/delete', {
+    const res = await fetch(`${config.scheme}://${config.url}/api/delete`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',

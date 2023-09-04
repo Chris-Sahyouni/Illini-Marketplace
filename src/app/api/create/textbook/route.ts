@@ -6,6 +6,7 @@ import { fetchImageIds, moderateImage } from '@/src/lib/server-utils';
 
 
 export async function POST(request: Request) {
+
     const body: creationRequest = await request.json();
     const { data, sellerId, id, numImages} = body;
     let success: boolean = false;
@@ -31,10 +32,9 @@ export async function POST(request: Request) {
                 }
             })
         }
-
         return new Response('success', {status: 200});
     }
-    return new Response('error', {status: 500});
+    return new Response('failure', {status: 500})
 }
 
 
@@ -46,7 +46,6 @@ async function createTextbook(data: ItemData, sellerId: string, itemId: string, 
                 data: {
                     id: itemId,
                     course: values[keys.indexOf('course')],
-                    name: values[keys.indexOf('course')],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     numImages: numImages,

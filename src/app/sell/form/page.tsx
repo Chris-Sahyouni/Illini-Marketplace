@@ -12,9 +12,9 @@ import SubleaseCard from "@/src/components/Card Related/SubleaseCard";
 import {v4 as uuidv4} from "uuid";
 import { CircularProgress } from "@mui/material";
 import { SellContext } from "@/src/components/providers/SellProvider";
+import { config } from "@/src/lib/url_config";
 
-
-    export default function Page() {
+export default function Page() {
 
         enum Status {
             Success,
@@ -126,7 +126,8 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                     notes: data.notes
                 }
 
-                fetch(`${process.env.BASE_URL}/api/create/${params.get('t')}`, {
+                
+                fetch(`${config.scheme}://${config.url}/api/create/${params.get('t')}`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -139,7 +140,7 @@ import { SellContext } from "@/src/components/providers/SellProvider";
                         console.log('success');
                     } else {
                         setStatus(Status.Failure);
-                        console.log("failure");
+                        console.log(res);
                     }
                 })
             }

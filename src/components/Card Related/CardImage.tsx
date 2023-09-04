@@ -6,11 +6,14 @@ import { LightBoxContext } from "../providers/LightBoxProvider";
 interface CardImageProps {
     id: string;
     isUploaded: boolean;
+    dimensions: {width: number, height: number};
 }
 
-export default function CardImage({ id, isUploaded }: CardImageProps) {
+export default function CardImage({ id, isUploaded, dimensions }: CardImageProps) {
 
     const context = useContext(LightBoxContext);
+
+    console.log('dimensions: ', dimensions);
 
     if (isUploaded && id) {
 
@@ -19,8 +22,8 @@ export default function CardImage({ id, isUploaded }: CardImageProps) {
                 <button onClick={() => context.boxState(id)}>
                     <CldImage
                         src={id}
-                        height={100}
-                        width={152}
+                        height={Math.round(dimensions.height)}
+                        width={Math.round(dimensions.width)}
                         crop="crop"
                         gravity="custom"
                         alt='img'

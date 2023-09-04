@@ -2,12 +2,13 @@
 
 import { CardData } from "../../lib/types/interfaces";
 import Image from "next/image";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import Field from "./Field";
 import CardImage from "./CardImage";
 import { CircularProgress } from "@mui/material";
 import { ItemType } from "@/src/lib/maps";
+import { config } from "@/src/lib/url_config";
 
 interface ItemProps {
     data: CardData
@@ -25,6 +26,16 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     const [loading, setLoading] = useState(false);
     const [imageId, setImageId] = useState('')
     const [padding, setPadding] = useState(1)
+    const [imgDimensions, setImgDimensions] = useState({width: 0, height: 0,})
+
+    const imgContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (imgContainerRef.current) {
+          const { width, height } = imgContainerRef.current.getBoundingClientRect();
+          setImgDimensions({ width, height });
+        }
+      }, []);
 
     useEffect(() => {
       switch (data.type) {
@@ -54,7 +65,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     useEffect(() => {
         const wrapper = async () => {
             setLoading(true)
-            const res = await fetch(`${process.env.BASE_URL}/api/images`, {
+            const res = await fetch(`/api/images`, {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -76,7 +87,7 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
         if (initSave === undefined) return;
         setIsSaved(!isSaved);
         // note the state has NOT updated yet at this point because state update is not synchronous
-        const res = await fetch(`${process.env.BASE_URL}/api/save`, {
+        const res = await fetch(`${config.scheme}://${config.url}/api/save`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -95,11 +106,11 @@ export default function Card({data, isUploaded, itemId, initSave, sellNotes}: It
     if (data === undefined) return (<></>);
     return (
         <div className=" w-full h-40 rounded-xl flex-row bg-white p-2 flex">
-            <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip">
+            <div className="w-1/4 h-full relative my-auto outline outline-slate-700 rounded hover:opacity-80 overflow-clip" ref={imgContainerRef}>
                 {
                     loading
                     ? <CircularProgress size={50} />
-                    : <CardImage id={imageId} isUploaded={isUploaded} />
+                    : <CardImage id={imageId} isUploaded={isUploaded} dimensions={imgDimensions} />
                 }
             </div>
 

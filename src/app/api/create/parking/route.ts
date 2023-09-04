@@ -52,7 +52,6 @@ async function createParking(data: ItemData, sellerId: string, itemId: string, n
                     location: values[keys.indexOf('location')],
                     start: values[keys.indexOf("start")],
                     end: values[keys.indexOf("end")],
-                    name: values[keys.indexOf('location')],
                     price: Number(values[keys.indexOf("price")]),
                     contact: values[keys.indexOf("contact")],
                     numImages: numImages,
